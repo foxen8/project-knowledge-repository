@@ -1,0 +1,33 @@
+<header>
+  <div class="header-container">
+    <div class="header-logo">
+      <img src="assets/images/gov_gr_logo.svg" alt="gov.gr logo" />
+      <div class="header-title">
+        <span>ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ</span>
+        <span>Υπουργείο Εσωτερικών</span>
+      </div>
+    </div>
+
+    <nav class="header-tabs">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active">Αρχική</a></li>
+        <li>
+          <a routerLink="/role-search" routerLinkActive="active"
+            >Αναζήτηση Προφίλ Ρόλου</a
+          >
+        </li>
+        <li>
+          <a routerLink="/knowledge" routerLinkActive="active">Γνώσεις</a>
+        </li>
+        <li>
+          <a routerLink="/position-summary" routerLinkActive="active"
+            >Γενικά Περιγράμματα Θέσης</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

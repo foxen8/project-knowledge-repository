@@ -1,0 +1,39 @@
+<div class="main-content">
+  <div class="side-menu">
+    <ul>
+      <li
+        *ngFor="let section of sections; let i = index"
+        (click)="scrollToSection(i)"
+      >
+        {{ section.title }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="article-content">
+    <button class="add-section-button" (click)="addSection()">
+      Προσθήκη Ενότητας <span class="icon">+</span>
+    </button>
+
+    <div
+      *ngFor="let section of sections; let i = index"
+      class="section"
+      [attr.id]="'section-' + i"
+      #section
+    >
+      <h2>
+        {{ section.title }}
+        <p-button
+          *ngIf="isAdmin"
+          icon="pi pi-pencil"
+          [rounded]="true"
+          [text]="true"
+          (onClick)="openDialog(section.title,section.content)"
+        ></p-button>
+      </h2>
+      <p>
+        {{ section.content }}
+      </p>
+    </div>
+  </div>
+</div>

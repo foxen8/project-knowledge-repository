@@ -1,0 +1,153 @@
+.main-content {
+  display: flex;
+  width: 100%;
+}
+
+.side-menu {
+  width: 400px; /* Fixed width */
+  flex-shrink: 0; /* Prevent it from shrinking */
+  flex-grow: 0; /* Prevent it from growing */
+  background-color: #003366;
+  padding: 10px;
+  color: white;
+  z-index: 10;
+  position: sticky;
+  top: 60px; /* Start the menu below the header */
+  transition: height 0.3s ease;
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+
+
+/* Adjusting height once scrolled */
+.side-menu.full-height {
+  height: 100vh; /* Full height of the viewport */
+}
+
+.side-menu.initial-height {
+  height: auto; /* Default height if not scrolled */
+}
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  cursor: pointer;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 23px;
+}
+
+.side-menu ul li:hover {
+  background-color: #0066cc;
+}
+
+/* Main Content */
+.article-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Section */
+.section {
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  text-align: center; /* Center the title */
+  // font-size: 24px; /* Adjust the font size as needed */
+  margin: 20px 0; /* Add margin around the title */
+  // font-weight: bold; /* Make the title bold */
+  position: relative; /* Positioning context for the line */
+}
+
+/* Create a line below the title */
+.section h2::after {
+  content: ''; /* Empty content for the line */
+  position: absolute; /* Position it relative to the title */
+  left: 50%; /* Center the line horizontally */
+  transform: translateX(-50%); /* Adjust to ensure it’s truly centered */
+  bottom: -10px; /* Position the line a little below the title */
+  width: 40%; /* Make the line slightly longer than the title width */
+  height: 3px; /* Line thickness */
+  background-color: lightgray; /* Line color (can change based on your design) */
+}
+
+/* Paragraph (Centered) */
+.section p {
+  text-align: center; /* Center the paragraph text */
+  font-size: 18px; /* Adjust the font size as needed */
+  line-height: 1.6; /* Add some line spacing for readability */
+  margin: 60px 20px 20px 20px; /* Add margin to the paragraph */
+  color: #333; /* Set a dark color for better readability */
+}
+
+.section textarea {
+  text-align: center; /* Center the paragraph text */
+  font-size: 18px; /* Adjust the font size as needed */
+  line-height: 1.6; /* Add some line spacing for readability */
+  margin: 60px 20px 20px 20px; /* Add margin to the paragraph */
+  color: #333; /* Set a dark color for better readability */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  /* For medium screens, reduce the left margin to 20px */
+  .header-tabs {
+    margin-left: 20px;
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove the left margin for smaller screens */
+  }
+
+  .side-menu {
+    width: 100%;
+    height: auto; /* Allow side menu to expand with content on smaller screens */
+    position: relative;
+  }
+}
+
+@media (max-width: 768px) {
+  /* For smaller screens, reduce margin further or remove it */
+  .header-tabs {
+    margin-left: 10px; /* Small space on mobile screens */
+  }
+
+  .header-tabs ul {
+    justify-content: flex-start; /* Keep tabs aligned to the left */
+  }
+
+  .header-tabs ul li a {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
+.add-section-button {
+  position: fixed;
+  bottom: 20px;  /* Adjust this value to set distance from the bottom of the screen */
+  left: 50%;
+  // transform: translateX(-50%);  /* Center the button horizontally */
+  padding: 15px 30px; /* Make the button bigger (adjust padding) */
+  background-color: #003366; /* Blue button color */
+  color: white;
+  border: none;
+  border-radius: 50px; /* Round corners for a pill shape */
+  font-size: 26px; /* Larger font size */
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Vertically center the text and icon */
+  justify-content: center;
+}
+
+.add-section-button:hover {
+  background-color: #0055a5; /* Darker shade on hover */
+}
+
+.add-section-button .icon {
+  font-size: 45px; /* Size of the plus icon */
+  margin-left: 10px; /* Space between text and icon */
+}
+

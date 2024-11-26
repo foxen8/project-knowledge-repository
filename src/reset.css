@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Roboto', serif;
+  line-height: 1.6;
+  background-color: var(--surface-a);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', serif;
+  font-weight: bold;
+  color: #333;
+}
+
+p {
+  margin-bottom: 1.2em;
+  color: #555;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+ul, ol {
+  margin-bottom: 1.2em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+}
+
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.box {
+  padding: 1em;
+  margin-bottom: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
