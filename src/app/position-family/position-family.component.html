@@ -1,0 +1,131 @@
+<div class="container">
+  <p-fieldset>
+    <ng-template pTemplate="header">
+      <div class="fieldset-header-class">
+        Οικογένεια Θέσης Εργασίας <br />
+        {{ parentName }}
+      </div>
+    </ng-template>
+    <p-panel>
+      <ng-template pTemplate="header">
+        <div class="custom-header">{{ familyName }}</div>
+      </ng-template>
+      <div class="main-content">
+        <!-- Left side: fieldsets with full layout -->
+        <div class="left-section">
+          <div class="content-container">
+            <!-- Top-left fieldset -->
+            <p-fieldset class="left-fieldset">
+              <ng-template pTemplate="header">
+                <div style="display: flex; align-items: center">
+                  <i class="pi pi-book" style="margin-right: 0.5rem"></i>
+                  <span>Περιγραφή Ρόλου</span>
+                </div>
+              </ng-template>
+              <p class="m-0">
+                Η Διοίκηση και Διαχείριση Πολιτικών περιλαμβάνει την αξιολόγηση
+                και συντονισμό των διαδικασιών του οργανισμού και τη βελτίωση
+                αξιοποίησης των πόρων, την επίτευξη των στόχων και την
+                εξορθολογισμένη. Περιλαμβάνει τη λήψη αποφάσεων και πρωτοβουλιών
+                με στόχο την εύρυθμη λειτουργία και τη βελτίωση του οργανισμού.
+              </p>
+            </p-fieldset>
+            <!-- Top-right fieldset -->
+            <div class="right-container">
+              <p-fieldset class="top-right-fieldset">
+                <ng-template pTemplate="header">
+                  <div style="display: flex; align-items: center">
+                    <i class="pi pi-book" style="margin-right: 0.5rem"></i>
+                    <span>Όραμα</span>
+                  </div>
+                </ng-template>
+                <p class="m-0">
+                  Μία αποδοτική και ευημερούσα Δημόσια Διοίκηση.
+                </p>
+              </p-fieldset>
+              <p-fieldset
+                class="bottom-right-fieldset"
+              >
+              <ng-template pTemplate="header">
+                <div style="display: flex; align-items: center;">
+                  <i class="pi pi-book" style="margin-right: 0.5rem;"></i>
+                  <span>Αντίκτυπος στους Πολίτες</span>
+                </div>
+              </ng-template>
+                <p class="m-0">
+                  Μεριμνά για την ομαλή καθημερινή λειτουργία και το υγιές
+                  εργασιακό κλίμα των δημοσίων οργανισμών, διασφαλίζοντας την
+                  υψηλή ποιότητα των δημόσιων υπηρεσιών.
+                </p>
+              </p-fieldset>
+            </div>
+          </div>
+          <!-- Full-width fieldset -->
+          <p-fieldset class="full-width-fieldset">
+            <ng-template pTemplate="header">
+              <div style="display: flex; align-items: center">
+                <i class="pi pi-book" style="margin-right: 0.5rem"></i>
+                <span>Καθήκοντα</span>
+              </div>
+            </ng-template>
+            <p class="m-0">
+              Προσανατολισμός στον πολίτη, Ομαδικότητα, Προσαρμοστικότητα,
+              Προσανατολισμός στο αποτέλεσμα, Οργάνωση και προγραμματισμός,
+              Επίλυση προβλημάτων και δημιουργικότητα, Επαγγελματισμός και
+              ακεραιότητα, Διαχείριση γνώσης, Ηγετικότητα, Ψηφιακές δεξιότητες,
+              Πρόσβαση δεξιοτήτων.
+            </p>
+          </p-fieldset>
+          <!-- Divider below full-width fieldset -->
+        </div>
+
+        <!-- Vertical divider and right section -->
+        <p-divider type="dashed" [layout]="'vertical'"></p-divider>
+        <div class="right-section">
+          <!-- Top fieldset on right -->
+          <p-fieldset class="right-top-fieldset">
+            <ng-template pTemplate="header">
+              <div style="display: flex; align-items: center">
+                <i class="pi pi-book" style="margin-right: 0.5rem"></i>
+                <span>Δεξιότητες</span>
+              </div>
+            </ng-template>
+            <p class="m-0">
+              Content for the top right fieldset. Fill as needed.
+            </p>
+          </p-fieldset>
+          <!-- Bottom fieldset on right -->
+          <p-fieldset class="right-bottom-fieldset">
+            <ng-template pTemplate="header">
+              <div style="display: flex; align-items: center">
+                <i class="pi pi-book" style="margin-right: 0.5rem"></i>
+                <span>Κατηγορίες Γνώσεων</span>
+              </div>
+            </ng-template>
+            <p class="m-0">
+              Content for the bottom right fieldset. Fill as needed.
+            </p>
+          </p-fieldset>
+        </div>
+      </div>
+    </p-panel>
+
+    <p-divider type="dashed"></p-divider>
+    <div class="icon-chips-container">
+      <div class="icon-text">
+        <i class="pi pi-building" style="font-size: 3rem"></i>
+        <span class="multi-line-text"> Γενικά Περιγράμματα Θέσεων </span>
+      </div>
+      <div class="button-group">
+        <p-button
+          [rounded]="true"
+          *ngFor="let position of jobPositions"
+          [label]="position"
+          class="chip-button"
+          (click)="onChipClick(position)"
+        >
+        </p-button>
+      </div>
+    </div>
+  </p-fieldset>
+</div>

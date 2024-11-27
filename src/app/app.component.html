@@ -10,17 +10,35 @@
 
     <nav class="header-tabs">
       <ul>
-        <li><a routerLink="/" routerLinkActive="active">Αρχική</a></li>
         <li>
-          <a routerLink="/role-search" routerLinkActive="active"
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Αρχική</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/role-search"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Αναζήτηση Προφίλ Ρόλου</a
           >
         </li>
         <li>
-          <a routerLink="/knowledge" routerLinkActive="active">Γνώσεις</a>
+          <a
+            routerLink="/knowledge"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Γνώσεις</a
+          >
         </li>
         <li>
-          <a routerLink="/position-summary" routerLinkActive="active"
+          <a
+            routerLink="/position-summary"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Γενικά Περιγράμματα Θέσης</a
           >
         </li>

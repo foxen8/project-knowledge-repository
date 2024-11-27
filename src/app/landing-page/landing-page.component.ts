@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class LandingPageComponent implements OnInit {
   isAdmin = true;
   @ViewChildren('section') sectionElements!: QueryList<ElementRef>;
+  currentSection = 0;
   sections = [
     {
       title: 'Αποθετήριο Γνώσεων',
@@ -39,6 +40,28 @@ export class LandingPageComponent implements OnInit {
   ];
   constructor() {}
   ngOnInit(): void {}
+  ngAfterViewInit() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Get the index of the section currently in view
+            const index = this.sectionElements.toArray().findIndex(
+              (el) => el.nativeElement === entry.target
+            );
+            this.currentSection = index;
+          }
+        });
+      },
+      {
+        root: null, // Observe the viewport
+        threshold: 0.6, // Trigger when 60% of the section is visible
+      }
+    );
+
+    // Observe each section
+    this.sectionElements.forEach((section) => observer.observe(section.nativeElement));
+  }
   toggleContentFlag() {
     this.isAdmin = !this.isAdmin;
   }
@@ -120,4 +143,5 @@ export class LandingPageComponent implements OnInit {
       });
     }
   }
+  onDelete(sectionTitle?: string, sectionDescription?: string) {}
 }

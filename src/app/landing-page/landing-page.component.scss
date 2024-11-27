@@ -4,6 +4,7 @@
 }
 
 .side-menu {
+  height: 100vh;
   width: 400px; /* Fixed width */
   flex-shrink: 0; /* Prevent it from shrinking */
   flex-grow: 0; /* Prevent it from growing */
@@ -15,22 +16,21 @@
   top: 60px; /* Start the menu below the header */
   transition: height 0.3s ease;
   box-sizing: border-box; /* Include padding in the width */
+  margin-top: 20px;
+  position: fixed;
 }
 
 
 
 /* Adjusting height once scrolled */
 .side-menu.full-height {
-  height: 100vh; /* Full height of the viewport */
+  height: 100%; 
 }
 
 .side-menu.initial-height {
   height: auto; /* Default height if not scrolled */
 }
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-}
+
 
 .side-menu ul li {
   cursor: pointer;
@@ -48,6 +48,8 @@
   flex-grow: 1;
   padding: 20px;
   background-color: #ffffff;
+  margin-left: 400px;
+  margin-top:100px;
 }
 
 /* Section */
@@ -73,6 +75,7 @@
   width: 40%; /* Make the line slightly longer than the title width */
   height: 3px; /* Line thickness */
   background-color: lightgray; /* Line color (can change based on your design) */
+  z-index: 8;
 }
 
 /* Paragraph (Centered) */
@@ -140,6 +143,7 @@
   display: flex;
   align-items: center; /* Vertically center the text and icon */
   justify-content: center;
+  z-index: 100;
 }
 
 .add-section-button:hover {
@@ -151,3 +155,20 @@
   margin-left: 10px; /* Space between text and icon */
 }
 
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.side-menu li.active {
+  font-weight: bold;
+  background-color: #0066cc;
+  border-left: 4px solid #007bff;
+}

@@ -4,6 +4,7 @@
       <li
         *ngFor="let section of sections; let i = index"
         (click)="scrollToSection(i)"
+        [class.active]="currentSection === i"
       >
         {{ section.title }}
       </li>
@@ -29,6 +30,14 @@
           [rounded]="true"
           [text]="true"
           (onClick)="openDialog(section.title,section.content)"
+        ></p-button>
+        <p-button
+          *ngIf="isAdmin"
+          icon="pi pi-times"
+          [rounded]="true"
+          [text]="true"
+          [style]="{'color':'red'}"
+          (onClick)="onDelete(section.title,section.content)"
         ></p-button>
       </h2>
       <p>
