@@ -21,6 +21,8 @@ import { ChipsModule } from 'primeng/chips';
 import { CarouselModule } from 'primeng/carousel';
 import { OutlineModalComponent } from './outline-modal/outline-modal.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { ChipModule } from 'primeng/chip';
+
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { DropdownModule } from 'primeng/dropdown';
     DividerModule,
     ChipsModule,
     CarouselModule,
-    DropdownModule
+    DropdownModule,
+    ChipModule
   ],
   bootstrap: [AppComponent],
 })

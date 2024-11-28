@@ -243,7 +243,7 @@ export class SearchProfileRoleComponent {
               familyName: d.data.name,
               parentName: d.parent.data.name,
             },
-          }); // Optionally, call a function or perform another action
+          }); 
         }
       });
   }
