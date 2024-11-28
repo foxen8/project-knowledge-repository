@@ -18,6 +18,9 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { DividerModule } from 'primeng/divider';
 import { ChipsModule } from 'primeng/chips';
+import { CarouselModule } from 'primeng/carousel';
+import { OutlineModalComponent } from './outline-modal/outline-modal.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -26,6 +29,7 @@ import { ChipsModule } from 'primeng/chips';
     LandingPageComponent,
     SearchProfileRoleComponent,
     PositionFamilyComponent,
+    OutlineModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import { ChipsModule } from 'primeng/chips';
     FieldsetModule,
     PanelModule,
     DividerModule,
-    ChipsModule
+    ChipsModule,
+    CarouselModule,
+    DropdownModule
   ],
   bootstrap: [AppComponent],
 })

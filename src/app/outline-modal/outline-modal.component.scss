@@ -1,0 +1,88 @@
+.modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  color: #d35400;
+}
+
+.modal-header h3 {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.modal-section {
+  margin-bottom: 20px;
+}
+
+.modal-section h4 {
+  font-size: 1.2rem;
+  color: #d35400;
+  margin-bottom: 10px;
+}
+
+.modal-section p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.modal-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.modal-section ul li {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.two-columns > div {
+  width: 48%;
+}
+.custom-carousel ::ng-deep .p-carousel-prev,
+.custom-carousel ::ng-deep .p-carousel-next {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  z-index: 999; /* Ensure arrows are always on top */
+  // background-color: #f56c6c; /* A distinct color for the arrows */
+  color: #fff; /* White arrow icons for better contrast */
+  border-radius: 50%; /* Circular button shape */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  cursor: pointer; /* Pointer cursor for better UX */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animations */
+}
+
+.custom-carousel ::ng-deep .p-carousel-prev:hover,
+.custom-carousel ::ng-deep .p-carousel-next:hover {
+  transform: translateY(-50%) scale(1.1); /* Slightly enlarge on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.custom-carousel ::ng-deep .p-carousel-prev:focus,
+.custom-carousel ::ng-deep .p-carousel-next:focus {
+  outline: none; /* Remove default focus outline */
+  border: 2px solid #fff; /* Add a white border for focus indication */
+  transform: translateY(-50%) scale(1.2); /* Slightly enlarge on focus */
+}
+
+.custom-carousel ::ng-deep .p-carousel-prev {
+  left: -50px; /* Move the previous arrow outside the modal */
+}
+
+.custom-carousel ::ng-deep .p-carousel-next {
+  right: -50px; /* Move the next arrow outside the modal */
+}

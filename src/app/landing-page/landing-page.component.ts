@@ -5,7 +5,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import Swal from 'sweetalert2';
+import { HelperService } from '../service/helper.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -38,7 +38,7 @@ export class LandingPageComponent implements OnInit {
         'This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis section summarizes the findings.This section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findings',
     },
   ];
-  constructor() {}
+  constructor(private helperService: HelperService) {}
   ngOnInit(): void {}
   ngAfterViewInit() {
     const observer = new IntersectionObserver(
@@ -46,9 +46,9 @@ export class LandingPageComponent implements OnInit {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             // Get the index of the section currently in view
-            const index = this.sectionElements.toArray().findIndex(
-              (el) => el.nativeElement === entry.target
-            );
+            const index = this.sectionElements
+              .toArray()
+              .findIndex((el) => el.nativeElement === entry.target);
             this.currentSection = index;
           }
         });
@@ -60,73 +60,20 @@ export class LandingPageComponent implements OnInit {
     );
 
     // Observe each section
-    this.sectionElements.forEach((section) => observer.observe(section.nativeElement));
+    this.sectionElements.forEach((section) =>
+      observer.observe(section.nativeElement)
+    );
   }
   toggleContentFlag() {
     this.isAdmin = !this.isAdmin;
   }
   addSection() {
-    this.openDialog();
+    this.helperService.openDialog();
   }
-  openDialog(sectionTitle?: string, sectionDescription?: string) {
-    sectionTitle = sectionTitle ?? '';
-    sectionDescription = sectionDescription ?? '';
-    const isDisabled = sectionTitle && sectionTitle !== '';
-    const dialogHeight = `${Math.max(150, sectionDescription.length / 5)}px`;
-    Swal.fire({
-      title: 'Προσθήκη Ενότητας',
-      html: `
-        <div style="text-align: left;">
-          <label for="input1" style="display: block; margin-bottom: 0.5em;font-size:30;font-weight:bold;">Τίτλος</label>
-          <input type="text"style="width: 90%; id="input1" class="swal2-input" placeholder="Τίτλος Ενότητας"  value="${sectionTitle}" 
-               ${isDisabled ? 'disabled' : ''}>
-          
-          <label for="input2" style="display: block; margin-top: 1em; margin-bottom: 0.5em;font-size:30;font-weight:bold;">Περιγραφή Ενότητας</label>
-          <textarea id="input2" class="swal2-textarea" placeholder="Συμπληρώστε την περιγραφή της ενότητας" style="width: 90%;height:${dialogHeight}; ">${sectionDescription}</textarea>
-        </div>
-      `,
-      showCancelButton: true,
-      width: '1400px',
-      confirmButtonText: 'Αποθήκευση',
-      confirmButtonColor: '#003366',
-      cancelButtonText: 'Ακύρωση',
-      focusConfirm: false,
-      allowEscapeKey: true,
-      preConfirm: () => {
-        const input1Value = (
-          document.getElementById('input1') as HTMLInputElement
-        ).value;
-        const input2Value = (
-          document.getElementById('input2') as HTMLInputElement
-        ).value;
-
-        if (!input1Value || !input2Value) {
-          Swal.showValidationMessage('Παρακαλώ συμπληρώστε και τα δύο πεδία');
-          return;
-        }
-        return { input1: input1Value, input2: input2Value };
-      },
-      willOpen: () => {
-        const popup = document.querySelector('.swal2-popup');
-        const textarea = document.querySelector(
-          '.swal2-textarea'
-        ) as HTMLElement;
-
-        // Dynamically adjust the height of the modal based on textarea content
-        if (textarea && popup) {
-          const textareaHeight = textarea.scrollHeight;
-
-          // Ensure popup is treated as HTMLElement and apply styles
-          const popupElement = popup as HTMLElement;
-          popupElement.style.minHeight = `${textareaHeight + 500}px`; // Add extra height for spacing
-        }
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log('Values:', result.value); // result.value contains { input1, input2 }
-      }
-    });
+  editSection(title:string,descr:string) {
+    this.helperService.openDialog(title,descr);
   }
+
   scrollToSection(index: number): void {
     // Get the selected section using the index
     const section = this.sectionElements.toArray()[index];

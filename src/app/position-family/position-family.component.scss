@@ -122,3 +122,31 @@
   margin: 5px; /* Spacing between chips */
   padding: 0px 5px; /* Padding inside the chip */
 }
+::ng-deep .p-carousel-prev .carousel-prev-icon,
+::ng-deep .p-carousel-next .carousel-prev-icon {
+  width: 80px; /* Adjust the width of the SVG */
+  height: 80px; /* Adjust the height of the SVG */
+}
+
+::ng-deep .p-carousel-prev,
+::ng-deep .p-carousel-next {
+  width: 80px; /* Adjust button size */
+  height: 80px;
+}
+::ng-deep .p-carousel-prev {
+  left: 120px; /* Increase the space from the left edge */
+  top: 50%; /* Ensure it is vertically centered */
+  transform: translateY(60%); /* Center it perfectly */
+}
+::ng-deep .p-carousel-next {
+  right: 120px; /* Increase the space from the right edge */
+  top: 50%; /* Ensure it is vertically centered */
+  transform: translateY(60%); /* Center it perfectly */
+}
+
+::ng-deep .p-carousel-prev,
+::ng-deep .p-carousel-next {
+  width: 50px; /* Button size */
+  height: 50px;
+  z-index: 10; /* Ensure it is above the carousel content */
+}

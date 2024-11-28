@@ -7,6 +7,7 @@
   color: white;
   position: fixed;
   width: 100%;
+  z-index: 100;
 }
 
 .header-logo {
@@ -74,6 +75,6 @@
 
 /* Side Menu */
 .main-content {
-  display: flex;
+  display: inline-block;
   width: 100%;
 }

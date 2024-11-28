@@ -29,15 +29,15 @@
           icon="pi pi-pencil"
           [rounded]="true"
           [text]="true"
-          (onClick)="openDialog(section.title,section.content)"
+          (onClick)="editSection(section.title, section.content)"
         ></p-button>
         <p-button
           *ngIf="isAdmin"
           icon="pi pi-times"
           [rounded]="true"
           [text]="true"
-          [style]="{'color':'red'}"
-          (onClick)="onDelete(section.title,section.content)"
+          [style]="{ color: 'red' }"
+          (onClick)="onDelete(section.title, section.content)"
         ></p-button>
       </h2>
       <p>

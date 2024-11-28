@@ -239,7 +239,7 @@ export class SearchProfileRoleComponent {
         // Handle click event for leaf nodes' labels
         if (!d.children && d.data.tooltip) {
           this.router.navigate(['/position-family'], {
-            queryParams: {
+            state: {
               familyName: d.data.name,
               parentName: d.parent.data.name,
             },
