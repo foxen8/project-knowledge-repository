@@ -22,8 +22,11 @@ import { CarouselModule } from 'primeng/carousel';
 import { OutlineModalComponent } from './outline-modal/outline-modal.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ChipModule } from 'primeng/chip';
-
-
+import { KnowledgePageComponent } from './knowledge-page/knowledge-page.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { AccordionModule } from 'primeng/accordion';
+import { GeneralOutlinesComponent } from './general-outlines/general-outlines.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { ChipModule } from 'primeng/chip';
     SearchProfileRoleComponent,
     PositionFamilyComponent,
     OutlineModalComponent,
+    KnowledgePageComponent,
+    GeneralOutlinesComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,10 @@ import { ChipModule } from 'primeng/chip';
     ChipsModule,
     CarouselModule,
     DropdownModule,
-    ChipModule
+    ChipModule,
+    TooltipModule,
+    AccordionModule,
+    TableModule
   ],
   bootstrap: [AppComponent],
 })

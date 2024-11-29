@@ -2843,7 +2843,7 @@
       background-color: var(--surface-200);
     }
     .p-datatable .p-datatable-tbody > tr {
-      background: #ffffff;
+      background: #e6f2fa;
       color: #25282f;
       transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     }

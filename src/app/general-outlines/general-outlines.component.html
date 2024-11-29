@@ -1,0 +1,54 @@
+<div class="page-container">
+  <div class="knowledge-section">
+    <h1>Γενικά Περιγράμματα Θέσης</h1>
+    <p>{{ knowledgeDescr }}</p>
+    <h3>Λίστα Γενικών Περιγραμμάτων Θέσεων</h3>
+    <p-table [value]="generalOutlines" class="custom-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Κωδικός Γενικού Περιγράμματος Θέσης</th>
+          <th>Γενικό Περίγραμμα Θέσης</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-gOutline>
+        <tr>
+          <td>{{ gOutline.code }}</td>
+          <td>
+            {{ gOutline.name }}
+          </td>
+          <td>
+            <p-button
+              icon="pi pi-angle-down"
+              [rounded]="true"
+              [text]="true"
+              (onClick)="openModal(gOutline)"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+<p-dialog
+  [(visible)]="displayModal"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '80%' }"
+>
+  <ng-template pTemplate="header">
+    <div
+      style="
+        justify-content: center;
+        color: #d35400;
+        font-weight: bolder;
+        margin-left: 40%;
+        font-size: 30px;
+      "
+    >
+      ΓΕΝΙΚΟ ΠΕΡΙΓΡΑΜΜΑ
+    </div>
+  </ng-template>
+  <!-- <p-header style="color: #d35400;font-weight: bolder;">ΓΕΝΙΚΟ ΠΕΡΙΓΡΑΜΜΑ</p-header> -->
+  <app-outline-modal></app-outline-modal>
+</p-dialog>

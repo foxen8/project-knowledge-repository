@@ -227,6 +227,7 @@
               *ngFor="let position of jobPositions"
               [removable]="true"
               (onRemove)="deleteGeneralOutline(position)"
+              (click)="onChipClick(position)"
               [style]="{ 'background-color': '#0055a5', color: 'white' }"
               >{{ position }}</p-chip
             >
