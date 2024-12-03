@@ -18,8 +18,8 @@ export class GeneralOutlinesModalComponent {
   @Input() dialogHide?: boolean;
   @Input() isEdit?: boolean;
   @Input() checked?: boolean;
-  @Output() formSubmit = new EventEmitter<any>(); // Emit form data on submit
-  @Output() cancel = new EventEmitter<void>(); // Emit cancel event to close dialog
+  @Output() formSubmit = new EventEmitter<any>();
+  @Output() cancel = new EventEmitter<void>();
   generalOutlineForm: FormGroup = this.formBuilder.group({
     positionGeneralOutline: ['', Validators.required],
     isAssigned: [false],

@@ -1,18 +1,19 @@
 <div>
-    <section class="general-outline-dashboard">
-      <section class="general-outline-dashboard-header">
-        <h1>Διαχείριση Γενικών Περιγραμμάτων</h1>
-      </section>
-      <section class="general-outline-dashboard-header" style="box-shadow: none">
-        <div>
-          <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary" />
-          <label style="margin-left: 30px" for="ny">Εμφάνιση Γενικών Περιγραμμάτων που δεν έχουν αντιστοιχηθεί σε Προφίλ Ρόλου</label>
-        </div>
-        
-      </section>
-      <div class="table-container">
-        <general-outlines-table></general-outlines-table>
+  <section class="general-outline-dashboard">
+    <section class="general-outline-dashboard-header">
+      <h1>Διαχείριση Γενικών Περιγραμμάτων</h1>
+    </section>
+    <section class="general-outline-dashboard-header" style="box-shadow: none">
+      <div>
+        <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary" />
+        <label style="margin-left: 30px" for="ny"
+          >Εμφάνιση Γενικών Περιγραμμάτων που δεν έχουν αντιστοιχηθεί σε Προφίλ
+          Ρόλου</label
+        >
       </div>
     </section>
-  </div>
-
+    <div class="table-container">
+      <general-outlines-table></general-outlines-table>
+    </div>
+  </section>
+</div>

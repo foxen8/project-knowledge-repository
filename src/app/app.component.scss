@@ -1,9 +1,8 @@
-/* Header container */
 .header-container {
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  background-color: #003366; /* Blue header background */
+  background-color: #003366;
   color: white;
   position: fixed;
   width: 100%;
@@ -26,18 +25,17 @@
   flex-direction: column;
 }
 
-/* Tabs Navigation */
 .header-tabs {
-  margin-left: 50px; /* Add space between logo and tabs for larger screens */
+  margin-left: 50px;
 }
 
 .header-tabs ul {
   display: flex;
-  justify-content: flex-start; /* Align tabs to the left */
+  justify-content: flex-start;
   list-style: none;
   margin: 0;
   padding: 0;
-  flex-wrap: nowrap; /* Prevent tabs from wrapping to the next line */
+  flex-wrap: nowrap;
 }
 
 .header-tabs ul li {
@@ -47,40 +45,36 @@
 .header-tabs ul li a {
   display: inline-block;
   text-align: center;
-  padding: 15px 30px; /* Adjust padding for a tab look */
+  padding: 15px 30px;
   color: white;
   font-size: 20px;
   font-weight: bold;
   text-decoration: none;
-  border: 1px solid transparent; /* Transparent borders for structure */
-  border-bottom: none; /* Remove bottom border for tab effect */
-  border-radius: 5px 5px 0 0; /* Rounded top corners for tabs */
-  white-space: nowrap; /* Prevent text wrapping inside tabs */
-  flex-shrink: 0; /* Prevent shrinking of the tabs */
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* Active tab styling */
 .header-tabs ul li a.active {
-  background-color: white; /* Active tab background */
-  color: #003366; /* Active tab text color */
-  border: 1px solid #ccc; /* Add a border to the active tab */
-  border-bottom: 2px solid white; /* White border to integrate with the main background */
+  background-color: white;
+  color: #003366;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid white;
 }
 
-/* Hover effect */
 .header-tabs ul li a:hover {
-  background-color: #0066cc; /* Darker blue on hover */
+  background-color: #0066cc;
   color: white;
 }
 
-/* Right-aligned button container */
 .header-button-container {
-  margin-left: auto; /* This will push the button to the right */
+  margin-left: auto;
   display: flex;
-  align-items: center; /* Align the icon vertically */
+  align-items: center;
 }
 
-/* Side Menu */
 .main-content {
   display: inline-block;
   width: 100%;

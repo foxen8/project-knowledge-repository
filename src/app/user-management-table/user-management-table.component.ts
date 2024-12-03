@@ -15,7 +15,7 @@ import { Table, TableFilterEvent } from 'primeng/table';
   styleUrls: ['./user-management-table.component.scss'],
 })
 export class UserManagementTableComponent implements OnInit {
-  @ViewChild('dt1') table: Table | undefined; // Reference to the table component
+  @ViewChild('dt1') table: Table | undefined;
   @Input() showDialog: boolean = false;
   @Output() addDialogClosed = new EventEmitter<boolean>();
 
@@ -39,7 +39,7 @@ export class UserManagementTableComponent implements OnInit {
       active: 'Ενεργός',
     },
   ];
-  filteredUsers: any[] = []; // Store filtered data here
+  filteredUsers: any[] = [];
   loading: boolean = false;
   selectUsersMenuActions: Array<MenuItem> = [];
   selectedRow: any;
@@ -59,7 +59,6 @@ export class UserManagementTableComponent implements OnInit {
       {
         items: [
           {
-            //this.translateService.instant('edit')
             label: 'Επεξεργασία',
             command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
               this.editUserModal = true;
@@ -68,7 +67,6 @@ export class UserManagementTableComponent implements OnInit {
             styleClass: 'action-link',
           },
           {
-            //this.translateService.instant('delete')
             label: 'Διαγραφή',
             command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
               this.deleteModal = true;
@@ -80,12 +78,11 @@ export class UserManagementTableComponent implements OnInit {
     ];
   }
   customGlobalFilter(value: string, data: any[]): any[] {
-    if (!value) return data; // Return all data if no value
+    if (!value) return data;
 
     const lowerCaseValue = value.toLowerCase();
 
     return data.filter((item) => {
-      // Check if any of the fields contain the search term
       return (
         item.name.toLowerCase().includes(lowerCaseValue) ||
         item.email.toLowerCase().includes(lowerCaseValue) ||
@@ -146,11 +143,7 @@ export class UserManagementTableComponent implements OnInit {
       this.addDialogClosed.emit(false);
     }
   }
-  createNewUser() {
-    //create user from service
-  }
-  updateUser() {
-    // update user with service
-  }
+  createNewUser() {}
+  updateUser() {}
   handleDelete(data: any) {}
 }

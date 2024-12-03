@@ -50,39 +50,38 @@
 .custom-carousel ::ng-deep .p-carousel-prev,
 .custom-carousel ::ng-deep .p-carousel-next {
   position: absolute;
-  top: 50%; /* Center vertically */
+  top: 50%;
   transform: translateY(-50%);
-  z-index: 999; /* Ensure arrows are always on top */
-  // background-color: #f56c6c; /* A distinct color for the arrows */
-  color: #fff; /* White arrow icons for better contrast */
-  border-radius: 50%; /* Circular button shape */
+  z-index: 999;
+  color: #fff;
+  border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  cursor: pointer; /* Pointer cursor for better UX */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animations */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .custom-carousel ::ng-deep .p-carousel-prev:hover,
 .custom-carousel ::ng-deep .p-carousel-next:hover {
-  transform: translateY(-50%) scale(1.1); /* Slightly enlarge on hover */
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 .custom-carousel ::ng-deep .p-carousel-prev:focus,
 .custom-carousel ::ng-deep .p-carousel-next:focus {
-  outline: none; /* Remove default focus outline */
-  border: 2px solid #fff; /* Add a white border for focus indication */
-  transform: translateY(-50%) scale(1.2); /* Slightly enlarge on focus */
+  outline: none;
+  border: 2px solid #fff;
+  transform: translateY(-50%) scale(1.2);
 }
 
 .custom-carousel ::ng-deep .p-carousel-prev {
-  left: -50px; /* Move the previous arrow outside the modal */
+  left: -50px;
 }
 
 .custom-carousel ::ng-deep .p-carousel-next {
-  right: -50px; /* Move the next arrow outside the modal */
+  right: -50px;
 }

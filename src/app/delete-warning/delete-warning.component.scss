@@ -1,194 +1,189 @@
 .notification-dashboard {
-    .notification-dashboard-header {
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 130px;
-      box-shadow: 0 10px 4px -4px var(--surface-border);
-    }
-  }
-  .dialog-header{
-    height: 1px;
-  }
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Space between rows */
-  }
-  
-  .form-row {
+  .notification-dashboard-header {
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px; /* Space between columns */
+    height: 130px;
+    box-shadow: 0 10px 4px -4px var(--surface-border);
   }
-  
-  .form-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    
-  }
-  .form-row-alone {
-    display:grid;
-    grid-template-columns: 2fr 2fr;
-    // gap: 10px; /* Optional: Adjusts the space between columns */
-    align-items: center;
-  }
-  
-  .form-column-alone {
-    display: flex;
-    align-items: center;
-  }
-  .long-label {
-    // margin-left: 8px;
-    white-space: nowrap;
-    overflow: visible;
-    text-overflow: ellipsis;
-  }
-  label {
-    margin-bottom: 5px; /* Space between label and input */
-  }
-  
-  input[type="text"], input[type="checkbox"] {
-    width: 100%; /* Ensure inputs take full column width */
-  }
-  .note {
-    margin-top: 5px; /* Space between input and note */
-    font-size: 12px;
-    color: gray;
-    font-style: italic;
-  }
-  .p-dialog .p-dialog-header {
-    height: 300px; /* Adjust this value as needed */
-    display: flex;
-    align-items: center;
-  }
-  .notification-mngment-component {
-    @mixin table-grid {
-      display: grid;
-      grid-template-columns: .5fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: var(--35px);
-      grid-row-gap: var(--5px);
-    }
-    .custom-chips .p-chips-container {
-      border: none;
-      box-shadow: none;
-      padding: 0;
-    }
-    
-    @mixin primary-table-cell {
-      background-color: var(--primary-color);
-      color: var(--primary-color-text);
-    }
-  
-    padding: var(--25px);
-  
-    .input-notification-mngment-div {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-  
-      .header-like-text {
-        font-size: 1.2rem;
-        color: black;
-        font-weight: 900;
-        margin-right: 30px;
-      }
-  
-      ::ng-deep p-inputNumber span input {
-        height: var(--30px);
-      }
-  
-      ::ng-deep .borderless-input span input {
-        border: none;
-      }
-    }
-  
-    .secondary-text {
-      font-size: .9rem;
-      color: var(--secondary-color-text);
-      font-weight: 300;
-      margin-bottom: var(--30px);
-    }
-  
-    .education-grade-model-table {
-      width: 70%;
-      margin: 20px 0 0 150px;
-      text-align: center;
-  
-      .start-table-column {
-        @include primary-table-cell();
-      }
-  
-      .end-table-column {
-        // TODO add #ECEBEC and #0054BA to theme variables
-        background-color: #ECEBEC;
-        color: #0054BA;
-        font-weight: bold;
-      }
-  
-      .educational-grade-model-table-header {
-        @include table-grid();
-        @include primary-table-cell();
-      }
-  
-      .educational-grade-model-table-body-input {
-        @include table-grid();
-  
-        p-inputNumber {
-          align-self: center;
-          justify-self: center;
-          width: 30%;
-  
-          ::ng-deep span input {
-            height: var(--30px);
-            text-align: center;
-            width: 100%;
-          }
-        }
-      }
-  
-      .educational-grade-model-table-body-percentage {
-        @include table-grid();
-  
-        .borderless-input {
-          align-self: center;
-          justify-self: center;
-  
-          ::ng-deep span input {
-            border: none;
-            text-align: center;
-          }
-        }
-      }
-    }
-  
-    .notification-mngment-by-priority-header {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      margin: 20px 0;
-  
-      p-button {
-        margin-left: var(--15px);
-      }
-    }
-  
-    .notification-mngment-by-priority-tables {
-      margin-left: 25px;
-    }
+}
+.dialog-header {
+  height: 1px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.form-row-alone {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  align-items: center;
+}
+
+.form-column-alone {
+  display: flex;
+  align-items: center;
+}
+.long-label {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: ellipsis;
+}
+label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="checkbox"] {
+  width: 100%;
+}
+.note {
+  margin-top: 5px;
+  font-size: 12px;
+  color: gray;
+  font-style: italic;
+}
+.p-dialog .p-dialog-header {
+  height: 300px;
+  display: flex;
+  align-items: center;
+}
+.notification-mngment-component {
+  @mixin table-grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: var(--35px);
+    grid-row-gap: var(--5px);
   }
   .custom-chips .p-chips-container {
     border: none;
     box-shadow: none;
     padding: 0;
   }
-  
-  .custom-chips .p-inputtext {
-    border: none;
-    box-shadow: none;
+
+  @mixin primary-table-cell {
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
   }
-  
-  
+
+  padding: var(--25px);
+
+  .input-notification-mngment-div {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    .header-like-text {
+      font-size: 1.2rem;
+      color: black;
+      font-weight: 900;
+      margin-right: 30px;
+    }
+
+    ::ng-deep p-inputNumber span input {
+      height: var(--30px);
+    }
+
+    ::ng-deep .borderless-input span input {
+      border: none;
+    }
+  }
+
+  .secondary-text {
+    font-size: 0.9rem;
+    color: var(--secondary-color-text);
+    font-weight: 300;
+    margin-bottom: var(--30px);
+  }
+
+  .education-grade-model-table {
+    width: 70%;
+    margin: 20px 0 0 150px;
+    text-align: center;
+
+    .start-table-column {
+      @include primary-table-cell();
+    }
+
+    .end-table-column {
+      background-color: #ecebec;
+      color: #0054ba;
+      font-weight: bold;
+    }
+
+    .educational-grade-model-table-header {
+      @include table-grid();
+      @include primary-table-cell();
+    }
+
+    .educational-grade-model-table-body-input {
+      @include table-grid();
+
+      p-inputNumber {
+        align-self: center;
+        justify-self: center;
+        width: 30%;
+
+        ::ng-deep span input {
+          height: var(--30px);
+          text-align: center;
+          width: 100%;
+        }
+      }
+    }
+
+    .educational-grade-model-table-body-percentage {
+      @include table-grid();
+
+      .borderless-input {
+        align-self: center;
+        justify-self: center;
+
+        ::ng-deep span input {
+          border: none;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .notification-mngment-by-priority-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 20px 0;
+
+    p-button {
+      margin-left: var(--15px);
+    }
+  }
+
+  .notification-mngment-by-priority-tables {
+    margin-left: 25px;
+  }
+}
+.custom-chips .p-chips-container {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.custom-chips .p-inputtext {
+  border: none;
+  box-shadow: none;
+}

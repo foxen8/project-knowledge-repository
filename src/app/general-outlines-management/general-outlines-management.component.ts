@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
-import { Table, TableFilterEvent } from 'primeng/table';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-general-outlines-management',

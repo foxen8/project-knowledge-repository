@@ -66,7 +66,6 @@ export class KnowledgePageComponent implements OnInit {
       title: 'Αλλαγή Τίτλου',
       input: isTextArea ? 'textarea' : 'text',
       inputLabel: 'Τροποποιήστε τον τίτλο',
-      // inputPlaceholder: 'Enter your email address',
       inputValue: titleDescr,
       confirmButtonText: 'Αποθήκευση',
       confirmButtonColor: '#003366',

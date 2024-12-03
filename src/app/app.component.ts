@@ -18,9 +18,9 @@ export class AppComponent {
   onWindowScroll() {
     const offset = document.documentElement.scrollTop;
     if (offset > 60) {
-      this.isScrolled = true; // Add class to make the side menu full height
+      this.isScrolled = true;
     } else {
-      this.isScrolled = false; // Remove class
+      this.isScrolled = false;
     }
   }
 

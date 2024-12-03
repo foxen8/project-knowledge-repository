@@ -2,7 +2,7 @@
   margin-top: 200px;
 }
 .fieldset-header-class {
-  color: #0055a5; /* Blue button color */
+  color: #0055a5;
   font-weight: bold;
 }
 
@@ -19,27 +19,23 @@
   width: 100%;
 }
 
-/* Left section with fieldsets and dividers */
 .left-section {
   display: flex;
   flex-direction: column;
-  width: 70%; /* Adjust as needed */
+  width: 70%;
   gap: 10px;
 }
 
-/* Content container for left fieldsets */
 .content-container {
   display: flex;
   justify-content: space-between;
   gap: 10px;
 }
 
-/* Left fieldset */
 .left-fieldset {
-  width: 45%; /* Adjust to desired size */
+  width: 45%;
 }
 
-/* Top and bottom-right fieldsets stacked */
 .right-container {
   display: flex;
   flex-direction: column;
@@ -47,18 +43,15 @@
   gap: 10px;
 }
 
-/* Full-width fieldset spans entire bottom area */
 .full-width-fieldset {
   width: 100%;
 }
 
-/* Divider under the full-width fieldset */
 .horizontal-divider {
   margin-top: 20px;
   width: 100%;
 }
 
-/* Vertical divider */
 .vertical-divider {
   width: 2px;
   background-color: #ccc;
@@ -66,7 +59,6 @@
   height: auto;
 }
 
-/* Right section: stacked fieldsets on the right side */
 .right-section {
   display: flex;
   flex-direction: column;
@@ -76,15 +68,15 @@
 
 .right-top-fieldset,
 .right-bottom-fieldset {
-  flex: 1; /* Makes the two fieldsets equal height */
+  flex: 1;
 }
 .custom-header {
-  background-color: #0055a5; /* Blue background */
-  color: white; /* White text */
-  padding: 10px; /* Padding */
-  font-size: 18px; /* Font size */
-  font-weight: bold; /* Bold text */
-  text-align: start; /* Center text */
+  background-color: #0055a5;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: start;
   width: 100%;
 }
 .positions-chips-section {
@@ -98,13 +90,13 @@
 }
 .icon-chips-container {
   display: flex;
-  align-items: center; /* Ensure the icon-text and chips are aligned vertically */
-  gap: 20px; /* Add space between the icon-text and chips */
+  align-items: center;
+  gap: 20px;
 }
 
 .icon-text {
   display: flex;
-  align-items: center; /* Vertically center the icon relative to the text */
+  align-items: center;
 }
 
 .icon-text i {
@@ -113,40 +105,40 @@
 
 .multi-line-text {
   font-size: 2rem;
-  margin-left: 10px; /* Space between the icon and text */
-  max-width: 250px; /* Limit the width to control text wrapping */
-  line-height: 1.2; /* Adjust the line spacing for readability */
-  word-break: break-word; /* Break long words to avoid overflow */
+  margin-left: 10px;
+  max-width: 250px;
+  line-height: 1.2;
+  word-break: break-word;
 }
 .chip-button {
-  margin: 5px; /* Spacing between chips */
-  padding: 0px 5px; /* Padding inside the chip */
+  margin: 5px;
+  padding: 0px 5px;
 }
 ::ng-deep .p-carousel-prev .carousel-prev-icon,
 ::ng-deep .p-carousel-next .carousel-prev-icon {
-  width: 80px; /* Adjust the width of the SVG */
-  height: 80px; /* Adjust the height of the SVG */
+  width: 80px;
+  height: 80px;
 }
 
 ::ng-deep .p-carousel-prev,
 ::ng-deep .p-carousel-next {
-  width: 80px; /* Adjust button size */
+  width: 80px;
   height: 80px;
 }
 ::ng-deep .p-carousel-prev {
-  left: 120px; /* Increase the space from the left edge */
-  top: 50%; /* Ensure it is vertically centered */
-  transform: translateY(60%); /* Center it perfectly */
+  left: 120px;
+  top: 50%;
+  transform: translateY(60%);
 }
 ::ng-deep .p-carousel-next {
-  right: 120px; /* Increase the space from the right edge */
-  top: 50%; /* Ensure it is vertically centered */
-  transform: translateY(60%); /* Center it perfectly */
+  right: 120px;
+  top: 50%;
+  transform: translateY(60%);
 }
 
 ::ng-deep .p-carousel-prev,
 ::ng-deep .p-carousel-next {
-  width: 50px; /* Button size */
+  width: 50px;
   height: 50px;
-  z-index: 10; /* Ensure it is above the carousel content */
+  z-index: 10;
 }

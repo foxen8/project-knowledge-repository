@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GeneralOutlinesManagementComponent } from './general-outlines-management.component';
 
 describe('GeneralOutlinesManagementComponent', () => {
@@ -8,7 +7,7 @@ describe('GeneralOutlinesManagementComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GeneralOutlinesManagementComponent]
+      declarations: [GeneralOutlinesManagementComponent],
     });
     fixture = TestBed.createComponent(GeneralOutlinesManagementComponent);
     component = fixture.componentInstance;

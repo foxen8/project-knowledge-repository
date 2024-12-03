@@ -45,7 +45,6 @@ export class LandingPageComponent implements OnInit {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Get the index of the section currently in view
             const index = this.sectionElements
               .toArray()
               .findIndex((el) => el.nativeElement === entry.target);
@@ -54,12 +53,10 @@ export class LandingPageComponent implements OnInit {
         });
       },
       {
-        root: null, // Observe the viewport
-        threshold: 0.6, // Trigger when 60% of the section is visible
+        root: null,
+        threshold: 0.6,
       }
     );
-
-    // Observe each section
     this.sectionElements.forEach((section) =>
       observer.observe(section.nativeElement)
     );
@@ -70,20 +67,15 @@ export class LandingPageComponent implements OnInit {
   addSection() {
     this.helperService.openDialog();
   }
-  editSection(title:string,descr:string) {
-    this.helperService.openDialog(title,descr);
+  editSection(title: string, descr: string) {
+    this.helperService.openDialog(title, descr);
   }
 
   scrollToSection(index: number): void {
-    // Get the selected section using the index
     const section = this.sectionElements.toArray()[index];
-
-    // Scroll to the selected section
     if (section) {
-      const offset = 60; // The height of the sticky header
-      const topPosition = section.nativeElement.offsetTop - offset; // Adjust scroll position based on header height
-
-      // Scroll to the position with an offset
+      const offset = 60;
+      const topPosition = section.nativeElement.offsetTop - offset;
       window.scrollTo({
         top: topPosition,
         behavior: 'smooth',

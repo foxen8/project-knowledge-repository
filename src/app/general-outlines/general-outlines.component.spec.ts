@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GeneralOutlinesComponent } from './general-outlines.component';
 
 describe('GeneralOutlinesComponent', () => {

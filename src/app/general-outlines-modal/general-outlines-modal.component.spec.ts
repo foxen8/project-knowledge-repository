@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GeneralOutlinesModalComponent } from './general-outlines-modal.component';
 
 describe('GeneralOutlinesModalComponent', () => {
@@ -8,7 +7,7 @@ describe('GeneralOutlinesModalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GeneralOutlinesModalComponent]
+      declarations: [GeneralOutlinesModalComponent],
     });
     fixture = TestBed.createComponent(GeneralOutlinesModalComponent);
     component = fixture.componentInstance;

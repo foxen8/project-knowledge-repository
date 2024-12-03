@@ -14,7 +14,11 @@
   </div>
   <div class="form-row">
     <div class="form-column">
-      <input id="positionGeneralOutline" type="text" formControlName="positionGeneralOutline" />
+      <input
+        id="positionGeneralOutline"
+        type="text"
+        formControlName="positionGeneralOutline"
+      />
       <div
         *ngIf="
           generalOutlineForm.controls['positionGeneralOutline'].invalid &&
@@ -28,11 +32,12 @@
       </div>
     </div>
     <div class="form-column">
-        <p-checkbox
+      <p-checkbox
         id="isAssigned"
         formControlName="isAssigned"
         [binary]="true"
-      ></p-checkbox>      <div
+      ></p-checkbox>
+      <div
         *ngIf="
           generalOutlineForm.controls['isAssigned'].invalid &&
           generalOutlineForm.controls['isAssigned'].touched
@@ -51,8 +56,8 @@
       <label for="profileRole">Προφίλ Ρόλου:</label>
     </div>
     <div class="form-column">
-        <label for="profileRoleDescription">Έχει αντιστοιχηθεί:</label>
-      </div>
+      <label for="profileRoleDescription">Έχει αντιστοιχηθεί:</label>
+    </div>
   </div>
   <div class="form-row">
     <div class="form-column">
@@ -70,19 +75,23 @@
       </div>
     </div>
     <div class="form-column">
-        <input id="profileRoleDescription" type="text" formControlName="profileRoleDescription" />
-        <div
-          *ngIf="
-            generalOutlineForm.controls['profileRoleDescription'].invalid &&
-            generalOutlineForm.controls['profileRoleDescription'].touched
-          "
-        >
-          <p-message
-            severity="error"
-            text="Το πεδίο είναι υποχρεωτικό."
-          ></p-message>
-        </div>
+      <input
+        id="profileRoleDescription"
+        type="text"
+        formControlName="profileRoleDescription"
+      />
+      <div
+        *ngIf="
+          generalOutlineForm.controls['profileRoleDescription'].invalid &&
+          generalOutlineForm.controls['profileRoleDescription'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
       </div>
+    </div>
   </div>
   <div class="p-dialog-footer" style="justify-content: space-between">
     <button

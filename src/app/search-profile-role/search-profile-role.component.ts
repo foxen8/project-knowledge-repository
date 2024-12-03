@@ -18,7 +18,6 @@ export class SearchProfileRoleComponent {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Tree data
     this.data = {
       name: 'Οικογένειες θέσεων',
       children: [
@@ -99,29 +98,20 @@ export class SearchProfileRoleComponent {
     this.updateTree(this.filteredData);
   }
 
-  // Initialize the tree structure
   initTree() {
-    // Clear previous SVG if it exists
     d3.select('#tree-container').select('svg').remove();
 
-    // Create SVG container
     this.svg = d3
       .select('#tree-container')
       .append('svg')
       .attr('width', 1900)
       .attr('height', 800)
       .append('g')
-      .attr('transform', 'translate(180,100)'); // Add margins
-
-    // Create tree layout with increased size
-    // this.tree = d3.tree().size([this.height - 100, this.width - 200]);
-
-    // Optional: Increase spacing between nodes
-    // this.tree.nodeSize([50, 440]); // Adjust spacing (vertical, horizontal)
+      .attr('transform', 'translate(180,100)');
   }
 
   updateTree(data: any) {
-    const tooltip = d3.select('#tooltip'); // Select the tooltip element
+    const tooltip = d3.select('#tooltip');
 
     const root = d3.hierarchy(data);
     const tree = d3
@@ -134,8 +124,7 @@ export class SearchProfileRoleComponent {
     const nodes = treeData.descendants();
     const links = treeData.links();
 
-    // Draw links
-    this.svg.selectAll('.link').remove(); // Remove existing links
+    this.svg.selectAll('.link').remove();
     this.svg
       .selectAll('.link')
       .data(links)
@@ -152,7 +141,6 @@ export class SearchProfileRoleComponent {
           .y((d: any) => d.x)
       );
 
-    // Draw nodes
     const nodeGroup = this.svg
       .selectAll('.node')
       .data(nodes, (d: any) => d.data.name)
@@ -160,21 +148,18 @@ export class SearchProfileRoleComponent {
       .attr('class', 'node')
       .attr('transform', (d: any) => `translate(${d.y},${d.x})`);
 
-    // Add circles with tooltip functionality for leaf nodes only
     nodeGroup
       .append('circle')
       .attr('r', 5)
       .attr('fill', (d: any) => (d.children ? 'steelblue' : 'orange'))
       .on('mouseover', function (event: MouseEvent, d: any) {
-        // Check if it's a leaf node and has a tooltip defined
         if (!d.children && d.data.tooltip) {
           tooltip
             .style('display', 'block')
             .style('left', `${event.pageX + 10}px`)
             .style('top', `${event.pageY + 10}px`)
-            .html(`<strong>${d.data.tooltip}</strong>`); // Use the tooltip value
+            .html(`<strong>${d.data.tooltip}</strong>`);
 
-          // Highlight node
           d3.select(event.currentTarget as SVGCircleElement).attr(
             'fill',
             'lightblue'
@@ -192,7 +177,6 @@ export class SearchProfileRoleComponent {
         if (!d.children && d.data.tooltip) {
           tooltip.style('display', 'none');
 
-          // Reset color for leaf nodes
           d3.select(event.currentTarget as SVGCircleElement).attr(
             'fill',
             'orange'
@@ -200,7 +184,6 @@ export class SearchProfileRoleComponent {
         }
       });
 
-    // Add labels (text)
     nodeGroup
       .append('text')
       .attr('dy', 3)
@@ -208,16 +191,12 @@ export class SearchProfileRoleComponent {
       .style('text-anchor', (d: any) => (d.children ? 'end' : 'start'))
       .text((d: any) => d.data.name)
       .on('mouseover', function (event: MouseEvent, d: any) {
-        // Apply hover events to text labels (for leaf nodes with tooltips)
         if (!d.children && d.data.tooltip) {
           tooltip
             .style('display', 'block')
             .style('left', `${event.pageX + 10}px`)
             .style('top', `${event.pageY + 10}px`)
             .html(`<strong>${d.data.tooltip}</strong>`);
-
-          // d3.select(this).attr('fill', 'blue'); // Highlight label text
-          // d3.select(d3.select(this).node().parentNode).select('circle').attr('fill', 'lightblue'); // Highlight circle
         }
       })
       .on('mousemove', function (event: MouseEvent, d: any) {
@@ -228,27 +207,22 @@ export class SearchProfileRoleComponent {
         }
       })
       .on('mouseout', function (event: MouseEvent, d: any) {
-        // Reset styling on mouseout
         if (!d.children && d.data.tooltip) {
           tooltip.style('display', 'none');
-          // d3.select(this).attr('fill', 'black'); // Reset label text color
-          // d3.select(d3.select(this).node().parentNode).select('circle').attr('fill', 'orange'); // Reset circle color
         }
       })
       .on('click', (event: MouseEvent, d: any) => {
-        // Handle click event for leaf nodes' labels
         if (!d.children && d.data.tooltip) {
           this.router.navigate(['/position-family'], {
             state: {
               familyName: d.data.name,
               parentName: d.parent.data.name,
             },
-          }); 
+          });
         }
       });
   }
 
-  // Filter tree data based on search input
   filterTree() {
     const searchTermLower = this.searchTerm.toLowerCase();
 

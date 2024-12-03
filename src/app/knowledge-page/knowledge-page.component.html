@@ -7,42 +7,35 @@
         icon="pi pi-pencil"
         [rounded]="true"
         [text]="true"
-        (click)="showEditModal(knowledgeDescr,true)"
+        (click)="showEditModal(knowledgeDescr, true)"
       ></p-button>
     </h1>
     <p>{{ knowledgeDescr }}</p>
     <h3>Κατηγορίες Γνώσεων</h3>
     <p-accordion [activeIndex]="0">
-        <p-accordionTab
-          *ngFor="let tab of accordionTabs"
-          [header]="tab.header"
-          pTooltip="{{ tab.tooltip }}"
-          tooltipPosition="top"
-        >
-          <!-- Custom header template with button -->
-          <ng-template pTemplate="header">
-            <div >
-              <!-- Button next to header, only visible for admins -->
-              <p-button
-                *ngIf="isAdmin"
-                icon="pi pi-pencil"
-                [rounded]="true"
-                [text]="true"
-                (click)="showEditModal(tab.header)"
-              ></p-button>
-            </div>
-          </ng-template>
-      
-          <!-- Display content as a list of strings -->
-          <ul>
-            <li *ngFor="let line of tab.content">
-              {{ line }}
-            </li>
-          </ul>
-        </p-accordionTab>
-      </p-accordion>
-      
-      
-      
+      <p-accordionTab
+        *ngFor="let tab of accordionTabs"
+        [header]="tab.header"
+        pTooltip="{{ tab.tooltip }}"
+        tooltipPosition="top"
+      >
+        <ng-template pTemplate="header">
+          <div>
+            <p-button
+              *ngIf="isAdmin"
+              icon="pi pi-pencil"
+              [rounded]="true"
+              [text]="true"
+              (click)="showEditModal(tab.header)"
+            ></p-button>
+          </div>
+        </ng-template>
+        <ul>
+          <li *ngFor="let line of tab.content">
+            {{ line }}
+          </li>
+        </ul>
+      </p-accordionTab>
+    </p-accordion>
   </div>
 </div>

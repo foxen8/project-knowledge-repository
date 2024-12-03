@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HelperService {
-
-  constructor() { }
+  constructor() {}
   openDialog(sectionTitle?: string, sectionDescription?: string) {
     sectionTitle = sectionTitle ?? '';
     sectionDescription = sectionDescription ?? '';
     const isDisabled = sectionTitle && sectionTitle !== '';
-    // const dialogHeight = `${Math.max(1500, sectionDescription.length / 5)}px`;
     const htmlContent = `
       <div style="text-align: left;">
         <label for="input1" style="display: block; margin-bottom: 0.5em; font-size: 30px; font-weight: bold;">Τίτλος</label>
@@ -52,19 +50,16 @@ export class HelperService {
         const textarea = document.querySelector(
           '.swal2-textarea'
         ) as HTMLElement;
-
-        // Dynamically adjust the height of the modal based on textarea content
         if (textarea && popup) {
           const textareaHeight = textarea.scrollHeight;
 
-          // Ensure popup is treated as HTMLElement and apply styles
           const popupElement = popup as HTMLElement;
-          popupElement.style.minHeight = `${textareaHeight + 500}px`; // Add extra height for spacing
+          popupElement.style.minHeight = `${textareaHeight + 500}px`;
         }
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('Values:', result.value); // result.value contains { input1, input2 }
+        console.log('Values:', result.value);
       }
     });
   }

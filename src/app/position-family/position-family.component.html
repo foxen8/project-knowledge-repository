@@ -13,10 +13,8 @@
             <div class="custom-header">{{ familyName }}</div>
           </ng-template>
           <div class="main-content">
-            <!-- Left side: fieldsets with full layout -->
             <div class="left-section">
               <div class="content-container">
-                <!-- Top-left fieldset -->
                 <p-fieldset class="left-fieldset">
                   <ng-template pTemplate="header">
                     <div style="display: flex; align-items: center">
@@ -51,7 +49,6 @@
                     {{ position.positionDescription }}
                   </p>
                 </p-fieldset>
-                <!-- Top-right fieldset -->
                 <div class="right-container">
                   <p-fieldset class="top-right-fieldset">
                     <ng-template pTemplate="header">
@@ -120,7 +117,6 @@
                   </p-fieldset>
                 </div>
               </div>
-              <!-- Full-width fieldset -->
               <p-fieldset class="full-width-fieldset">
                 <ng-template pTemplate="header">
                   <div style="display: flex; align-items: center">
@@ -150,13 +146,9 @@
                   {{ position.outlines }}
                 </p>
               </p-fieldset>
-              <!-- Divider below full-width fieldset -->
             </div>
-
-            <!-- Vertical divider and right section -->
             <p-divider type="dashed" [layout]="'vertical'"></p-divider>
             <div class="right-section">
-              <!-- Top fieldset on right -->
               <p-fieldset class="right-top-fieldset">
                 <ng-template pTemplate="header">
                   <div style="display: flex; align-items: center">
@@ -171,7 +163,6 @@
                   {{ position.capabilities }}
                 </p>
               </p-fieldset>
-              <!-- Bottom fieldset on right -->
               <p-fieldset class="right-bottom-fieldset">
                 <ng-template pTemplate="header">
                   <div style="display: flex; align-items: center">
@@ -263,6 +254,5 @@
       ΓΕΝΙΚΟ ΠΕΡΙΓΡΑΜΜΑ
     </div>
   </ng-template>
-  <!-- <p-header style="color: #d35400;font-weight: bolder;">ΓΕΝΙΚΟ ΠΕΡΙΓΡΑΜΜΑ</p-header> -->
   <app-outline-modal></app-outline-modal>
 </p-dialog>

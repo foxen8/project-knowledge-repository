@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
-import { Table, TableFilterEvent } from 'primeng/table';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'general-outlines-table',
@@ -14,7 +14,7 @@ import { Table, TableFilterEvent } from 'primeng/table';
   styleUrls: ['./general-outlines-table.component.scss'],
 })
 export class GeneralOutlinesTableComponent {
-  @ViewChild('dt1') table: Table | undefined; // Reference to the table component
+  @ViewChild('dt1') table: Table | undefined;
   @Input() showDialog: boolean = false;
   @Output() addDialogClosed = new EventEmitter<boolean>();
 
@@ -44,19 +44,17 @@ export class GeneralOutlinesTableComponent {
       profileRoleDescription: 'xxxx',
     },
   ];
-  filteredGOutlines: any[] = []; // Store filtered data here
+  filteredGOutlines: any[] = [];
   loading: boolean = false;
   selectGOutlinesMenuActions: Array<MenuItem> = [];
   selectedRow: any;
   selectedIndex: number = 0;
   editGOutlineModal: boolean;
-  // deleteModal: boolean;
   newRow: any;
 
   constructor() {
     this.editGOutlineModal = false;
     this.showDialog = false;
-    // this.deleteModal = false;
   }
   ngOnInit(): void {
     this.filteredGOutlines = this.generalOutlinesArray;
@@ -64,7 +62,6 @@ export class GeneralOutlinesTableComponent {
       {
         items: [
           {
-            //this.translateService.instant('edit')
             label: 'Επεξεργασία',
             command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
               this.editGOutlineModal = true;
@@ -72,14 +69,6 @@ export class GeneralOutlinesTableComponent {
             },
             styleClass: 'action-link',
           },
-          // {
-          //   //this.translateService.instant('delete')
-          //   label: 'Διαγραφή',
-          //   command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
-          //     this.deleteModal = true;
-          //   },
-          //   styleClass: 'action-link',
-          // },
         ],
       },
     ];
@@ -90,7 +79,6 @@ export class GeneralOutlinesTableComponent {
   }
   handleCancel(): boolean {
     this.editGOutlineModal = false;
-    // this.deleteModal = false;
     this.showDialog = false;
     this.addDialogClosed.emit(false);
     return this.showDialog;
@@ -117,7 +105,6 @@ export class GeneralOutlinesTableComponent {
       this.addDialogClosed.emit(false);
     }
   }
-
   updateGOutline() {}
   handleDelete(data: any) {}
 }

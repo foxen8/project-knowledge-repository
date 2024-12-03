@@ -20,8 +20,8 @@ export class UserFormComponent implements OnChanges, OnInit {
   @Input() dialogHide?: boolean;
   @Input() isEdit?: boolean;
   @Input() checked?: boolean;
-  @Output() formSubmit = new EventEmitter<any>(); // Emit form data on submit
-  @Output() cancel = new EventEmitter<void>(); // Emit cancel event to close dialog
+  @Output() formSubmit = new EventEmitter<any>(); 
+  @Output() cancel = new EventEmitter<void>(); 
   userForm: FormGroup = this.formBuilder.group({
     email: ['', Validators.required],
     name: ['', Validators.required],

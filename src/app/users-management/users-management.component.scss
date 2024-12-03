@@ -1,275 +1,276 @@
 .user-dashboard {
-    .user-dashboard-header {
-      padding-left: 40px;
-      padding-right: 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100px;
-      box-shadow: 0 10px 4px -4px var(--surface-border);
-      margin-top: 100px;
-    }
-  }
-  .dialog-header {
-    height: 1px;
-  }
-  p-table {
-    margin-top: 1rem;
-  }
-  
-  .table-header {
+  .user-dashboard-header {
+    padding-left: 40px;
+    padding-right: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    height: 100px;
+    box-shadow: 0 10px 4px -4px var(--surface-border);
+    margin-top: 100px;
   }
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Space between rows */
-  }
-  
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px; /* Space between columns */
-  }
-  
-  .form-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .form-row-alone {
+}
+.dialog-header {
+  height: 1px;
+}
+p-table {
+  margin-top: 1rem;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.form-row-alone {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  // gap: 10px;
+  align-items: center;
+}
+
+.form-column-alone {
+  display: flex;
+  align-items: center;
+}
+.long-label {
+  // margin-left: 8px;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: ellipsis;
+}
+label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="checkbox"] {
+  width: 100%;
+}
+.note {
+  margin-top: 5px;
+  font-size: 12px;
+  color: gray;
+  font-style: italic;
+}
+.p-dialog .p-dialog-header {
+  height: 300px;
+  display: flex;
+  align-items: center;
+}
+.user-mngment-component {
+  @mixin table-grid {
     display: grid;
-    grid-template-columns: 2fr 2fr;
-    // gap: 10px; /* Optional: Adjusts the space between columns */
-    align-items: center;
-  }
-  
-  .form-column-alone {
-    display: flex;
-    align-items: center;
-  }
-  .long-label {
-    // margin-left: 8px;
-    white-space: nowrap;
-    overflow: visible;
-    text-overflow: ellipsis;
-  }
-  label {
-    margin-bottom: 5px; /* Space between label and input */
-  }
-  
-  input[type="text"],
-  input[type="checkbox"] {
-    width: 100%; /* Ensure inputs take full column width */
-  }
-  .note {
-    margin-top: 5px; /* Space between input and note */
-    font-size: 12px;
-    color: gray;
-    font-style: italic;
-  }
-  .p-dialog .p-dialog-header {
-    height: 300px; /* Adjust this value as needed */
-    display: flex;
-    align-items: center;
-  }
-  .user-mngment-component {
-    @mixin table-grid {
-      display: grid;
-      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: var(--35px);
-      grid-row-gap: var(--5px);
-    }
-    .custom-chips .p-chips-container {
-      border: none;
-      box-shadow: none;
-      padding: 0;
-    }
-  
-    @mixin primary-table-cell {
-      background-color: var(--primary-color);
-      color: var(--primary-color-text);
-    }
-  
-    padding: var(--25px);
-  
-    .input-user-mngment-div {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-  
-      .header-like-text {
-        font-size: 1.2rem;
-        color: black;
-        font-weight: 900;
-        margin-right: 30px;
-      }
-  
-      ::ng-deep p-inputNumber span input {
-        height: var(--30px);
-      }
-  
-      ::ng-deep .borderless-input span input {
-        border: none;
-      }
-    }
-  
-    .secondary-text {
-      font-size: 0.9rem;
-      color: var(--secondary-color-text);
-      font-weight: 300;
-      margin-bottom: var(--30px);
-    }
-  
-    .education-grade-model-table {
-      width: 70%;
-      margin: 20px 0 0 150px;
-      text-align: center;
-  
-      .start-table-column {
-        @include primary-table-cell();
-      }
-  
-      .end-table-column {
-        // TODO add #ECEBEC and #0054BA to theme variables
-        background-color: #ecebec;
-        color: #0054ba;
-        font-weight: bold;
-      }
-  
-      .educational-grade-model-table-header {
-        @include table-grid();
-        @include primary-table-cell();
-      }
-  
-      .educational-grade-model-table-body-input {
-        @include table-grid();
-  
-        p-inputNumber {
-          align-self: center;
-          justify-self: center;
-          width: 30%;
-  
-          ::ng-deep span input {
-            height: var(--30px);
-            text-align: center;
-            width: 100%;
-          }
-        }
-      }
-  
-      .educational-grade-model-table-body-percentage {
-        @include table-grid();
-  
-        .borderless-input {
-          align-self: center;
-          justify-self: center;
-  
-          ::ng-deep span input {
-            border: none;
-            text-align: center;
-          }
-        }
-      }
-    }
-  
-    .user-mngment-by-priority-header {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      margin: 20px 0;
-  
-      p-button {
-        margin-left: var(--15px);
-      }
-    }
-  
-    .user-mngment-by-priority-tables {
-      margin-left: 25px;
-    }
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: var(--35px);
+    grid-row-gap: var(--5px);
   }
   .custom-chips .p-chips-container {
     border: none;
     box-shadow: none;
     padding: 0;
   }
-  
-  .custom-chips .p-inputtext {
-    border: none;
-    box-shadow: none;
+
+  @mixin primary-table-cell {
+    background-color: var(--primary-color);
+    color: var(--primary-color-text);
   }
-  .table-container {
-    margin: 2rem;
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 100%; /* Ensure the container doesn't exceed the page width */
-    box-sizing: border-box; /* Include padding and borders in width calculation */
-    overflow: hidden; /* Prevent content from overflowing */
-  }
-  
-  .filter-options {
+
+  padding: var(--25px);
+
+  .input-user-mngment-div {
     display: flex;
-    flex-wrap: wrap; /* Wrap dropdowns if there's not enough space */
-    gap: 1rem;
-    width: 100%; /* Ensure the dropdowns are contained within the container */
-  }
-  .table-header {
-    display: flex;
-    justify-content: space-between;
+    flex-flow: row nowrap;
     align-items: center;
-    margin-bottom: 1rem;
+
+    .header-like-text {
+      font-size: 1.2rem;
+      color: black;
+      font-weight: 900;
+      margin-right: 30px;
+    }
+
+    ::ng-deep p-inputNumber span input {
+      height: var(--30px);
+    }
+
+    ::ng-deep .borderless-input span input {
+      border: none;
+    }
   }
+
+  .secondary-text {
+    font-size: 0.9rem;
+    color: var(--secondary-color-text);
+    font-weight: 300;
+    margin-bottom: var(--30px);
+  }
+
+  .education-grade-model-table {
+    width: 70%;
+    margin: 20px 0 0 150px;
+    text-align: center;
+
+    .start-table-column {
+      @include primary-table-cell();
+    }
+
+    .end-table-column {
+      // TODO add #ECEBEC and #0054BA to theme variables
+      background-color: #ecebec;
+      color: #0054ba;
+      font-weight: bold;
+    }
+
+    .educational-grade-model-table-header {
+      @include table-grid();
+      @include primary-table-cell();
+    }
+
+    .educational-grade-model-table-body-input {
+      @include table-grid();
+
+      p-inputNumber {
+        align-self: center;
+        justify-self: center;
+        width: 30%;
+
+        ::ng-deep span input {
+          height: var(--30px);
+          text-align: center;
+          width: 100%;
+        }
+      }
+    }
+
+    .educational-grade-model-table-body-percentage {
+      @include table-grid();
+
+      .borderless-input {
+        align-self: center;
+        justify-self: center;
+
+        ::ng-deep span input {
+          border: none;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .user-mngment-by-priority-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 20px 0;
+
+    p-button {
+      margin-left: var(--15px);
+    }
+  }
+
+  .user-mngment-by-priority-tables {
+    margin-left: 25px;
+  }
+}
+.custom-chips .p-chips-container {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.custom-chips .p-inputtext {
+  border: none;
+  box-shadow: none;
+}
+.table-container {
+  margin: 2rem;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.p-dropdown {
+  width: 100%;
+  max-width: calc(33.33% - 1rem);
+  min-width: 150px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
   .p-dropdown {
-    width: 100%; /* Allow dropdowns to take full width of the container */
-    max-width: calc(33.33% - 1rem); /* Allow three dropdowns to fit side by side with the gap, adjust the 1rem if gap is different */
-    min-width: 150px; /* Set a reasonable minimum width */
-    box-sizing: border-box; /* Include padding and borders in the width */
+    max-width: 100%;
   }
-  
-  @media (max-width: 768px) {
-    .p-dropdown {
-      max-width: 100%; /* On small screens, allow dropdowns to be full width */
-    }
+}
+@media (max-width: 1200px) {
+  .p-dropdown {
+    max-width: calc(50% - 1rem);
   }
-  @media (max-width: 1200px) {
-    .p-dropdown {
-      max-width: calc(50% - 1rem); /* For medium screens, make dropdowns take 50% of the container */
-    }
+}
+
+@media (max-width: 768px) {
+  .p-dropdown {
+    max-width: 100%;
   }
-  
-  @media (max-width: 768px) {
-    .p-dropdown {
-      max-width: 100%; /* For small screens, make the dropdowns full width */
-    }
-  }
-  body, html {
-    overflow-x: hidden;
-  }.header-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px 40px;
-    box-shadow: 0 0 14px 2px var(--maskbg);
-  
-  }.ui-dropdown .ui-dropdown-clear-icon {
-    position: absolute;
-    right: 10px;
-    top: 70%;
-    transform: translateY(-50%);
-  }
-  
-  .ui-dropdown-label {
-    display: inline-block;
-    width: calc(100% - 30px); /* Ensures text stays clear of the clear button */
-    vertical-align: middle;
-  }
-  
-  .ui-dropdown .ui-dropdown-items-wrapper {
-    width: 100%;
-  }
-  
+}
+body,
+html {
+  overflow-x: hidden;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 40px;
+  box-shadow: 0 0 14px 2px var(--maskbg);
+}
+.ui-dropdown .ui-dropdown-clear-icon {
+  position: absolute;
+  right: 10px;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+.ui-dropdown-label {
+  display: inline-block;
+  width: calc(100% - 30px);
+  vertical-align: middle;
+}
+
+.ui-dropdown .ui-dropdown-items-wrapper {
+  width: 100%;
+}
