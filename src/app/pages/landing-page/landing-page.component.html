@@ -27,7 +27,7 @@
           icon="pi pi-pencil"
           [rounded]="true"
           [text]="true"
-          (onClick)="editSection(section.title, section.content)"
+          (onClick)="editSection(section)"
         ></p-button>
         <p-button
           *ngIf="isAdmin"
@@ -35,7 +35,7 @@
           [rounded]="true"
           [text]="true"
           [style]="{ color: 'red' }"
-          (onClick)="onDelete(section.title, section.content)"
+          (onClick)="onDelete(section)"
         ></p-button>
       </h2>
       <p>
@@ -44,3 +44,9 @@
     </div>
   </div>
 </div>
+<p-dialog [(visible)]="showDeleteModal" header="Διαγραφή Χρήστη">
+  <delete-warning
+    (delete)="handleDelete($event)"
+    (cancel)="handleCancel()"
+  ></delete-warning>
+</p-dialog>

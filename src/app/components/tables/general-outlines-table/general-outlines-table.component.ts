@@ -2,20 +2,25 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
+  OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { ApiService } from '../../../service/api-service/api.service';
 
 @Component({
   selector: 'general-outlines-table',
   templateUrl: './general-outlines-table.component.html',
   styleUrls: ['./general-outlines-table.component.scss'],
 })
-export class GeneralOutlinesTableComponent {
+export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
   @ViewChild('dt1') table: Table | undefined;
   @Input() showDialog: boolean = false;
+  @Input() checked: boolean = false;
   @Output() addDialogClosed = new EventEmitter<boolean>();
 
   generalOutlinesArray: Array<any> = [
@@ -52,12 +57,34 @@ export class GeneralOutlinesTableComponent {
   editGOutlineModal: boolean;
   newRow: any;
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     this.editGOutlineModal = false;
     this.showDialog = false;
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes['checked'].currentValue);
+  }
   ngOnInit(): void {
+    this.getGeneralOutlines();
+    this.initMenuActions();
+  }
+  edit(index: any) {
+    this.selectedRow = this.generalOutlinesArray[index];
+    this.selectedIndex = index;
+  }
+  handleCancel() {
+    this.editGOutlineModal = false;
+    this.showDialog = false;
+    this.addDialogClosed.emit(false);
+    return this.showDialog;
+  }
+  getGeneralOutlines() {
+    // this.apiService.getGeneralOutlines().subscribe((resp) => {
+    // this.generalOutlinesArray = resp;
     this.filteredGOutlines = this.generalOutlinesArray;
+    // });
+  }
+  initMenuActions() {
     this.selectGOutlinesMenuActions = [
       {
         items: [
@@ -73,38 +100,22 @@ export class GeneralOutlinesTableComponent {
       },
     ];
   }
-  edit(index: any) {
-    this.selectedRow = this.generalOutlinesArray[index];
-    this.selectedIndex = index;
-  }
-  handleCancel(): boolean {
-    this.editGOutlineModal = false;
-    this.showDialog = false;
-    this.addDialogClosed.emit(false);
-    return this.showDialog;
-  }
   handleFormSubmit(data: any) {
-    if (this.editGOutlineModal) {
+    if (this.showDialog) {
       this.newRow = {
-        email: data.email,
-        name: data.name,
-        surname: data.surname,
-        active: data.active,
+        code: data.code,
+        positionGeneralOutline: data.positionGeneralOutline,
+        isAssigned: data.isAssigned,
+        profileRoleCode: data.profileRoleCode,
+        profileRole: data.profileRole,
+        profileRoleDescription: data.profileRoleDescription,
       };
       this.generalOutlinesArray[this.selectedIndex] = this.newRow;
       this.filteredGOutlines = this.generalOutlinesArray;
-      this.updateGOutline();
-    } else {
-      this.newRow = {
-        email: data.email,
-        name: data.name,
-        surname: data.surname,
-        active: data.active,
-      };
-      this.showDialog = false;
-      this.addDialogClosed.emit(false);
+      this.updateGeneralOutline(this.newRow);
     }
   }
-  updateGOutline() {}
-  handleDelete(data: any) {}
+  updateGeneralOutline(gOutline: any) {
+    this.apiService.updateGeneralOutline(gOutline).subscribe((resp) => {});
+  }
 }

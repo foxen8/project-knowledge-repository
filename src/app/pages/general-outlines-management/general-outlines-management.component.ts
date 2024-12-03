@@ -7,13 +7,12 @@ import { Component } from '@angular/core';
 })
 export class GeneralOutlinesManagementComponent {
   checked: boolean = false;
-  addUser: boolean = false;
+  showEditDialog: boolean = false;
   constructor() {}
   showDialog() {
-    this.addUser = true;
+    this.showEditDialog = true;
   }
   handleFormCancel() {
-    this.addUser = false;
+    this.showEditDialog = false;
   }
-  handleCancel() {}
 }

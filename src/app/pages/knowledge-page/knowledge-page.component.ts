@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { ApiService } from '../../service/api-service/api.service';
 
 @Component({
   selector: 'app-knowledge-page',
@@ -52,7 +53,7 @@ export class KnowledgePageComponent implements OnInit {
   ];
 
   tooltipContent: string = '';
-  constructor() {}
+  constructor(private apiService: ApiService) {}
   ngOnInit(): void {}
   showTooltip(description: string): void {
     this.tooltipContent = description;
@@ -73,7 +74,7 @@ export class KnowledgePageComponent implements OnInit {
       showCancelButton: true,
     });
     if (title) {
-      Swal.fire(`Επιτυχημένη αλλαγή τίτλου!`);
+      this.apiService.editKnowledgeTitle(title).subscribe((resp) => {});
     }
   }
 }

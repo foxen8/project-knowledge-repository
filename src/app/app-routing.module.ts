@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { SearchProfileRoleComponent } from './search-profile-role/search-profile-role.component';
-import { PositionFamilyComponent } from './position-family/position-family.component';
-import { KnowledgePageComponent } from './knowledge-page/knowledge-page.component';
-import { GeneralOutlinesComponent } from './general-outlines/general-outlines.component';
-import { GeneralOutlinesManagementComponent } from './general-outlines-management/general-outlines-management.component';
-import { UsersManagementComponent } from './users-management/users-management.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { SearchProfileRoleComponent } from './pages/search-profile-role/search-profile-role.component';
+import { PositionFamilyComponent } from './pages/position-family/position-family.component';
+import { KnowledgePageComponent } from './pages/knowledge-page/knowledge-page.component';
+import { GeneralOutlinesComponent } from './pages/general-outlines/general-outlines.component';
+import { GeneralOutlinesManagementComponent } from './pages/general-outlines-management/general-outlines-management.component';
+import { UsersManagementComponent } from './pages/users-management/users-management.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },  // Default route for the main content

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Table, TableFilterEvent } from 'primeng/table';
+import { ApiService } from '../../../service/api-service/api.service';
 
 @Component({
   selector: 'user-management-table',
@@ -48,34 +49,14 @@ export class UserManagementTableComponent implements OnInit {
   deleteModal: boolean;
   newRow: any;
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     this.editUserModal = false;
     this.showDialog = false;
     this.deleteModal = false;
   }
   ngOnInit(): void {
-    this.filteredUsers = this.usersArray;
-    this.selectUsersMenuActions = [
-      {
-        items: [
-          {
-            label: 'Επεξεργασία',
-            command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
-              this.editUserModal = true;
-              this.showDialog = true;
-            },
-            styleClass: 'action-link',
-          },
-          {
-            label: 'Διαγραφή',
-            command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
-              this.deleteModal = true;
-            },
-            styleClass: 'action-link',
-          },
-        ],
-      },
-    ];
+    this.getUsers();
+    this.initMenuActions();
   }
   customGlobalFilter(value: string, data: any[]): any[] {
     if (!value) return data;
@@ -130,20 +111,42 @@ export class UserManagementTableComponent implements OnInit {
       };
       this.usersArray[this.selectedIndex] = this.newRow;
       this.filteredUsers = this.usersArray;
-      this.updateUser();
-    } else {
-      this.newRow = {
-        email: data.email,
-        name: data.name,
-        surname: data.surname,
-        active: data.active,
-      };
-      this.createNewUser();
-      this.showDialog = false;
-      this.addDialogClosed.emit(false);
+      this.updateUser(this.newRow);
     }
   }
-  createNewUser() {}
-  updateUser() {}
-  handleDelete(data: any) {}
+  getUsers() {
+    // this.apiService.getUsers().subscribe((resp) => {
+    //   this.usersArray = resp;
+    this.filteredUsers = this.usersArray;
+    // });
+  }
+  initMenuActions() {
+    this.selectUsersMenuActions = [
+      {
+        items: [
+          {
+            label: 'Επεξεργασία',
+            command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
+              this.editUserModal = true;
+              this.showDialog = true;
+            },
+            styleClass: 'action-link',
+          },
+          {
+            label: 'Διαγραφή',
+            command: (menuItemCommandEvent: MenuItemCommandEvent): void => {
+              this.deleteModal = true;
+            },
+            styleClass: 'action-link',
+          },
+        ],
+      },
+    ];
+  }
+  updateUser(user: any) {
+    this.apiService.updateUser(user).subscribe((resp) => {});
+  }
+  handleDelete(data: any) {
+    data ?? this.apiService.deleteUser().subscribe((resp) => {});
+  }
 }

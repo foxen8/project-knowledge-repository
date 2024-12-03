@@ -217,11 +217,12 @@
               class="chip-button"
               *ngFor="let position of jobPositions"
               [removable]="true"
-              (onRemove)="deleteGeneralOutline(position)"
-              (click)="onChipClick(position)"
+              (onRemove)="handleRemove(position, $event)"
+              (click)="onChipClick(position, $event)"
               [style]="{ 'background-color': '#0055a5', color: 'white' }"
-              >{{ position }}</p-chip
             >
+              {{ position }}
+            </p-chip>
             <p-button
               icon="pi pi-plus"
               [rounded]="true"
@@ -255,4 +256,10 @@
     </div>
   </ng-template>
   <app-outline-modal></app-outline-modal>
+</p-dialog>
+<p-dialog [(visible)]="showDeleteModal" header="Διαγραφή Πεδίου">
+  <delete-warning
+    (delete)="handleDelete($event)"
+    (cancel)="handleCancel()"
+  ></delete-warning>
 </p-dialog>

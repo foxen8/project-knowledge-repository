@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { HelperService } from '../service/helper.service';
+import { HelperService } from '../../service/helper-service/helper.service';
+import { ApiService } from '../../service/api-service/api.service';
 
 @Component({
   selector: 'app-position-family',
@@ -27,9 +28,9 @@ export class PositionFamilyComponent implements OnInit {
     { name: 'ΓΠΘ3', code: '3' },
     { name: 'ΓΠΘ4 ΚΛΠ', code: '4' },
   ];
-
+  showDeleteModal: boolean = false;
   selectedOutline: any;
-  constructor(private router: Router) {
+  constructor(private router: Router, private apiService: ApiService) {
     const state = this.router.getCurrentNavigation()?.extras.state;
     this.familyName = state?.['familyName'] || '';
     this.parentName = state?.['parentName'] || '';
@@ -63,12 +64,19 @@ export class PositionFamilyComponent implements OnInit {
           '    Content for the top right fieldset. Fill as needed.',
       },
     ];
+    this.getPositionDetails();
+    this.getJobPositions();
   }
 
-  onChipClick(selectedChip: string): void {
+  onChipClick(selectedChip: string, event: Event): void {
+    if ((event.target as HTMLElement).classList.contains('pi-times')) {
+      return;
+    }
     this.displayModal = true;
   }
-  onDelete(position: any) {}
+  onDelete(position: any) {
+    this.showDeleteModal = true;
+  }
   showEditModal(sectionTitle?: string, sectionDescription?: string) {
     sectionTitle = sectionTitle ?? '';
     sectionDescription = sectionDescription ?? '';
@@ -95,9 +103,10 @@ export class PositionFamilyComponent implements OnInit {
       focusConfirm: false,
       allowEscapeKey: true,
       preConfirm: () => {
-        const input1Value = (
-          document.getElementById('input1') as HTMLInputElement
-        ).value;
+        const input1Element = document.getElementById(
+          'input1'
+        ) as HTMLInputElement;
+        const input1Value = input1Element?.value || sectionTitle;
         const input2Value = (
           document.getElementById('input2') as HTMLInputElement
         ).value;
@@ -118,12 +127,14 @@ export class PositionFamilyComponent implements OnInit {
           const textareaHeight = textarea.scrollHeight;
 
           const popupElement = popup as HTMLElement;
-          popupElement.style.minHeight = `${textareaHeight + 500}px`; 
+          popupElement.style.minHeight = `${textareaHeight + 500}px`;
         }
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('Values:', result.value);
+        this.apiService.editPositionSection().subscribe((resp) => {
+          this.getPositionDetails();
+        });
       }
     });
   }
@@ -145,7 +156,6 @@ export class PositionFamilyComponent implements OnInit {
       </select>
     </div>
   `;
-
     Swal.fire({
       title: 'Προσθήκη Γενικού Περιγράμματος',
       html: htmlContent,
@@ -179,10 +189,40 @@ export class PositionFamilyComponent implements OnInit {
         }
       },
     }).then((result) => {
-      if (result.isConfirmed && result.value?.selectedOutline) {
-        this.selectedOutline = result.value.selectedOutline;
+      if (result.isConfirmed) {
+        this.apiService.addGeneralOutline(result.value).subscribe((resp) => {});
       }
     });
   }
-  deleteGeneralOutline(outline:any){}
+  handleCancel() {
+    this.showDeleteModal = false;
+  }
+  handleDelete(event: any) {
+    event &&
+      this.apiService.deletePositionSection().subscribe((resp) => {
+        this.getPositionDetails();
+      });
+  }
+  deleteGeneralOutline(outline: any) {}
+  getPositionDetails() {
+    // this.apiService.getPositionsDetails().subscribe((resp)=>{
+    // this.positions=resp;
+    // })
+  }
+  getJobPositions() {
+    // this.apiService.getJobPositions().subscribe((resp) => {
+    //   this.jobPositions = resp;
+    // });
+  }
+  handleRemove(position: string, event: Event): void {
+    event.stopPropagation();
+    // this.apiService.deleteJobPosition(position).subscribe({
+    //   next: () => {
+    //     this.getJobPositions();
+    //   },
+    //   error: (err) => {
+    //     console.error('Failed to delete position', err);
+    //   },
+    // });
+  }
 }

@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
+import { ApiService } from '../api-service/api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelperService {
-  constructor() {}
-  openDialog(sectionTitle?: string, sectionDescription?: string) {
+  constructor(private apiService: ApiService) {}
+  openDialog(
+    isAdd: boolean,
+    sectionTitle?: string,
+    sectionDescription?: string
+  ) {
     sectionTitle = sectionTitle ?? '';
     sectionDescription = sectionDescription ?? '';
     const isDisabled = sectionTitle && sectionTitle !== '';
@@ -32,14 +37,16 @@ export class HelperService {
       focusConfirm: false,
       allowEscapeKey: true,
       preConfirm: () => {
-        const input1Value = (
-          document.getElementById('input1') as HTMLInputElement
-        ).value;
-        const input2Value = (
-          document.getElementById('input2') as HTMLInputElement
-        ).value;
+        const input1Element = document.getElementById(
+          'input1'
+        ) as HTMLInputElement;
+        const input1Value = input1Element?.value || sectionTitle;
+        const input2Element = document.getElementById(
+          'input2'
+        ) as HTMLInputElement;
+        const input2Value = input2Element?.value || sectionDescription;
 
-        if (!input1Value || !input2Value) {
+        if (!input2Value) {
           Swal.showValidationMessage('Παρακαλώ συμπληρώστε και τα δύο πεδία');
           return;
         }
@@ -52,14 +59,16 @@ export class HelperService {
         ) as HTMLElement;
         if (textarea && popup) {
           const textareaHeight = textarea.scrollHeight;
-
           const popupElement = popup as HTMLElement;
           popupElement.style.minHeight = `${textareaHeight + 500}px`;
         }
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('Values:', result.value);
+        const apiCall = isAdd
+          ? this.apiService.addSection()
+          : this.apiService.editSection();
+        apiCall.subscribe((resp) => {});
       }
     });
   }

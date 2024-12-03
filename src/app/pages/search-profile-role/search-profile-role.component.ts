@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as d3 from 'd3';
+import { ApiService } from '../../service/api-service/api.service';
 @Component({
   selector: 'app-search-profile-role',
   templateUrl: './search-profile-role.component.html',
@@ -15,7 +16,7 @@ export class SearchProfileRoleComponent {
   width: number = 900;
   height: number = 600;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.data = {
@@ -91,9 +92,7 @@ export class SearchProfileRoleComponent {
         { name: 'Ασφάλεια και Άμυνα' },
       ],
     };
-
-    this.filteredData = this.data;
-
+    this.getTree();
     this.initTree();
     this.updateTree(this.filteredData);
   }
@@ -225,7 +224,6 @@ export class SearchProfileRoleComponent {
 
   filterTree() {
     const searchTermLower = this.searchTerm.toLowerCase();
-
     const filterNodes = (node: any): any =>
       node.name.toLowerCase().includes(searchTermLower) ||
       (node.children &&
@@ -246,5 +244,11 @@ export class SearchProfileRoleComponent {
     if (this.filteredData) {
       this.updateTree(this.filteredData);
     }
+  }
+  getTree() {
+    // this.apiService.getTree().subscribe((resp) => {
+    //   this.data = resp;
+      this.filteredData = this.data;
+    // });
   }
 }

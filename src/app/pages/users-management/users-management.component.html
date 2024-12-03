@@ -27,9 +27,10 @@
   (onHide)="handleCancel()"
 >
   <p-header>Προσθήκη Χρήστη</p-header>
-  <user-form
+  <user-modal
     [dialogHide]="addUser"
     [isEdit]="false"
     (cancel)="handleCancel()"
-  ></user-form>
+    (formSubmit)="onAddSubmit($event)"
+  ></user-modal>
 </p-dialog>

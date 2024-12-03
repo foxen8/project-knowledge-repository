@@ -75,15 +75,15 @@
   (onHide)="handleCancel()"
 >
   <p-header>Επεξεργασία Χρήστη</p-header>
-  <user-form
+  <user-modal
     [dialogHide]="showDialog"
     [isEdit]="editUserModal"
     (formSubmit)="handleFormSubmit($event)"
     (cancel)="handleCancel()"
     [row]="selectedRow"
-  ></user-form>
+  ></user-modal>
 </p-dialog>
-<p-dialog [(visible)]="deleteModal" header="Διγραφή Χρήστη">
+<p-dialog [(visible)]="deleteModal" header="Διαγραφή Χρήστη">
   <delete-warning
     (delete)="handleDelete($event)"
     (cancel)="handleCancel()"

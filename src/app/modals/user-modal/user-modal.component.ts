@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ScrollerOptions } from 'primeng/api';
 
 @Component({
-  selector: 'user-form',
+  selector: 'user-modal',
   templateUrl: './user-modal.component.html',
   styleUrls: ['./user-modal.component.scss'],
 })

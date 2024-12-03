@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../../service/api-service/api.service';
 
 @Component({
   selector: 'app-users-management',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class UsersManagementComponent {
   checked: boolean = false;
   addUser: boolean = false;
-  constructor() {}
+  constructor(private apiService:ApiService) {}
   showDialog() {
     this.addUser = true;
   }
@@ -16,4 +17,7 @@ export class UsersManagementComponent {
     this.addUser = false;
   }
   handleCancel() {}
+  onAddSubmit(event:any) {
+    this.apiService.addUser(event).subscribe((resp)=>{})
+  }
 }

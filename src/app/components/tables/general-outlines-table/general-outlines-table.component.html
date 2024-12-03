@@ -57,5 +57,6 @@
   [(visible)]="showDialog"
   header="Επεξεργασία ανάθεσης ΓΠΘ σε Προφίλ Ρόλου"
 >
-  <app-general-outlines-modal [row]="selectedRow"></app-general-outlines-modal>
+  <app-general-outlines-modal [row]="selectedRow" (formSubmit)="handleFormSubmit($event)"
+  (cancel)="handleCancel()"></app-general-outlines-modal>
 </p-dialog>

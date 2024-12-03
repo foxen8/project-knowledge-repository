@@ -5,7 +5,8 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { HelperService } from '../service/helper.service';
+import { HelperService } from '../../service/helper-service/helper.service';
+import { ApiService } from '../../service/api-service/api.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -38,8 +39,14 @@ export class LandingPageComponent implements OnInit {
         'This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content,This is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph content.This is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis is the introduction paragraph contentThis section summarizes the findings.This section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findingsThis section summarizes the findings',
     },
   ];
-  constructor(private helperService: HelperService) {}
-  ngOnInit(): void {}
+  showDeleteModal: boolean = false;
+  constructor(
+    private helperService: HelperService,
+    private apiService: ApiService
+  ) {}
+  ngOnInit(): void {
+    this.getSections();
+  }
   ngAfterViewInit() {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -65,10 +72,10 @@ export class LandingPageComponent implements OnInit {
     this.isAdmin = !this.isAdmin;
   }
   addSection() {
-    this.helperService.openDialog();
+    this.helperService.openDialog(true);
   }
-  editSection(title: string, descr: string) {
-    this.helperService.openDialog(title, descr);
+  editSection(section:any) {
+    this.helperService.openDialog(false, section.title, section.descr);
   }
 
   scrollToSection(index: number): void {
@@ -82,5 +89,18 @@ export class LandingPageComponent implements OnInit {
       });
     }
   }
-  onDelete(sectionTitle?: string, sectionDescription?: string) {}
+  onDelete(section:any) {
+    this.showDeleteModal = true;
+  }
+  getSections() {
+    // this.apiService.getSections().subscribe((resp)=>{
+    // this.sections=resp
+    // });
+  }
+  handleCancel() {
+    this.showDeleteModal = false;
+  }
+  handleDelete(event: any) {
+    // event && this.apiService.deleteSection().subscribe((resp) => {});
+  }
 }
