@@ -1,0 +1,91 @@
+<p-menu
+  #selectUsersMenu
+  [model]="selectUsersMenuActions"
+  [popup]="true"
+  appendTo="body"
+></p-menu>
+<div class="table-container">
+  <input
+    style="width: 350px; height: 40px"
+    id="globalFilter"
+    type="text"
+    pInputText
+    placeholder="Αναζήτηση..."
+    (input)="onGlobalFilter($event)"
+  />
+</div>
+<p-table
+  [value]="filteredUsers"
+  #dt1
+  (onFilter)="onTableFilter($event)"
+  [loading]="loading"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Email</th>
+      <th>Επίθετο</th>
+      <th>Όνομα</th>
+      <th>Κατάσταση</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowIndex="rowIndex" let-user>
+    <tr>
+      <td>
+        <i
+          class="pi"
+          [ngStyle]="{ color: user.active ? 'green' : 'red' }"
+          [ngClass]="{
+            'pi-check-circle': user.active,
+            'pi-times-circle': !user.active
+          }"
+        ></i>
+        {{ user.email }}
+      </td>
+      <td>{{ user.surname }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.active }}</td>
+      <td>
+        <p-button
+          (onClick)="selectUsersMenu.toggle($event)"
+          (onClick)="edit(rowIndex)"
+          iconPos="right"
+          icon="pi pi-ellipsis-v"
+          label="Ενέργειες"
+          severity="secondary"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="7" style="text-align: center">Δεν υπάρχουν εγγραφές.</td>
+    </tr></ng-template
+  >
+  <ng-template pTemplate="loadingicon">
+    <app-loader></app-loader>
+  </ng-template>
+</p-table>
+<p-dialog
+  [(visible)]="showDialog"
+  [modal]="true"
+  [closable]="true"
+  [resizable]="false"
+  appendTo="body"
+  (onHide)="handleCancel()"
+>
+  <p-header>Επεξεργασία Χρήστη</p-header>
+  <user-form
+    [dialogHide]="showDialog"
+    [isEdit]="editUserModal"
+    (formSubmit)="handleFormSubmit($event)"
+    (cancel)="handleCancel()"
+    [row]="selectedRow"
+  ></user-form>
+</p-dialog>
+<p-dialog [(visible)]="deleteModal" header="Διγραφή Χρήστη">
+  <delete-warning
+    (delete)="handleDelete($event)"
+    (cancel)="handleCancel()"
+  ></delete-warning>
+</p-dialog>

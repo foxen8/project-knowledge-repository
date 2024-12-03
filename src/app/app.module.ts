@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import {  DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -27,6 +27,17 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AccordionModule } from 'primeng/accordion';
 import { GeneralOutlinesComponent } from './general-outlines/general-outlines.component';
 import { TableModule } from 'primeng/table';
+import {MenuModule} from 'primeng/menu';
+import { UsersManagementComponent } from './users-management/users-management.component';
+import { GeneralOutlinesManagementComponent } from './general-outlines-management/general-outlines-management.component';
+import { UserManagementTableComponent } from './user-management-table/user-management-table.component';
+import { AppLoaderComponent } from './app-loader/app-loader.component';
+import {CheckboxModule} from 'primeng/checkbox';
+import { UserFormComponent } from './user-modal/user-modal.component';
+import { MessageModule } from 'primeng/message';
+import { DeleteWarningComponent } from './delete-warning/delete-warning.component';
+import { GeneralOutlinesTableComponent } from './general-outlines-table/general-outlines-table.component';
+import { GeneralOutlinesModalComponent } from './general-outlines-modal/general-outlines-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +48,14 @@ import { TableModule } from 'primeng/table';
     OutlineModalComponent,
     KnowledgePageComponent,
     GeneralOutlinesComponent,
+    UsersManagementComponent,
+    GeneralOutlinesManagementComponent,
+    UserManagementTableComponent,
+    AppLoaderComponent,
+    UserFormComponent,
+    DeleteWarningComponent,
+    GeneralOutlinesTableComponent,
+    GeneralOutlinesModalComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +77,11 @@ import { TableModule } from 'primeng/table';
     ChipModule,
     TooltipModule,
     AccordionModule,
-    TableModule
+    TableModule,
+    MenuModule,
+    CheckboxModule,
+    MessageModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent],
 })

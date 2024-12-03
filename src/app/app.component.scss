@@ -73,6 +73,13 @@
   color: white;
 }
 
+/* Right-aligned button container */
+.header-button-container {
+  margin-left: auto; /* This will push the button to the right */
+  display: flex;
+  align-items: center; /* Align the icon vertically */
+}
+
 /* Side Menu */
 .main-content {
   display: inline-block;

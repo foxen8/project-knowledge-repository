@@ -1,7 +1,6 @@
-import {
-  Component,
-  HostListener,
-} from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +9,10 @@ import {
 })
 export class AppComponent {
   title = 'project-knowledge-repository';
-
-  constructor() {}
+  isAdmin: boolean = true;
+  constructor(private router: Router) {}
   isScrolled = false;
+  actions: MenuItem[] | undefined;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -25,9 +25,31 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.onWindowScroll(); // Check on init if the page is already scrolled
+    this.onWindowScroll();
+    this.actions = [
+      {
+        items: [
+          {
+            label: 'Διαχείριση Χρηστών',
+            command: (): void => {
+              this.router.navigateByUrl('users-management');
+            },
+            styleClass: 'action-link',
+          },
+          {
+            label: 'Διαχείριση ΓΠΘ',
+            command: (): void => {
+              this.router.navigateByUrl('general-outlines-management');
+            },
+            styleClass: 'action-link',
+          },
+          {
+            label: 'Αποσύνδεση',
+            command: (): void => {},
+            styleClass: 'action-link',
+          },
+        ],
+      },
+    ];
   }
-
-  
-  
 }

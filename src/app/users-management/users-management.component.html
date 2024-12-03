@@ -1,0 +1,35 @@
+<div>
+  <section class="user-dashboard">
+    <section class="user-dashboard-header">
+      <h1>Διαχείριση Χρηστών</h1>
+    </section>
+    <section class="user-dashboard-header" style="box-shadow: none">
+      <div></div>
+      <div class="user-dashboard-heading-actions">
+        <p-button
+          (click)="showDialog()"
+          label="Προσθήκη Χρήστη"
+          severity="success"
+        ></p-button>
+      </div>
+    </section>
+    <div class="table-container">
+      <user-management-table></user-management-table>
+    </div>
+  </section>
+</div>
+<p-dialog
+  [(visible)]="addUser"
+  [modal]="true"
+  [closable]="true"
+  [resizable]="false"
+  appendTo="body"
+  (onHide)="handleCancel()"
+>
+  <p-header>Προσθήκη Χρήστη</p-header>
+  <user-form
+    [dialogHide]="addUser"
+    [isEdit]="false"
+    (cancel)="handleCancel()"
+  ></user-form>
+</p-dialog>

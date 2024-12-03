@@ -1,0 +1,61 @@
+<p-menu
+  #selectGOutlinesMenu
+  [model]="selectGOutlinesMenuActions"
+  [popup]="true"
+  appendTo="body"
+></p-menu>
+<p-table [value]="filteredGOutlines" #dt1 [loading]="loading">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Κωδικός ΓΠΘ</th>
+      <th>Γενικό Περίγραμμα Θέσης (ΓΠΘ)</th>
+      <th>Έχει αντιστοιχηθεί</th>
+      <th>Κωδικός Προφίλ Ρόλου</th>
+      <th>Προφίλ Ρόλου</th>
+      <th>Περιγραφή Προφίλ Ρόλου</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowIndex="rowIndex" let-goutline>
+    <tr>
+      <td>
+        {{ goutline.code }}
+      </td>
+      <td>{{ goutline.positionGeneralOutline }}</td>
+      <td>
+        <p-checkbox
+          [(ngModel)]="goutline.isAssigned"
+          [binary]="true"
+          [disabled]="true"
+        ></p-checkbox>
+      </td>
+      <td>{{ goutline.profileRoleCode }}</td>
+      <td>{{ goutline.profileRole }}</td>
+      <td>{{ goutline.profileRoleDescription }}</td>
+      <td>
+        <p-button
+          (onClick)="selectGOutlinesMenu.toggle($event)"
+          (onClick)="edit(rowIndex)"
+          iconPos="right"
+          icon="pi pi-ellipsis-v"
+          label="Ενέργειες"
+          severity="secondary"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="7" style="text-align: center">Δεν υπάρχουν εγγραφές.</td>
+    </tr></ng-template
+  >
+  <ng-template pTemplate="loadingicon">
+    <app-loader></app-loader>
+  </ng-template>
+</p-table>
+<p-dialog
+  [(visible)]="showDialog"
+  header="Επεξεργασία ανάθεσης ΓΠΘ σε Προφίλ Ρόλου"
+>
+  <app-general-outlines-modal [row]="selectedRow"></app-general-outlines-modal>
+</p-dialog>

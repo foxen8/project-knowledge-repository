@@ -1,0 +1,83 @@
+<form [formGroup]="userForm!" (ngSubmit)="onSubmit()" class="form-container">
+  <p-header class="dialog-header"></p-header>
+  <div class="form-row">
+    <div class="form-column">
+      <label for="email">Email:</label>
+    </div>
+    <div class="form-column">
+      <label for="name">Όνομα:</label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-column">
+      <input id="email" type="text" formControlName="email" />
+      <div
+        *ngIf="
+          userForm.controls['email'].invalid &&
+          userForm.controls['email'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+    <div class="form-column">
+      <input id="name" type="text" formControlName="name" />
+      <div
+        *ngIf="
+          userForm.controls['name'].invalid && userForm.controls['name'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-column">
+      <label for="surname">Επίθετο:</label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-column">
+      <input id="surname" type="text" formControlName="surname" />
+      <div
+        *ngIf="
+          userForm.controls['surname'].invalid &&
+          userForm.controls['surname'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+  </div>
+  <div class="p-dialog-footer" style="justify-content: space-between">
+    <button
+      [ngClass]="{
+        'p-button-success': userForm.valid,
+        'p-button-secondary': !userForm.valid
+      }"
+      [disabled]="!userForm.valid"
+      pButton
+      type="button"
+      label="Αποθήκευση"
+      class="p-button-success"
+      (click)="onSubmit()"
+    ></button>
+    &nbsp;
+    <p-button
+      label="Ακύρωση"
+      icon="pi pi-times"
+      (click)="onCancel()"
+      class="ui-button-secondary"
+    ></p-button>
+  </div>
+</form>

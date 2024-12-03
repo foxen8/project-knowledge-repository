@@ -1,0 +1,108 @@
+<form
+  [formGroup]="generalOutlineForm!"
+  (ngSubmit)="onSubmit()"
+  class="form-container"
+>
+  <p-header class="dialog-header"></p-header>
+  <div class="form-row">
+    <div class="form-column">
+      <label for="generalOutline">Γενικό Περίγραμμα Θέσης(ΓΠΘ):</label>
+    </div>
+    <div class="form-column">
+      <label for="isAssigned">Έχει αντιστοιχηθεί:</label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-column">
+      <input id="positionGeneralOutline" type="text" formControlName="positionGeneralOutline" />
+      <div
+        *ngIf="
+          generalOutlineForm.controls['positionGeneralOutline'].invalid &&
+          generalOutlineForm.controls['positionGeneralOutline'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+    <div class="form-column">
+        <p-checkbox
+        id="isAssigned"
+        formControlName="isAssigned"
+        [binary]="true"
+      ></p-checkbox>      <div
+        *ngIf="
+          generalOutlineForm.controls['isAssigned'].invalid &&
+          generalOutlineForm.controls['isAssigned'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-column">
+      <label for="profileRole">Προφίλ Ρόλου:</label>
+    </div>
+    <div class="form-column">
+        <label for="profileRoleDescription">Έχει αντιστοιχηθεί:</label>
+      </div>
+  </div>
+  <div class="form-row">
+    <div class="form-column">
+      <input id="profileRole" type="text" formControlName="profileRole" />
+      <div
+        *ngIf="
+          generalOutlineForm.controls['profileRole'].invalid &&
+          generalOutlineForm.controls['profileRole'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+    <div class="form-column">
+        <input id="profileRoleDescription" type="text" formControlName="profileRoleDescription" />
+        <div
+          *ngIf="
+            generalOutlineForm.controls['profileRoleDescription'].invalid &&
+            generalOutlineForm.controls['profileRoleDescription'].touched
+          "
+        >
+          <p-message
+            severity="error"
+            text="Το πεδίο είναι υποχρεωτικό."
+          ></p-message>
+        </div>
+      </div>
+  </div>
+  <div class="p-dialog-footer" style="justify-content: space-between">
+    <button
+      [ngClass]="{
+        'p-button-success': generalOutlineForm.valid,
+        'p-button-secondary': !generalOutlineForm.valid
+      }"
+      [disabled]="!generalOutlineForm.valid"
+      pButton
+      type="button"
+      label="Αποθήκευση"
+      class="p-button-success"
+      (click)="onSubmit()"
+    ></button>
+    &nbsp;
+    <p-button
+      label="Ακύρωση"
+      icon="pi pi-times"
+      (click)="onCancel()"
+      class="ui-button-secondary"
+    ></p-button>
+  </div>
+</form>

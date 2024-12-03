@@ -39,11 +39,21 @@
             routerLink="/general-outlines"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Γενικά Περιγράμματα Θέσης</a
-          >
+            >Γενικά Περιγράμματα Θέσης
+          </a>
         </li>
       </ul>
     </nav>
+
+    <div class="header-button-container">
+      <p-menu #menu [model]="actions" [popup]="true" appendTo="body"></p-menu>
+      <p-button
+        icon="pi pi-cog"
+        [rounded]="true"
+        [size]="'large'"
+        (click)="menu.toggle($event)"
+      ></p-button>
+    </div>
   </div>
 </header>
 <main class="main-content">

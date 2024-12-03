@@ -1,0 +1,15 @@
+<p>Είστε σίγουροι ότι θέλετε να διαγράψετε την εγγραφή;</p>
+<div class="p-dialog-footer" style="justify-content: space-between">
+  <p-button
+    label="Διαγραφή"
+    (onClick)="onDelete()"
+    severity="danger"
+  ></p-button>
+  &nbsp;
+  <p-button
+    label="Ακύρωση"
+    icon="pi pi-times"
+    (click)="onCancel()"
+    class="ui-button-secondary"
+  ></p-button>
+</div>

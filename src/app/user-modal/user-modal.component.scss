@@ -1,0 +1,72 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  gap: 10px; /* Space between rows */
+}
+::ng-deep .p-dropdown .p-dropdown-clear-icon {
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+::ng-deep .p-dropdown-clear-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px; /* Space between columns */
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.form-row-alone {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  // gap: 10px; /* Optional: Adjusts the space between columns */
+  align-items: center;
+}
+
+.form-column-alone {
+  display: flex;
+  align-items: center;
+  flex:1;
+  justify-content: space-around;
+}
+.long-label {
+  // margin-left: 8px;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: ellipsis;
+}
+label {
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+input[type="text"],
+input[type="checkbox"] {
+  width: 100%; /* Ensure inputs take full column width */
+}
+.ui-dropdown .ui-dropdown-clear-icon {
+  position: absolute;
+  right: 10px;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+.ui-dropdown-label {
+  display: inline-block;
+  width: calc(100% - 30px); /* Ensures text stays clear of the clear button */
+  vertical-align: middle;
+}
+
+.ui-dropdown .ui-dropdown-items-wrapper {
+  width: 100%;
+}
