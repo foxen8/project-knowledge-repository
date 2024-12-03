@@ -62,7 +62,11 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
     this.showDialog = false;
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['checked'].currentValue);
+    if (changes['changes'] !== undefined) {
+      if (changes['changes'].currentValue !== undefined) {
+        this.getGeneralOutlines();
+      }
+    }
   }
   ngOnInit(): void {
     this.getGeneralOutlines();

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ApiService } from '../api-service/api.service';
+import { AddSectionResponse, EditSectionResponse } from 'src/app/contracts/responses';
 
 @Injectable({
   providedIn: 'root',
@@ -65,10 +66,11 @@ export class HelperService {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        const apiCall = isAdd
-          ? this.apiService.addSection()
-          : this.apiService.editSection();
-        apiCall.subscribe((resp) => {});
+        if(isAdd){
+          this.apiService.addSection().subscribe((resp:AddSectionResponse)=>{});
+        }else{
+          this.apiService.editSection().subscribe((resp:EditSectionResponse)=>{});
+        }
       }
     });
   }
