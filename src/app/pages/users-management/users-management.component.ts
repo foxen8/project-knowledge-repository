@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../../service/api-service/api.service';
+import { ApiService } from '../../services/api-service/api.service';
 
 @Component({
   selector: 'app-users-management',

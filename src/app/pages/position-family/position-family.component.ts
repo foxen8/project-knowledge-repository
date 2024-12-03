@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { HelperService } from '../../service/helper-service/helper.service';
-import { ApiService } from '../../service/api-service/api.service';
+import { HelperService } from '../../services/helper-service/helper.service';
+import { ApiService } from '../../services/api-service/api.service';
 
 @Component({
   selector: 'app-position-family',

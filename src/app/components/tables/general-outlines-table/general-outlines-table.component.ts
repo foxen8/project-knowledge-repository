@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { ApiService } from '../../../service/api-service/api.service';
+import { ApiService } from '../../../services/api-service/api.service';
 
 @Component({
   selector: 'general-outlines-table',

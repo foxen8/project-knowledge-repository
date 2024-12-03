@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as d3 from 'd3';
-import { ApiService } from '../../service/api-service/api.service';
+import { ApiService } from '../../services/api-service/api.service';
 @Component({
   selector: 'app-search-profile-role',
   templateUrl: './search-profile-role.component.html',

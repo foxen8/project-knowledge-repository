@@ -5,8 +5,8 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { HelperService } from '../../service/helper-service/helper.service';
-import { ApiService } from '../../service/api-service/api.service';
+import { HelperService } from '../../services/helper-service/helper.service';
+import { ApiService } from '../../services/api-service/api.service';
 
 @Component({
   selector: 'app-landing-page',
