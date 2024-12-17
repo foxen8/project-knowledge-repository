@@ -1,4 +1,4 @@
-<p-carousel [circular]="true" [value]="positions">
+<p-carousel [circular]="true" [value]="positions"  (onPage)="onPageChange($event)">
   <ng-template let-position pTemplate="item">
     <div class="container">
       <p-fieldset>
@@ -32,14 +32,14 @@
                           showEditModal('Περιγραφή Ρόλου', position.description)
                         "
                       ></p-button>
-                      <p-button
+                      <!-- <p-button
                         *ngIf="isAdmin"
                         icon="pi pi-times"
                         [rounded]="true"
                         [text]="true"
                         [style]="{ color: 'red' }"
                         (onClick)="onDelete(position)"
-                      ></p-button>
+                      ></p-button> -->
                     </div>
                   </ng-template>
                   <p class="m-0">
@@ -62,14 +62,14 @@
                           [text]="true"
                           (click)="showEditModal('Όραμα', position.vision)"
                         ></p-button>
-                        <p-button
+                        <!-- <p-button
                           *ngIf="isAdmin"
                           icon="pi pi-times"
                           [rounded]="true"
                           [text]="true"
                           [style]="{ color: 'red' }"
                           (onClick)="onDelete(position)"
-                        ></p-button>
+                        ></p-button> -->
                       </div>
                     </ng-template>
                     <p class="m-0">
@@ -92,17 +92,17 @@
                           [rounded]="true"
                           [text]="true"
                           (click)="
-                            showEditModal('Περιγραφή Ρόλου', position.socialImpact)
+                            showEditModal('Αντίκτυπος στους Πολίτες', position.socialImpact)
                           "
                         ></p-button>
-                        <p-button
+                        <!-- <p-button
                           *ngIf="isAdmin"
                           icon="pi pi-times"
                           [rounded]="true"
                           [text]="true"
                           [style]="{ color: 'red' }"
                           (onClick)="onDelete(position)"
-                        ></p-button>
+                        ></p-button> -->
                       </div>
                     </ng-template>
                     <p class="m-0">
@@ -128,14 +128,14 @@
                         showEditModal('Καθήκοντα', position.duties)
                       "
                     ></p-button>
-                    <p-button
+                    <!-- <p-button
                       *ngIf="isAdmin"
                       icon="pi pi-times"
                       [rounded]="true"
                       [text]="true"
                       [style]="{ color: 'red' }"
                       (onClick)="onDelete(position)"
-                    ></p-button>
+                    ></p-button> -->
                   </div>
                 </ng-template>
                 <p *ngFor="let g of position.duties" class="m-0">
@@ -167,7 +167,7 @@
                       style="margin-right: 0.5rem; color: #0055a5"
                     ></i>
                     <span style="color: #0055a5">Κατηγορίες Γνώσεων</span>
-                    <p-button
+                    <!-- <p-button
                       *ngIf="isAdmin"
                       icon="pi pi-pencil"
                       [rounded]="true"
@@ -178,15 +178,15 @@
                           position.knowledgeCategories
                         )
                       "
-                    ></p-button>
-                    <p-button
+                    ></p-button> -->
+                    <!-- <p-button
                       *ngIf="isAdmin"
                       icon="pi pi-times"
                       [rounded]="true"
                       [text]="true"
                       [style]="{ color: 'red' }"
                       (onClick)="onDelete(position)"
-                    ></p-button>
+                    ></p-button> -->
                   </div>
                 </ng-template>
                 <p *ngFor="let k of position.knowledgeCategories" class="m-0">
@@ -253,9 +253,9 @@
   </ng-template>
   <app-outline-modal></app-outline-modal>
 </p-dialog>
-<p-dialog [(visible)]="showDeleteModal" header="Διαγραφή Πεδίου">
+<!-- <p-dialog [(visible)]="showDeleteModal" header="Διαγραφή Πεδίου">
   <delete-warning
     (delete)="handleDelete($event)"
     (cancel)="handleCancel()"
   ></delete-warning>
-</p-dialog>
+</p-dialog> -->

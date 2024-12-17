@@ -24,13 +24,14 @@ export class PositionFamilyComponent implements OnInit {
     // 'Διοικητικός/η Υπάλληλος',
   ];
   generalOutlines: Array<any> = [
-    // { name: 'ΓΠΘ1', code: '1' },
-    // { name: 'ΓΠΘ2', code: '2' },
-    // { name: 'ΓΠΘ3', code: '3' },
-    // { name: 'ΓΠΘ4 ΚΛΠ', code: '4' },
+    { name: 'ΓΠΘ1', code: '1' },
+    { name: 'ΓΠΘ2', code: '2' },
+    { name: 'ΓΠΘ3', code: '3' },
+    { name: 'ΓΠΘ4 ΚΛΠ', code: '4' },
   ];
   showDeleteModal: boolean = false;
   selectedOutline: any;
+  selectedPositionFamily: any;
   constructor(private router: Router, private apiService: ApiService) {
     const state = this.router.getCurrentNavigation()?.extras.state;
     this.familyName = state?.['familyName'] || '';
@@ -38,34 +39,6 @@ export class PositionFamilyComponent implements OnInit {
     this.profileRoleId = state?.['id'] || '';
   }
   ngOnInit(): void {
-    // this.positions = [
-    //   {
-    //     positionDescription:
-    //       ' Η Διοίκηση και Διαχείριση Πολιτικών περιλαμβάνει την αξιολόγηση και συντονισμό των διαδικασιών του οργανισμού και τη βελτίωση αξιοποίησης των πόρων, την επίτευξη των στόχων και την εξορθολογισμένη. Περιλαμβάνει τη λήψη αποφάσεων και πρωτοβουλιών με στόχο την εύρυθμη λειτουργία και τη βελτίωση του οργανισμού.',
-    //     vision:
-    //       '                      Μία αποδοτική και ευημερούσα Δημόσια Διοίκηση.',
-    //     impact:
-    //       'Μεριμνά για την ομαλή καθημερινή λειτουργία και το υγιές εργασιακό κλίμα των δημοσίων οργανισμών, διασφαλίζοντας την υψηλή ποιότητα των δημόσιων υπηρεσιών.',
-    //     outlines:
-    //       ' Προσανατολισμός στον πολίτη, Ομαδικότητα, Προσαρμοστικότητα, Προσανατολισμός στο αποτέλεσμα, Οργάνωση και προγραμματισμός, Επίλυση προβλημάτων και δημιουργικότητα, Επαγγελματισμός και ακεραιότητα, Διαχείριση γνώσης, Ηγετικότητα, Ψηφιακές δεξιότητες, Πρόσβαση δεξιοτήτων.',
-    //     capabilities: '    Content for the top right fieldset. Fill as needed.',
-    //     knowledgeCategories:
-    //       '    Content for the top right fieldset. Fill as needed.',
-    //   },
-    //   {
-    //     positionDescription:
-    //       ' Η Διοίκηση και Διαχείριση Πολιτικών περιλαμβάνει την αξιολόγηση και συντονισμό των διαδικασιών του οργανισμού και τη βελτίωση αξιοποίησης των πόρων, την επίτευξη των στόχων και την εξορθολογισμένη. Περιλαμβάνει τη λήψη αποφάσεων και πρωτοβουλιών με στόχο την εύρυθμη λειτουργία και τη βελτίωση του οργανισμού.',
-    //     vision:
-    //       '                      Μία αποδοτική και ευημερούσα Δημόσια Διοίκηση.',
-    //     impact:
-    //       'Μεριμνά για την ομαλή καθημερινή λειτουργία και το υγιές εργασιακό κλίμα των δημοσίων οργανισμών, διασφαλίζοντας την υψηλή ποιότητα των δημόσιων υπηρεσιών.',
-    //     outlines:
-    //       ' Προσανατολισμός στον πολίτη, Ομαδικότητα, Προσαρμοστικότητα, Προσανατολισμός στο αποτέλεσμα, Οργάνωση και προγραμματισμός, Επίλυση προβλημάτων και δημιουργικότητα, Επαγγελματισμός και ακεραιότητα, Διαχείριση γνώσης, Ηγετικότητα, Ψηφιακές δεξιότητες, Πρόσβαση δεξιοτήτων.',
-    //     capabilities: '    Content for the top right fieldset. Fill as needed.',
-    //     knowledgeCategories:
-    //       '    Content for the top right fieldset. Fill as needed.',
-    //   },
-    // ];
     this.getPositionDetails();
     this.getJobPositions();
   }
@@ -76,9 +49,9 @@ export class PositionFamilyComponent implements OnInit {
     }
     this.displayModal = true;
   }
-  onDelete(position: any) {
-    this.showDeleteModal = true;
-  }
+  // onDelete(position: any) {
+  //   this.showDeleteModal = true;
+  // }
   showEditModal(sectionTitle?: string, sectionDescription?: string) {
     sectionTitle = sectionTitle ?? '';
     sectionDescription = sectionDescription ?? '';
@@ -134,9 +107,23 @@ export class PositionFamilyComponent implements OnInit {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.editPositionSection().subscribe((resp) => {
-          this.getPositionDetails();
-        });
+        console.log(this.selectedPositionFamily);
+        if (result.value.input1 == 'Όραμα') {
+          this.selectedPositionFamily.vision = result.value.input2;
+        } else if (result.value.input1 == 'Περιγραφή Ρόλου') {
+          this.selectedPositionFamily.description = result.value.input2;
+        } else if (result.value.input1 == 'Αντίκτυπος στους Πολίτες') {
+          this.selectedPositionFamily.socialImpact = result.value.input2;
+        }
+        // else if (result.value.input1 == 'Καθήκοντα') {
+        //   this.selectedPositionFamily.duties = result.value.input2;
+        // } else if (result.value.input1 == 'Κατηγορίες Γνώσεων') {
+        //   this.selectedPositionFamily.knowledgeCategories = result.value.input2;
+        // }
+
+        // this.apiService.editPositionSection(this.selectedPositionFamily).subscribe((resp) => {
+        //   this.getPositionDetails();
+        // });
       }
     });
   }
@@ -192,33 +179,38 @@ export class PositionFamilyComponent implements OnInit {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.addGeneralOutline(result.value).subscribe((resp) => {});
+        this.apiService
+          .addGeneralOutline(result.value.selectedOutline.code, this.selectedPositionFamily.id)
+          .subscribe((resp) => {
+            // this.generalOutlines();
+          });
       }
     });
   }
-  handleCancel() {
-    this.showDeleteModal = false;
-  }
-  handleDelete(event: any) {
-    event &&
-      this.apiService.deletePositionSection().subscribe((resp) => {
-        this.getPositionDetails();
-      });
-  }
+  // handleCancel() {
+  //   this.showDeleteModal = false;
+  // }
+  // handleDelete(event: any) {
+  //   event &&
+  //     this.apiService.deletePositionSection().subscribe((resp) => {
+  //       this.getPositionDetails();
+  //     });
+  // }
   deleteGeneralOutline(outline: any) {}
   getPositionDetails() {
     this.apiService
       .getPositionsDetails(this.profileRoleId)
       .subscribe((resp) => {
         this.positions = resp.profileRoles;
+        this.selectedPositionFamily = this.positions[0];
         resp.profileRoles[0].generalOutlines.forEach((g: any) => {
           this.jobPositions.push(
-          //   {
-          //   code: g.code,
-          //   name: g.name,
-          // }
-          g.name
-        );
+            //   {
+            //   code: g.code,
+            //   name: g.name,
+            // }
+            g.name
+          );
         });
       });
   }
@@ -237,5 +229,10 @@ export class PositionFamilyComponent implements OnInit {
     //     console.error('Failed to delete position', err);
     //   },
     // });
+  }
+  onPageChange(event: any) {
+    const currentIndex = event.page; // Get the active index
+    this.selectedPositionFamily = this.positions[currentIndex];
+    console.log('Selected Element:', this.selectedPositionFamily);
   }
 }

@@ -70,29 +70,51 @@ export class ApiService {
     return this.http.post(this.url + '/...', {});
   }
   editPositionSection(
-    request?: /*EditPositionSectionRequest*/ any
+    request: /*EditPositionSectionRequest*/ any
   ): Observable<EditPositionSectionResponse> {
-    return this.http.post(this.url + '/...', {});
+    console.log(request);
+    let knowledgeCategoryIds = request.knowledgeCategories.map(
+      (kc: any) => kc.id
+    );
+
+    let generalOutlineIds = request.generalOutlines.map((go: any) => go.id);
+    return this.http.put(this.url + 'jobFamily/profileRole/' + request.id, {
+      id: request.id,
+      name: request.name,
+      description: request.description,
+      vision: request.vision,
+      socialImpact: request.socialImpact,
+      duties: request.duties,
+      knowledgeCategoryIds: knowledgeCategoryIds,
+      generalOutlineIds: generalOutlineIds,
+    });
   }
   getPositionsDetails(
     id: /*GetPositionsDetailsRequest*/ any
-  ): Observable</*GetPositionsDetailsResponse*/any> {
-    return this.http.get(this.url + 'jobFamily/details/'+id, {});
+  ): Observable</*GetPositionsDetailsResponse*/ any> {
+    return this.http.get(this.url + 'jobFamily/details/' + id, {});
   }
-  getJobPositions(
-    request?: /*GetJobPositionsRequest*/ any
-  ): Observable<GetJobPositionsResponse> {
+  getJobPositions(request?: any): Observable<GetJobPositionsResponse> {
     return this.http.post(this.url + '/...', {});
   }
-  deleteJobPosition(
-    request?: /*DeleteJobPositionRequest*/ any
-  ): Observable<DeleteJobPositionResponse> {
+  deleteJobPosition(request?: any): Observable<DeleteJobPositionResponse> {
     return this.http.post(this.url + '/...', {});
   }
   addGeneralOutline(
-    request?: /*AddGeneralOutlineRequest*/ any
+    goutlineId: string,
+    profileRoleId: string
   ): Observable<AddGeneralOutlineResponse> {
-    return this.http.post(this.url + '/...', {});
+    return this.http.post(
+      this.url +
+        'generalOutline/' +
+        goutlineId +
+        '/assign/profileRole/' +
+        profileRoleId,
+      {
+        id: goutlineId,
+        profileRoleId: profileRoleId,
+      }
+    );
   }
   editKnowledgeTitle(
     request?: /*EditKnowledgeTitleRequest*/ any
@@ -120,5 +142,8 @@ export class ApiService {
     request?: /*UpdateGeneralOutlineRequest*/ any
   ): Observable<UpdateGeneralOutlineResponse> {
     return this.http.post(this.url + '/...', {});
+  }
+  getKnowledgeCategories(): Observable<any> {
+    return this.http.get(this.url + 'knowledge/category');
   }
 }
