@@ -19,82 +19,7 @@ export class SearchProfileRoleComponent {
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.data = {
-      name: 'Οικογένειες θέσεων',
-      children: [
-        { name: 'Δικαιοσύνη' },
-        {
-          name: 'Δημόσια Διοίκηση',
-          children: [
-            {
-              name: 'Διοίκηση και Διαχείριση Πολιτικών',
-              tooltip: 'This is the tooltip',
-            },
-            {
-              name: 'Συντονισμός και Παρακολούθηση Έργων',
-              tooltip: 'This is the tooltip',
-            },
-            { name: 'Διασφάλιση Ποιότητας', tooltip: 'This is the tooltip' },
-            { name: 'Διαπραγμάτευση', tooltip: 'This is the tooltip' },
-            { name: 'Διοικητική Υποστήριξη', tooltip: 'This is the tooltip' },
-            {
-              name: 'Εστίαση, Φύλαξη και Καθαριότητα',
-              tooltip: 'This is the tooltip',
-            },
-            { name: 'Εργαστηριακή Έρευνα', tooltip: 'This is the tooltip' },
-            {
-              name: 'Αξιολόγηση και Αξιοποίηση Δεδομένων',
-              tooltip: 'This is the tooltip',
-            },
-            {
-              name: 'Διερμηνεία και Μετάφραση',
-              tooltip: 'This is the tooltip',
-            },
-            {
-              name: 'Διαχείριση Δημόσιων Οικονομικών και Προϋπολογισμού',
-              tooltip: 'This is the tooltip',
-            },
-            { name: 'Διασφάλιση Συμμόρφωσης', tooltip: 'This is the tooltip' },
-            {
-              name: 'Διαχείριση Δημόσιας Ακίνητης Περιουσίας',
-              tooltip: 'This is the tooltip',
-            },
-          ],
-        },
-        { name: 'Υγεία και Κοινωνική Μέριμνα' },
-        { name: 'Ψηφιακός Μετασχηματισμός' },
-        { name: 'Υποδομές και Περιβάλλον' },
-        { name: 'Υποδομές και Περιβάλλον' },
-        {
-          name: 'Οικονομική Ανάπτυξη',
-          children: [
-            { name: 'Εσωτερικοί Έλεγχοι', tooltip: 'This is the tooltip' },
-            { name: 'Εξωτερικοί Έλεγχοι', tooltip: 'This is the tooltip' },
-            {
-              name: 'Αγροτική Παραγωγή και Τρόφιμα',
-              tooltip: 'This is the tooltip',
-            },
-            {
-              name: 'Διαχείριση Αναπτυξιακών Έργων',
-              tooltip: 'This is the tooltip',
-            },
-            {
-              name: 'Διαχείριση Διεθνών Συνεργασιών',
-              tooltip: 'This is the tooltip',
-            },
-            {
-              name: 'Διαχείριση Δημόσεων Συμβάσεων',
-              tooltip: 'This is the tooltip',
-            },
-          ],
-        },
-        { name: 'Πολιτισμός, Τουρισμός και Επικοινωνία' },
-        { name: 'Ασφάλεια και Άμυνα' },
-      ],
-    };
     this.getTree();
-    this.initTree();
-    this.updateTree(this.filteredData);
   }
 
   initTree() {
@@ -211,11 +136,13 @@ export class SearchProfileRoleComponent {
         }
       })
       .on('click', (event: MouseEvent, d: any) => {
+        console.log(d)
         if (!d.children && d.data.tooltip) {
           this.router.navigate(['/position-family'], {
             state: {
               familyName: d.data.name,
               parentName: d.parent.data.name,
+              id:d.data.id
             },
           });
         }
@@ -246,9 +173,24 @@ export class SearchProfileRoleComponent {
     }
   }
   getTree() {
-    // this.apiService.getTree().subscribe((resp) => {
-    //   this.data = resp;
+    this.apiService.getJobFamilies().subscribe((response: any) => {
+      const formattedData = response.map((jobFamily: any) => ({
+        name: jobFamily.title,
+        children: jobFamily.profileRoles.map((profileRole: any) => ({
+          id:jobFamily.id,
+          name: profileRole.name,
+          tooltip: profileRole.description,
+        })),
+      }));
+
+      this.data = {
+        name: 'Οικογένειες θέσεων',
+        children: formattedData,
+      };
       this.filteredData = this.data;
-    // });
+
+      this.initTree();
+      this.updateTree(this.filteredData);
+    });
   }
 }

@@ -12,21 +12,22 @@ import { ApiService } from '../../services/api-service/api.service';
 export class PositionFamilyComponent implements OnInit {
   familyName: string | undefined;
   parentName: string | undefined;
+  profileRoleId: string | undefined;
   positions: any[] = [];
   displayModal: boolean = false;
   isAdmin: boolean = true;
-  jobPositions: string[] = [
-    'Προϊστάμενος/η Γενικής Διεύθυνσης',
-    'Προϊστάμενος/η Διεύθυνσης',
-    'Προϊστάμενος/η Τμήματος',
-    'Εμπειρογνώμονας',
-    'Διοικητικός/η Υπάλληλος',
+  jobPositions: Array<any> = [
+    // 'Προϊστάμενος/η Γενικής Διεύθυνσης',
+    // 'Προϊστάμενος/η Διεύθυνσης',
+    // 'Προϊστάμενος/η Τμήματος',
+    // 'Εμπειρογνώμονας',
+    // 'Διοικητικός/η Υπάλληλος',
   ];
-  generalOutlines = [
-    { name: 'ΓΠΘ1', code: '1' },
-    { name: 'ΓΠΘ2', code: '2' },
-    { name: 'ΓΠΘ3', code: '3' },
-    { name: 'ΓΠΘ4 ΚΛΠ', code: '4' },
+  generalOutlines: Array<any> = [
+    // { name: 'ΓΠΘ1', code: '1' },
+    // { name: 'ΓΠΘ2', code: '2' },
+    // { name: 'ΓΠΘ3', code: '3' },
+    // { name: 'ΓΠΘ4 ΚΛΠ', code: '4' },
   ];
   showDeleteModal: boolean = false;
   selectedOutline: any;
@@ -34,36 +35,37 @@ export class PositionFamilyComponent implements OnInit {
     const state = this.router.getCurrentNavigation()?.extras.state;
     this.familyName = state?.['familyName'] || '';
     this.parentName = state?.['parentName'] || '';
+    this.profileRoleId = state?.['id'] || '';
   }
   ngOnInit(): void {
-    this.positions = [
-      {
-        positionDescription:
-          ' Η Διοίκηση και Διαχείριση Πολιτικών περιλαμβάνει την αξιολόγηση και συντονισμό των διαδικασιών του οργανισμού και τη βελτίωση αξιοποίησης των πόρων, την επίτευξη των στόχων και την εξορθολογισμένη. Περιλαμβάνει τη λήψη αποφάσεων και πρωτοβουλιών με στόχο την εύρυθμη λειτουργία και τη βελτίωση του οργανισμού.',
-        vision:
-          '                      Μία αποδοτική και ευημερούσα Δημόσια Διοίκηση.',
-        impact:
-          'Μεριμνά για την ομαλή καθημερινή λειτουργία και το υγιές εργασιακό κλίμα των δημοσίων οργανισμών, διασφαλίζοντας την υψηλή ποιότητα των δημόσιων υπηρεσιών.',
-        outlines:
-          ' Προσανατολισμός στον πολίτη, Ομαδικότητα, Προσαρμοστικότητα, Προσανατολισμός στο αποτέλεσμα, Οργάνωση και προγραμματισμός, Επίλυση προβλημάτων και δημιουργικότητα, Επαγγελματισμός και ακεραιότητα, Διαχείριση γνώσης, Ηγετικότητα, Ψηφιακές δεξιότητες, Πρόσβαση δεξιοτήτων.',
-        capabilities: '    Content for the top right fieldset. Fill as needed.',
-        knowledgeCategories:
-          '    Content for the top right fieldset. Fill as needed.',
-      },
-      {
-        positionDescription:
-          ' Η Διοίκηση και Διαχείριση Πολιτικών περιλαμβάνει την αξιολόγηση και συντονισμό των διαδικασιών του οργανισμού και τη βελτίωση αξιοποίησης των πόρων, την επίτευξη των στόχων και την εξορθολογισμένη. Περιλαμβάνει τη λήψη αποφάσεων και πρωτοβουλιών με στόχο την εύρυθμη λειτουργία και τη βελτίωση του οργανισμού.',
-        vision:
-          '                      Μία αποδοτική και ευημερούσα Δημόσια Διοίκηση.',
-        impact:
-          'Μεριμνά για την ομαλή καθημερινή λειτουργία και το υγιές εργασιακό κλίμα των δημοσίων οργανισμών, διασφαλίζοντας την υψηλή ποιότητα των δημόσιων υπηρεσιών.',
-        outlines:
-          ' Προσανατολισμός στον πολίτη, Ομαδικότητα, Προσαρμοστικότητα, Προσανατολισμός στο αποτέλεσμα, Οργάνωση και προγραμματισμός, Επίλυση προβλημάτων και δημιουργικότητα, Επαγγελματισμός και ακεραιότητα, Διαχείριση γνώσης, Ηγετικότητα, Ψηφιακές δεξιότητες, Πρόσβαση δεξιοτήτων.',
-        capabilities: '    Content for the top right fieldset. Fill as needed.',
-        knowledgeCategories:
-          '    Content for the top right fieldset. Fill as needed.',
-      },
-    ];
+    // this.positions = [
+    //   {
+    //     positionDescription:
+    //       ' Η Διοίκηση και Διαχείριση Πολιτικών περιλαμβάνει την αξιολόγηση και συντονισμό των διαδικασιών του οργανισμού και τη βελτίωση αξιοποίησης των πόρων, την επίτευξη των στόχων και την εξορθολογισμένη. Περιλαμβάνει τη λήψη αποφάσεων και πρωτοβουλιών με στόχο την εύρυθμη λειτουργία και τη βελτίωση του οργανισμού.',
+    //     vision:
+    //       '                      Μία αποδοτική και ευημερούσα Δημόσια Διοίκηση.',
+    //     impact:
+    //       'Μεριμνά για την ομαλή καθημερινή λειτουργία και το υγιές εργασιακό κλίμα των δημοσίων οργανισμών, διασφαλίζοντας την υψηλή ποιότητα των δημόσιων υπηρεσιών.',
+    //     outlines:
+    //       ' Προσανατολισμός στον πολίτη, Ομαδικότητα, Προσαρμοστικότητα, Προσανατολισμός στο αποτέλεσμα, Οργάνωση και προγραμματισμός, Επίλυση προβλημάτων και δημιουργικότητα, Επαγγελματισμός και ακεραιότητα, Διαχείριση γνώσης, Ηγετικότητα, Ψηφιακές δεξιότητες, Πρόσβαση δεξιοτήτων.',
+    //     capabilities: '    Content for the top right fieldset. Fill as needed.',
+    //     knowledgeCategories:
+    //       '    Content for the top right fieldset. Fill as needed.',
+    //   },
+    //   {
+    //     positionDescription:
+    //       ' Η Διοίκηση και Διαχείριση Πολιτικών περιλαμβάνει την αξιολόγηση και συντονισμό των διαδικασιών του οργανισμού και τη βελτίωση αξιοποίησης των πόρων, την επίτευξη των στόχων και την εξορθολογισμένη. Περιλαμβάνει τη λήψη αποφάσεων και πρωτοβουλιών με στόχο την εύρυθμη λειτουργία και τη βελτίωση του οργανισμού.',
+    //     vision:
+    //       '                      Μία αποδοτική και ευημερούσα Δημόσια Διοίκηση.',
+    //     impact:
+    //       'Μεριμνά για την ομαλή καθημερινή λειτουργία και το υγιές εργασιακό κλίμα των δημοσίων οργανισμών, διασφαλίζοντας την υψηλή ποιότητα των δημόσιων υπηρεσιών.',
+    //     outlines:
+    //       ' Προσανατολισμός στον πολίτη, Ομαδικότητα, Προσαρμοστικότητα, Προσανατολισμός στο αποτέλεσμα, Οργάνωση και προγραμματισμός, Επίλυση προβλημάτων και δημιουργικότητα, Επαγγελματισμός και ακεραιότητα, Διαχείριση γνώσης, Ηγετικότητα, Ψηφιακές δεξιότητες, Πρόσβαση δεξιοτήτων.',
+    //     capabilities: '    Content for the top right fieldset. Fill as needed.',
+    //     knowledgeCategories:
+    //       '    Content for the top right fieldset. Fill as needed.',
+    //   },
+    // ];
     this.getPositionDetails();
     this.getJobPositions();
   }
@@ -205,9 +207,20 @@ export class PositionFamilyComponent implements OnInit {
   }
   deleteGeneralOutline(outline: any) {}
   getPositionDetails() {
-    // this.apiService.getPositionsDetails().subscribe((resp)=>{
-    // this.positions=resp;
-    // })
+    this.apiService
+      .getPositionsDetails(this.profileRoleId)
+      .subscribe((resp) => {
+        this.positions = resp.profileRoles;
+        resp.profileRoles[0].generalOutlines.forEach((g: any) => {
+          this.jobPositions.push(
+          //   {
+          //   code: g.code,
+          //   name: g.name,
+          // }
+          g.name
+        );
+        });
+      });
   }
   getJobPositions() {
     // this.apiService.getJobPositions().subscribe((resp) => {

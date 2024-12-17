@@ -21,22 +21,11 @@ import {
   UpdateUserResponse,
 } from 'src/app/contracts/responses';
 import {
-  AddGeneralOutlineRequest,
-  AddSectionRequest,
   AddUserRequest,
-  DeleteJobPositionRequest,
-  DeleteSectionRequest,
   DeleteUserRequest,
-  EditKnowledgeTitleRequest,
-  EditPositionSectionRequest,
-  EditSectionRequest,
   GetGeneralOutlinesRequest,
-  GetJobPositionsRequest,
-  GetPositionsDetailsRequest,
   GetSectionsRequest,
-  GetTreeRequest,
   GetUsersRequest,
-  UpdateGeneralOutlineRequest,
   UpdateUserRequest,
 } from 'src/app/contracts/requests';
 import { Observable } from 'rxjs';
@@ -47,55 +36,66 @@ import { Observable } from 'rxjs';
 export class ApiService {
   url: string = `${environment.apiUrl}`;
   constructor(private http: HttpClient) {}
-  getSections(request?: GetSectionsRequest): Observable<GetSectionsResponse> {
-    return this.http.post(this.url + '/...', {});
+  getSections(request?: GetSectionsRequest): Observable<GetSectionsResponse[]> {
+    return this.http.get(this.url + 'homepage', {}) as Observable<
+      GetSectionsResponse[]
+    >;
   }
-  addSection(request?: AddSectionRequest): Observable<AddSectionResponse> {
-    return this.http.post(this.url + '/...', {});
+  addSection(
+    request?: /*AddSectionRequest*/ any
+  ): Observable<AddSectionResponse> {
+    return this.http.post(this.url + 'homepage/topic/', {
+      title: request.title,
+      description: request.description,
+    });
   }
-  editSection(request?: EditSectionRequest): Observable<EditSectionResponse> {
-    return this.http.post(this.url + '/...', {});
+  editSection(
+    request?: /*EditSectionRequest*/ any,
+    sectionId?: string
+  ): Observable<EditSectionResponse> {
+    return this.http.put(this.url + 'homepage/topic/' + sectionId, {
+      title: request.title,
+      description: request.description,
+    });
   }
-  deleteSection(
-    request?: DeleteSectionRequest
-  ): Observable<DeleteSectionResponse> {
-    return this.http.post(this.url + '/...', {});
+  deleteSection(sectionId?: string): Observable<DeleteSectionResponse> {
+    return this.http.delete(this.url + 'homepage/topic/' + sectionId);
   }
-  getTree(request?: GetTreeRequest): Observable<GetTreeResponse> {
-    return this.http.post(this.url + '/...', {});
+  getJobFamilies(): Observable<any> {
+    return this.http.get(this.url + 'jobFamily', {});
   }
   deletePositionSection(
-    request?: DeleteSectionRequest
+    request?: /*DeleteSectionRequest*/ any
   ): Observable<DeleteSectionResponse> {
     return this.http.post(this.url + '/...', {});
   }
   editPositionSection(
-    request?: EditPositionSectionRequest
+    request?: /*EditPositionSectionRequest*/ any
   ): Observable<EditPositionSectionResponse> {
     return this.http.post(this.url + '/...', {});
   }
   getPositionsDetails(
-    request?: GetPositionsDetailsRequest
-  ): Observable<GetPositionsDetailsResponse> {
-    return this.http.post(this.url + '/...', {});
+    id: /*GetPositionsDetailsRequest*/ any
+  ): Observable</*GetPositionsDetailsResponse*/any> {
+    return this.http.get(this.url + 'jobFamily/details/'+id, {});
   }
   getJobPositions(
-    request?: GetJobPositionsRequest
+    request?: /*GetJobPositionsRequest*/ any
   ): Observable<GetJobPositionsResponse> {
     return this.http.post(this.url + '/...', {});
   }
   deleteJobPosition(
-    request?: DeleteJobPositionRequest
+    request?: /*DeleteJobPositionRequest*/ any
   ): Observable<DeleteJobPositionResponse> {
     return this.http.post(this.url + '/...', {});
   }
   addGeneralOutline(
-    request?: AddGeneralOutlineRequest
+    request?: /*AddGeneralOutlineRequest*/ any
   ): Observable<AddGeneralOutlineResponse> {
     return this.http.post(this.url + '/...', {});
   }
   editKnowledgeTitle(
-    request?: EditKnowledgeTitleRequest
+    request?: /*EditKnowledgeTitleRequest*/ any
   ): Observable<EditKnowledgeTitleResponse> {
     return this.http.post(this.url + '/...', {});
   }
@@ -117,7 +117,7 @@ export class ApiService {
     return this.http.post(this.url + '/...', {});
   }
   updateGeneralOutline(
-    request?: UpdateGeneralOutlineRequest
+    request?: /*UpdateGeneralOutlineRequest*/ any
   ): Observable<UpdateGeneralOutlineResponse> {
     return this.http.post(this.url + '/...', {});
   }

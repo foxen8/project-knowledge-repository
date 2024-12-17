@@ -45,7 +45,7 @@
       </ul>
     </nav>
 
-    <div class="header-button-container">
+    <div *ngIf="isAdmin" class="header-button-container">
       <p-menu #menu [model]="actions" [popup]="true" appendTo="body"></p-menu>
       <p-button
         icon="pi pi-cog"

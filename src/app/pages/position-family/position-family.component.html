@@ -29,10 +29,7 @@
                         [rounded]="true"
                         [text]="true"
                         (click)="
-                          showEditModal(
-                            'Περιγραφή Ρόλου',
-                            position.positionDescription
-                          )
+                          showEditModal('Περιγραφή Ρόλου', position.description)
                         "
                       ></p-button>
                       <p-button
@@ -46,7 +43,7 @@
                     </div>
                   </ng-template>
                   <p class="m-0">
-                    {{ position.positionDescription }}
+                    {{ position.description }}
                   </p>
                 </p-fieldset>
                 <div class="right-container">
@@ -95,10 +92,7 @@
                           [rounded]="true"
                           [text]="true"
                           (click)="
-                            showEditModal(
-                              'Περιγραφή Ρόλου',
-                              position.positionDescription
-                            )
+                            showEditModal('Περιγραφή Ρόλου', position.socialImpact)
                           "
                         ></p-button>
                         <p-button
@@ -112,7 +106,7 @@
                       </div>
                     </ng-template>
                     <p class="m-0">
-                      {{ position.impact }}
+                      {{ position.socialImpact }}
                     </p>
                   </p-fieldset>
                 </div>
@@ -130,7 +124,9 @@
                       icon="pi pi-pencil"
                       [rounded]="true"
                       [text]="true"
-                      (click)="showEditModal('Καθήκοντα', position.outlines)"
+                      (click)="
+                        showEditModal('Καθήκοντα', position.duties)
+                      "
                     ></p-button>
                     <p-button
                       *ngIf="isAdmin"
@@ -142,8 +138,8 @@
                     ></p-button>
                   </div>
                 </ng-template>
-                <p class="m-0">
-                  {{ position.outlines }}
+                <p *ngFor="let g of position.duties" class="m-0">
+                  {{ g?.description }}
                 </p>
               </p-fieldset>
             </div>
@@ -159,8 +155,8 @@
                     <span style="color: #0055a5">Δεξιότητες</span>
                   </div>
                 </ng-template>
-                <p class="m-0">
-                  {{ position.capabilities }}
+                <p *ngFor="let s of position.skills" class="m-0">
+                  {{ s?.description }}
                 </p>
               </p-fieldset>
               <p-fieldset class="right-bottom-fieldset">
@@ -193,8 +189,8 @@
                     ></p-button>
                   </div>
                 </ng-template>
-                <p class="m-0">
-                  {{ position.knowledgeCategories }}
+                <p *ngFor="let k of position.knowledgeCategories" class="m-0">
+                  {{ k?.description }}
                 </p>
               </p-fieldset>
             </div>
