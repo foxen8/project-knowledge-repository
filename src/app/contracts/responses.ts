@@ -4,7 +4,7 @@ export class GetSectionsResponse {
   constructor(
     public id: string,
     public title: string,
-    public description: String
+    public description: string
   ) {}
 }
 export class DeleteSectionResponse {}

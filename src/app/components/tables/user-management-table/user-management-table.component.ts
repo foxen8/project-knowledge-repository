@@ -20,26 +20,7 @@ export class UserManagementTableComponent implements OnInit {
   @Input() showDialog: boolean = false;
   @Output() addDialogClosed = new EventEmitter<boolean>();
 
-  usersArray: Array<any> = [
-    {
-      email: 'fotisxne@email.com',
-      surname: 'Xen',
-      name: 'fo',
-      active: 'Ενεργός',
-    },
-    {
-      email: 'fotisxne@email.com',
-      surname: 'Xen',
-      name: 'fo',
-      active: 'Ενεργός',
-    },
-    {
-      email: 'fotisxne@email.com',
-      surname: 'Xen',
-      name: 'fo',
-      active: 'Ενεργός',
-    },
-  ];
+  usersArray: Array<any> = [];
   filteredUsers: any[] = [];
   loading: boolean = false;
   selectUsersMenuActions: Array<MenuItem> = [];
@@ -115,10 +96,10 @@ export class UserManagementTableComponent implements OnInit {
     }
   }
   getUsers() {
-    // this.apiService.getUsers().subscribe((resp) => {
-    //   this.usersArray = resp;
+    this.apiService.getUsers().subscribe((resp:any) => {
+      this.usersArray = resp;
     this.filteredUsers = this.usersArray;
-    // });
+    });
   }
   initMenuActions() {
     this.selectUsersMenuActions = [

@@ -24,12 +24,15 @@ export class LandingPageComponent implements OnInit {
   currentSection = 0;
   sections: GetSectionsResponse[] = [];
   showDeleteModal: boolean = false;
-  selectedSection?: GetSectionsResponse;
+  selectedSection: GetSectionsResponse = { id: '', description: '', title: '' };
+  showAddEditModal: boolean = false;
+  modalHeader: string = 'Επεξεργασία Ενότητας';
   constructor(
     private helperService: HelperService,
     private apiService: ApiService
   ) {}
   ngOnInit(): void {
+    this.login();
     this.getSections();
   }
   ngAfterViewInit() {
@@ -53,31 +56,23 @@ export class LandingPageComponent implements OnInit {
       observer.observe(section.nativeElement)
     );
   }
+  login() {
+    this.apiService.login().subscribe((apiToken) => {
+      localStorage.setItem('apiToken', apiToken.token);
+    });
+  }
   toggleContentFlag() {
     this.isAdmin = !this.isAdmin;
   }
   addSection() {
-    this.helperService.openDialog(true).then((result) => {
-      this.apiService
-        .addSection(result)
-        .subscribe((resp: AddSectionResponse) => {
-          this.getSections();
-        });
-    });
+    this.showAddEditModal = true;
+    this.selectedSection = { title: '', description: '', id: '' };
+    this.modalHeader = 'Προσθήκη Ενότητας';
   }
   editSection(section: any) {
-    this.helperService
-      .openDialog(false, section.title, section.description)
-      .then((result) => {
-        if (result !== null) {
-          console.log(result);
-          this.apiService
-            .editSection(result, section.id)
-            .subscribe((resp: EditSectionResponse) => {
-              this.getSections();
-            });
-        }
-      });
+    this.showAddEditModal = true;
+    this.modalHeader = 'Επεξεργασία Ενότητας';
+    this.selectedSection = section;
   }
 
   scrollToSection(index: number): void {
@@ -110,5 +105,19 @@ export class LandingPageComponent implements OnInit {
       .subscribe((resp) => {
         this.getSections();
       });
+  }
+  handleSave(event: any) {
+    event.isAdd
+      ? this.apiService
+          .addSection(event)
+          .subscribe((resp: AddSectionResponse) => {
+            this.getSections();
+          })
+      : this.apiService
+          .editSection(event, this.selectedSection.id)
+          .subscribe((resp: AddSectionResponse) => {
+            this.getSections();
+          });
+    this.showAddEditModal = false;
   }
 }

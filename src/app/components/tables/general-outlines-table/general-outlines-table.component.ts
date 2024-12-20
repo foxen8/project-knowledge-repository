@@ -12,6 +12,7 @@ import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ApiService } from '../../../services/api-service/api.service';
 
+
 @Component({
   selector: 'general-outlines-table',
   templateUrl: './general-outlines-table.component.html',

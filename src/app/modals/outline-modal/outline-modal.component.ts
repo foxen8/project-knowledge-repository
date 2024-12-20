@@ -1,60 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-outline-modal',
   templateUrl: './outline-modal.component.html',
   styleUrls: ['./outline-modal.component.scss'],
 })
-export class OutlineModalComponent implements OnInit {
-  generalOutlines: any[] = [];
+export class OutlineModalComponent implements OnInit, OnChanges {
+  @Input() generalOutlines?: any[];
+  @Input() selectedOutline?: any;
+  index: number = 0;
 
+  gOutlines?: any[];
+  currentOutline: any;
   constructor() {}
-  ngOnInit(): void {
-    this.generalOutlines = [
-      {
-        generalOutline:
-          'ΤΟΜΕΑΣ ΠΟΛΙΤΙΚΗΣ: ΚΑΤΑΡΤΙΣΗ & ΔΙΑΧΕΙΡΙΣΗ ΔΗΜΟΣΙΩΝ ΠΟΛΙΤΙΚΩΝ',
-        mission:
-          'Αναπτύσσει και εφαρμόζει τις δημόσιες πολιτικές της Διεύθυνσης της οποίας προΐσταται.',
-        mainDuties: [
-          'Μεριμνά για την ευθυγράμμιση των στρατηγικών σκοπών της Διεύθυνσης...',
-          'Διασφαλίζει την ορθή συνεργασία μεταξύ των οργανικών μονάδων της Διεύθυνσης...',
-          'Συντονίζει και αναθέτει εργασίες στους προϊσταμένους των οργανικών μονάδων...',
-          'Αναλαμβάνει πρωτοβουλίες για τη διαχείριση κρίσεων...',
-        ],
-        capabillities: [
-          'Διαθέτει ηγετική φυσιογνωμία',
-          'Είναι αποτελεσματικός στην επικοινωνία',
-          'Είναι ανοιχτός σε νέες προσεγγίσεις',
-        ],
-        knowledge: [
-          'Δημόσιο Δίκαιο',
-          'Πολιτική, Θεσμοί & Διακυβέρνηση',
-          'Διοικητική Οργάνωση & Μεταρρυθμίσεις',
-        ],
-      },
-      {
-        generalOutline:
-          'ΤΟΜΕΑΣ ΠΟΛΙΤΙΚΗΣ: ΚΑΤΑΡΤΙΣΗ & ΔΙΑΧΕΙΡΙΣΗ ΔΗΜΟΣΙΩΝ ΠΟΛΙΤΙΚΩΝ',
-        mission:
-          'Αναπτύσσει και εφαρμόζει τις δημόσιες πολιτικές της Διεύθυνσης της οποίας προΐσταται.',
-        mainDuties: [
-          'Μεριμνά για την ευθυγράμμιση των στρατηγικών σκοπών της Διεύθυνσης...',
-          'Διασφαλίζει την ορθή συνεργασία μεταξύ των οργανικών μονάδων της Διεύθυνσης...',
-          'Συντονίζει και αναθέτει εργασίες στους προϊσταμένους των οργανικών μονάδων...',
-          'Αναλαμβάνει πρωτοβουλίες για τη διαχείριση κρίσεων...',
-        ],
-        capabilities: [
-          'Διαθέτει ηγετική φυσιογνωμία',
-          'Είναι αποτελεσματικός στην επικοινωνία',
-          'Είναι ανοιχτός σε νέες προσεγγίσεις',
-        ],
-        knowledge: [
-          'Δημόσιο Δίκαιο',
-          'Πολιτική, Θεσμοί & Διακυβέρνηση',
-          'Διοικητική Οργάνωση & Μεταρρυθμίσεις',
-        ],
-      },
-    ];
+  ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['generalOutlines']) {
+      this.gOutlines = changes['generalOutlines'].currentValue;
+    }
+    if (changes['selectedOutline']) {
+      this.currentOutline = changes['selectedOutline'].currentValue;
+      this.index = this.gOutlines?.findIndex(
+        (goutline) => goutline.id == this.currentOutline.id
+      )!;
+    }
   }
 }

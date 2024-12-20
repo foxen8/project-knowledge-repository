@@ -38,7 +38,9 @@ export class KnowledgePageComponent implements OnInit {
       showCancelButton: true,
     });
     if (title) {
-      this.apiService.editKnowledgeTitle(title).subscribe((resp) => {});
+      this.apiService.editKnowledgeTitle(tab.id, title).subscribe((resp) => {
+        this.getAccordionTabs();
+      });
     }
   }
   getAccordionTabs() {

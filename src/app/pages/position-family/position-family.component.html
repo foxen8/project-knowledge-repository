@@ -1,4 +1,8 @@
-<p-carousel [circular]="true" [value]="positions"  (onPage)="onPageChange($event)">
+<p-carousel
+  [circular]="true"
+  [value]="positions"
+  (onPage)="onPageChange($event)"
+>
   <ng-template let-position pTemplate="item">
     <div class="container">
       <p-fieldset>
@@ -29,7 +33,11 @@
                         [rounded]="true"
                         [text]="true"
                         (click)="
-                          showEditModal('Περιγραφή Ρόλου', position.description)
+                          showEditModal(
+                            'Περιγραφή Ρόλου',
+                            position.description,
+                            position
+                          )
                         "
                       ></p-button>
                       <!-- <p-button
@@ -60,7 +68,9 @@
                           icon="pi pi-pencil"
                           [rounded]="true"
                           [text]="true"
-                          (click)="showEditModal('Όραμα', position.vision)"
+                          (click)="
+                            showEditModal('Όραμα', position.vision, position)
+                          "
                         ></p-button>
                         <!-- <p-button
                           *ngIf="isAdmin"
@@ -92,7 +102,11 @@
                           [rounded]="true"
                           [text]="true"
                           (click)="
-                            showEditModal('Αντίκτυπος στους Πολίτες', position.socialImpact)
+                            showEditModal(
+                              'Αντίκτυπος στους Πολίτες',
+                              position.socialImpact,
+                              position
+                            )
                           "
                         ></p-button>
                         <!-- <p-button
@@ -121,12 +135,10 @@
                     <span style="color: #0055a5">Καθήκοντα</span>
                     <p-button
                       *ngIf="isAdmin"
-                      icon="pi pi-pencil"
+                      icon="pi pi-plus"
                       [rounded]="true"
                       [text]="true"
-                      (click)="
-                        showEditModal('Καθήκοντα', position.duties)
-                      "
+                      (click)="addSkill(position)"
                     ></p-button>
                     <!-- <p-button
                       *ngIf="isAdmin"
@@ -138,9 +150,44 @@
                     ></p-button> -->
                   </div>
                 </ng-template>
-                <p *ngFor="let g of position.duties" class="m-0">
+                <p-table [value]="position.duties">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>Καθήκοντα</th>
+                      <th>Ενέργειες</th>
+                      <!-- <th>Διαγραφή</th> -->
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-duty>
+                    <tr>
+                      <td>{{ duty.description }}</td>
+                      <td>
+                        <p-button
+                          icon="pi pi-pencil"
+                          [rounded]="true"
+                          [text]="true"
+                          (onClick)="
+                            showEditModal(
+                              'Επεξεργασία Καθήκοντος',
+                              duty.description,
+                              position,
+                              duty
+                            )
+                          "
+                        /><p-button
+                          icon="pi pi-times"
+                          [rounded]="true"
+                          [text]="true"
+                          severity="danger"
+                          (onClick)="onDutyDelete(duty)"
+                        />
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+                <!-- <p *ngFor="let g of position.duties" class="m-0">
                   {{ g?.description }}
-                </p>
+                </p> -->
               </p-fieldset>
             </div>
             <p-divider type="dashed" [layout]="'vertical'"></p-divider>
@@ -217,7 +264,7 @@
               (click)="onChipClick(position, $event)"
               [style]="{ 'background-color': '#0055a5', color: 'white' }"
             >
-              {{ position }}
+              {{ position.name }}
             </p-chip>
             <p-button
               icon="pi pi-plus"
@@ -251,11 +298,23 @@
       ΓΕΝΙΚΟ ΠΕΡΙΓΡΑΜΜΑ
     </div>
   </ng-template>
-  <app-outline-modal></app-outline-modal>
+  <app-outline-modal
+    [generalOutlines]="selectedPositionFamily?.generalOutlines"
+    [selectedOutline]="selectedOutline"
+  ></app-outline-modal>
 </p-dialog>
-<!-- <p-dialog [(visible)]="showDeleteModal" header="Διαγραφή Πεδίου">
-  <delete-warning
-    (delete)="handleDelete($event)"
-    (cancel)="handleCancel()"
-  ></delete-warning>
-</p-dialog> -->
+<p-dialog
+  *ngIf="selectedPositionFamily != undefined"
+  [(visible)]="showEditModalBool"
+  header="Επεξεργασία Πεδίου"
+  [style]="{ width: '65rem' }"
+>
+  <add-edit-modal
+    [style]="{ width: '65rem' }"
+    [title]="selectedTitle"
+    [description]="selectedDescription"
+    [duties]="selectedPositionFamily.duties"
+    (save)="handleSave($event)"
+    (cancel)="showEditModalBool = false"
+  ></add-edit-modal>
+</p-dialog>

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
@@ -39,6 +38,7 @@ import { DeleteWarningComponent } from './modals/delete-warning/delete-warning.c
 import { GeneralOutlinesTableComponent } from './components/tables/general-outlines-table/general-outlines-table.component';
 import { GeneralOutlinesModalComponent } from './modals/general-outlines-modal/general-outlines-modal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddEditModalComponent } from './components/add-edit-modal/add-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,8 @@ import { HttpClientModule } from '@angular/common/http';
     UserFormComponent,
     DeleteWarningComponent,
     GeneralOutlinesTableComponent,
-    GeneralOutlinesModalComponent
+    GeneralOutlinesModalComponent,
+    AddEditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,7 @@ import { HttpClientModule } from '@angular/common/http';
     DialogModule,
     InputTextModule,
     FormsModule,
-    BrowserAnimationsModule  ,
+    BrowserAnimationsModule,
     DynamicDialogModule,
     TreeModule,
     CardModule,
@@ -83,7 +84,7 @@ import { HttpClientModule } from '@angular/common/http';
     CheckboxModule,
     MessageModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [AppComponent],
 })

@@ -72,7 +72,6 @@ export class ApiService {
   editPositionSection(
     request: /*EditPositionSectionRequest*/ any
   ): Observable<EditPositionSectionResponse> {
-    console.log(request);
     let knowledgeCategoryIds = request.knowledgeCategories.map(
       (kc: any) => kc.id
     );
@@ -117,15 +116,26 @@ export class ApiService {
     );
   }
   editKnowledgeTitle(
-    request?: /*EditKnowledgeTitleRequest*/ any
+    knowledgeCategoryId: string,
+    name: string
   ): Observable<EditKnowledgeTitleResponse> {
-    return this.http.post(this.url + '/...', {});
+    return this.http.put(
+      this.url + 'knowledge/category/' + knowledgeCategoryId,
+      {
+        knowledgeCategoryId: knowledgeCategoryId,
+        request: { name: name },
+      }
+    );
   }
   addUser(request?: AddUserRequest): Observable<AddUserResponse> {
     return this.http.post(this.url + '/...', {});
   }
-  getUsers(request?: GetUsersRequest): Observable<GetUsersResponse> {
-    return this.http.post(this.url + '/...', {});
+  getUsers(activeUsers?: boolean): Observable<GetUsersResponse> {
+    let request = {};
+    activeUsers !== undefined
+      ? (request = { activeUsers: activeUsers })
+      : (request = {});
+    return this.http.post(this.url + 'user/getAll', request);
   }
   updateUser(request?: UpdateUserRequest): Observable<UpdateUserResponse> {
     return this.http.post(this.url + '/...', {});
@@ -134,9 +144,12 @@ export class ApiService {
     return this.http.post(this.url + '/...', {});
   }
   getGeneralOutlines(
-    request?: GetGeneralOutlinesRequest
+    unassigned?: boolean
   ): Observable<GetGeneralOutlinesResponse> {
-    return this.http.post(this.url + '/...', {});
+    let params = new HttpParams().set('unassigned', unassigned!);
+    return this.http.get(this.url + 'generalOutline', {
+      params: params,
+    });
   }
   updateGeneralOutline(
     request?: /*UpdateGeneralOutlineRequest*/ any
@@ -145,5 +158,10 @@ export class ApiService {
   }
   getKnowledgeCategories(): Observable<any> {
     return this.http.get(this.url + 'knowledge/category');
+  }
+  login(): Observable<any> {
+    return this.http.post(this.url + 'user/login', {
+       gsisToken: 'TempTokenTBD',
+    });
   }
 }

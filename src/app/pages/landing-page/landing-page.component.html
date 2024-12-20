@@ -50,3 +50,15 @@
     (cancel)="handleCancel()"
   ></delete-warning>
 </p-dialog>
+<p-dialog
+  [(visible)]="showAddEditModal"
+  header="{{ modalHeader }}"
+  [style]="{ width: '65rem' }"
+>
+  <add-edit-modal
+    [title]="selectedSection.title"
+    [description]="selectedSection.description"
+    (cancel)="handleCancel()"
+    (save)="handleSave($event)"
+  ></add-edit-modal>
+</p-dialog>

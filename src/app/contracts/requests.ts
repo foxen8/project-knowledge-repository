@@ -47,3 +47,17 @@ export class GetProfileRolesRequest {
 export class GetGeneralOutlinesRequest {
   constructor(public profileRoleId: number) {}
 }
+export class GeneralOutlineModel {
+  constructor(
+    public code: string,
+    public description: string,
+    public id: string,
+    public name: string,
+    public politicalSector: string,
+    public duties: { id: string; description: string }[],
+    public knowledge: { id: string; description: string }[],
+    public profileRole: { id: string; description: string; name: string },
+    public qualifications: { id: string; description: string }[],
+    public skills: { id: string; description: string }[]
+  ) {}
+}
