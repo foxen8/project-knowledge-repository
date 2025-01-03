@@ -39,6 +39,7 @@ import { GeneralOutlinesTableComponent } from './components/tables/general-outli
 import { GeneralOutlinesModalComponent } from './modals/general-outlines-modal/general-outlines-modal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddEditModalComponent } from './components/add-edit-modal/add-edit-modal.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { AddEditModalComponent } from './components/add-edit-modal/add-edit-moda
     MessageModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RadioButtonModule
   ],
   bootstrap: [AppComponent],
 })

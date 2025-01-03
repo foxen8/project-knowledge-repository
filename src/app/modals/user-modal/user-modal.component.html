@@ -37,10 +37,55 @@
       </div>
     </div>
   </div>
+  <div class="form-row">
+    <div class="form-column">
+      <label for="email">Ρόλος:</label>
+    </div>
+    <div class="form-column">
+      <label for="name">ΑΦΜ:</label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-column">
+      <p-dropdown
+        formControlName="role"
+        [options]="roles"
+        optionLabel="name"
+        placeholder="Επιλογή Ρόλου"
+      />
+      <div
+        *ngIf="
+          userForm.controls['email'].invalid &&
+          userForm.controls['email'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+    <div class="form-column">
+      <input id="vatNo" type="text" formControlName="vatNo" />
+      <div
+        *ngIf="
+          userForm.controls['name'].invalid && userForm.controls['name'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+  </div>
 
   <div class="form-row">
     <div class="form-column">
       <label for="surname">Επίθετο:</label>
+    </div>
+    <div class="form-column">
+      <label for="surname">Κατάσταση:</label>
     </div>
   </div>
   <div class="form-row">
@@ -50,6 +95,28 @@
         *ngIf="
           userForm.controls['surname'].invalid &&
           userForm.controls['surname'].touched
+        "
+      >
+        <p-message
+          severity="error"
+          text="Το πεδίο είναι υποχρεωτικό."
+        ></p-message>
+      </div>
+    </div>
+    <div class="form-column">
+      <div class="form-row">
+        <div class="p-field-radiobutton">
+          <p-radioButton value="false" formControlName="active"></p-radioButton>
+          <label for="active">Ανενεργός</label>
+        </div>
+        <div class="p-field-radiobutton">
+          <p-radioButton value="true" formControlName="active"></p-radioButton>
+          <label for="active">Ενεργός</label>
+        </div>
+      </div>
+      <div
+        *ngIf="
+          userForm.controls['name'].invalid && userForm.controls['name'].touched
         "
       >
         <p-message

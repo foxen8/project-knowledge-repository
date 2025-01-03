@@ -120,14 +120,14 @@ export class ApiService {
     name: string
   ): Observable<EditKnowledgeTitleResponse> {
     return this.http.put(
-      this.url + 'knowledge/category/' + knowledgeCategoryId,
+      this.url + 'knowledge/category/' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNDQ0MjAyYS0wODFjLTQyYWMtYmQ3NS1kMmM1MjUwZmU2MjMiLCJ1c2VySWQiOiI1NWRkZDQ4MS00NDlkLTRjODMtYTlmMy1hMGM2MzU3YmM1YjUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTeXN0ZW1BZG1pbmlzdHJhdG9yIiwiZXhwIjoxNzM5NDk2MDk5LCJpc3MiOiJLbm93bGVkZ2VSZXBvc2l0b3J5In0.y_L5E3uHaGQDo8yFqeJcArHKFidGvBnIAqTZdgp5RsY',
       {
-        knowledgeCategoryId: knowledgeCategoryId,
+        knowledgeCategoryId: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNDQ0MjAyYS0wODFjLTQyYWMtYmQ3NS1kMmM1MjUwZmU2MjMiLCJ1c2VySWQiOiI1NWRkZDQ4MS00NDlkLTRjODMtYTlmMy1hMGM2MzU3YmM1YjUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTeXN0ZW1BZG1pbmlzdHJhdG9yIiwiZXhwIjoxNzM5NDk2MDk5LCJpc3MiOiJLbm93bGVkZ2VSZXBvc2l0b3J5In0.y_L5E3uHaGQDo8yFqeJcArHKFidGvBnIAqTZdgp5RsY',
         request: { name: name },
       }
     );
   }
-  addUser(request?: AddUserRequest): Observable<AddUserResponse> {
+  addUser(request?: any): Observable<AddUserResponse> {
     return this.http.post(this.url + '/...', {});
   }
   getUsers(activeUsers?: boolean): Observable<GetUsersResponse> {

@@ -31,6 +31,26 @@ export class GeneralOutlinesModalComponent {
     orientation: 'vertical',
     scrollWidth: '500px',
   };
+  roles = [
+    {
+      description: 'ProfileRoleDesc3\n',
+      id: '9852733e-bfc9-4d06-8981-02e8d0d783bc',
+      name: 'ProfileRoleName3',
+    },
+    {
+      name: 'Ρολος 2',
+      value: 2,
+    },
+    {
+      name: 'Ρολος 3',
+      value: 3,
+    },
+    {
+      name: 'Ρολος 4',
+      value: 4,
+    },
+  ];
+
   constructor(private formBuilder: FormBuilder) {
     this.formInit();
   }
@@ -62,7 +82,7 @@ export class GeneralOutlinesModalComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.row) {
       this.generalOutlineForm.patchValue({
-        positionGeneralOutline: this.row['positionGeneralOutline'],
+        positionGeneralOutline: this.row['name'],
         isAssigned: this.row['isAssigned'],
         profileRole: this.row['profileRole'],
         profileRoleDescription: this.row['profileRoleDescription'],

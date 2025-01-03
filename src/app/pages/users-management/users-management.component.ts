@@ -18,6 +18,7 @@ export class UsersManagementComponent {
   }
   handleCancel() {}
   onAddSubmit(event:any) {
+    console.log(event)
     this.apiService.addUser(event).subscribe((resp)=>{})
   }
 }

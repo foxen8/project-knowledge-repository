@@ -96,9 +96,9 @@ export class UserManagementTableComponent implements OnInit {
     }
   }
   getUsers() {
-    this.apiService.getUsers().subscribe((resp:any) => {
+    this.apiService.getUsers().subscribe((resp: any) => {
       this.usersArray = resp;
-    this.filteredUsers = this.usersArray;
+      this.filteredUsers = this.usersArray;
     });
   }
   initMenuActions() {

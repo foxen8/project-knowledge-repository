@@ -20,19 +20,36 @@ export class UserFormComponent implements OnChanges, OnInit {
   @Input() dialogHide?: boolean;
   @Input() isEdit?: boolean;
   @Input() checked?: boolean;
-  @Output() formSubmit = new EventEmitter<any>(); 
-  @Output() cancel = new EventEmitter<void>(); 
+  @Output() formSubmit = new EventEmitter<any>();
+  @Output() cancel = new EventEmitter<void>();
   userForm: FormGroup = this.formBuilder.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
     surname: ['', Validators.required],
-    active: [false],
+    active: [false, Validators.required],
+    role: ['', Validators.required],
+    vatNo: ['', Validators.required],
   });
+  roles=[{
+    name:'Ρολος 1',value:1
+  },
+  {
+    name:'Ρολος 2',value:2
+  },{
+    name:'Ρολος 3',value:3
+  },
+  {
+    name:'Ρολος 4',value:4
+  }]
   virtualScrollOptions: ScrollerOptions = {
     itemSize: 34,
     orientation: 'vertical',
     scrollWidth: '500px',
   };
+  states: { name: string; key: string }[] = [
+    { name: 'ΕΝΕΡΓΟΣ', key: 'Ε' },
+    { name: 'ΑΝΕΝΕΡΓΟΣ', key: 'A' },
+  ];
 
   cycleId?: string;
   constructor(private formBuilder: FormBuilder) {
@@ -49,10 +66,12 @@ export class UserFormComponent implements OnChanges, OnInit {
 
   formInit() {
     this.userForm = this.formBuilder.group({
+      vatNo: ['', Validators.required],
       email: ['', Validators.required],
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      active: [false],
+      role: ['', Validators.required],
+      active: [false, Validators.required],
     });
   }
 
@@ -66,6 +85,8 @@ export class UserFormComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.row) {
       this.userForm.patchValue({
+        vatNo: this.row['vatNo'],
+        role: this.row['role'],
         email: this.row['email'],
         name: this.row['name'],
         surname: this.row['surname'],
@@ -78,7 +99,9 @@ export class UserFormComponent implements OnChanges, OnInit {
       email: ['', Validators.required],
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      active: [false],
+      vatNo: ['', Validators.required],
+      role: ['', Validators.required],
+      active: [false, Validators.required],
     });
   }
 }

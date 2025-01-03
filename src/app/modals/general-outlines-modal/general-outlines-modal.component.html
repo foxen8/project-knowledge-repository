@@ -61,7 +61,13 @@
   </div>
   <div class="form-row">
     <div class="form-column">
-      <input id="profileRole" type="text" formControlName="profileRole" />
+      <p-dropdown
+        formControlName="profileRole"
+        [options]="roles"
+        optionLabel="name"
+        placeholder="Επιλογή Ρόλου"
+        appendTo="body"
+      />
       <div
         *ngIf="
           generalOutlineForm.controls['profileRole'].invalid &&

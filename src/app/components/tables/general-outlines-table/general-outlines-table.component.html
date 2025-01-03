@@ -21,7 +21,7 @@
       <td>
         {{ goutline.code }}
       </td>
-      <td>{{ goutline.positionGeneralOutline }}</td>
+      <td>{{ goutline.name }}</td>
       <td>
         <p-checkbox
           [(ngModel)]="goutline.isAssigned"
@@ -29,9 +29,9 @@
           [disabled]="true"
         ></p-checkbox>
       </td>
-      <td>{{ goutline.profileRoleCode }}</td>
-      <td>{{ goutline.profileRole }}</td>
-      <td>{{ goutline.profileRoleDescription }}</td>
+      <td>{{ goutline.profileRole?.id }}</td>
+      <td>{{ goutline.profileRole?.name }}</td>
+      <td>{{ goutline.profileRole?.description }}</td>
       <td>
         <p-button
           (onClick)="selectGOutlinesMenu.toggle($event)"
@@ -54,6 +54,7 @@
   </ng-template>
 </p-table>
 <p-dialog
+  *ngIf="selectedRow"
   [(visible)]="showDialog"
   header="Επεξεργασία ανάθεσης ΓΠΘ σε Προφίλ Ρόλου"
 >

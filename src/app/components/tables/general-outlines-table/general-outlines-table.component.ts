@@ -25,30 +25,30 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
   @Output() addDialogClosed = new EventEmitter<boolean>();
 
   generalOutlinesArray: Array<any> = [
-    {
-      code: '1.1',
-      positionGeneralOutline: 'xx',
-      isAssigned: true,
-      profileRoleCode: 'JP1.1',
-      profileRole: 'xxx',
-      profileRoleDescription: 'xxxx',
-    },
-    {
-      code: '1.1',
-      positionGeneralOutline: 'xx',
-      isAssigned: false,
-      profileRoleCode: 'JP1.1',
-      profileRole: 'xxx',
-      profileRoleDescription: 'xxxx',
-    },
-    {
-      code: '1.1',
-      positionGeneralOutline: 'xx',
-      isAssigned: true,
-      profileRoleCode: 'JP1.1',
-      profileRole: 'xxx',
-      profileRoleDescription: 'xxxx',
-    },
+    // {
+    //   code: '1.1',
+    //   positionGeneralOutline: 'xx',
+    //   isAssigned: true,
+    //   profileRoleCode: 'JP1.1',
+    //   profileRole: 'xxx',
+    //   profileRoleDescription: 'xxxx',
+    // },
+    // {
+    //   code: '1.1',
+    //   positionGeneralOutline: 'xx',
+    //   isAssigned: false,
+    //   profileRoleCode: 'JP1.1',
+    //   profileRole: 'xxx',
+    //   profileRoleDescription: 'xxxx',
+    // },
+    // {
+    //   code: '1.1',
+    //   positionGeneralOutline: 'xx',
+    //   isAssigned: true,
+    //   profileRoleCode: 'JP1.1',
+    //   profileRole: 'xxx',
+    //   profileRoleDescription: 'xxxx',
+    // },
   ];
   filteredGOutlines: any[] = [];
   loading: boolean = false;
@@ -84,10 +84,10 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
     return this.showDialog;
   }
   getGeneralOutlines() {
-    // this.apiService.getGeneralOutlines().subscribe((resp) => {
-    // this.generalOutlinesArray = resp;
+    this.apiService.getGeneralOutlines().subscribe((resp:any) => {
+    this.generalOutlinesArray = resp;
     this.filteredGOutlines = this.generalOutlinesArray;
-    // });
+    });
   }
   initMenuActions() {
     this.selectGOutlinesMenuActions = [
