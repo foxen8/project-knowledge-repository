@@ -12,6 +12,8 @@ import {
   EditSectionResponse,
   GetSectionsResponse,
 } from 'src/app/contracts/responses';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-landing-page',
@@ -29,7 +31,8 @@ export class LandingPageComponent implements OnInit {
   modalHeader: string = 'Επεξεργασία Ενότητας';
   constructor(
     private helperService: HelperService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private cookieService:CookieService
   ) {}
   ngOnInit(): void {
     this.login();
@@ -58,7 +61,7 @@ export class LandingPageComponent implements OnInit {
   }
   login() {
     this.apiService.login().subscribe((apiToken) => {
-      localStorage.setItem('apiToken', apiToken.token);
+      this.cookieService.set('apiToken', apiToken.token);
     });
   }
   toggleContentFlag() {

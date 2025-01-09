@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ScrollerOptions } from 'primeng/api';
+import { ApiService } from 'src/app/services/api-service/api.service';
 
 @Component({
   selector: 'app-general-outlines-modal',
@@ -21,38 +22,21 @@ export class GeneralOutlinesModalComponent {
   @Output() formSubmit = new EventEmitter<any>();
   @Output() cancel = new EventEmitter<void>();
   generalOutlineForm: FormGroup = this.formBuilder.group({
-    positionGeneralOutline: ['', Validators.required],
-    isAssigned: [false],
     profileRole: ['', Validators.required],
-    profileRoleDescription: ['', Validators.required],
   });
   virtualScrollOptions: ScrollerOptions = {
     itemSize: 34,
     orientation: 'vertical',
     scrollWidth: '500px',
   };
-  roles = [
-    {
-      description: 'ProfileRoleDesc3\n',
-      id: '9852733e-bfc9-4d06-8981-02e8d0d783bc',
-      name: 'ProfileRoleName3',
-    },
-    {
-      name: 'Ρολος 2',
-      value: 2,
-    },
-    {
-      name: 'Ρολος 3',
-      value: 3,
-    },
-    {
-      name: 'Ρολος 4',
-      value: 4,
-    },
-  ];
+  roles = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private apiService: ApiService
+  ) {
     this.formInit();
+    this.getProfileRoles();
   }
   onSubmit() {
     this.formSubmit.emit(this.generalOutlineForm?.value);
@@ -65,10 +49,7 @@ export class GeneralOutlinesModalComponent {
 
   formInit() {
     this.generalOutlineForm = this.formBuilder.group({
-      positionGeneralOutline: ['', Validators.required],
-      isAssigned: ['', Validators.required],
       profileRole: ['', Validators.required],
-      profileRoleDescription: [false],
     });
   }
 
@@ -82,19 +63,22 @@ export class GeneralOutlinesModalComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.row) {
       this.generalOutlineForm.patchValue({
-        positionGeneralOutline: this.row['name'],
-        isAssigned: this.row['isAssigned'],
         profileRole: this.row['profileRole'],
-        profileRoleDescription: this.row['profileRoleDescription'],
       });
     }
   }
   ngOnInit(): void {
     this.generalOutlineForm = this.formBuilder.group({
-      positionGeneralOutline: ['', Validators.required],
-      isAssigned: [false],
       profileRole: ['', Validators.required],
-      profileRoleDescription: ['', Validators.required],
+    });
+  }
+  getProfileRoles() {
+    this.apiService.getProfileRoles().subscribe((resp: any) => {
+      this.roles = resp.map((item: any) => ({
+        name: item.name,
+        id: item.id,
+        description: item.description,
+      }));
     });
   }
 }

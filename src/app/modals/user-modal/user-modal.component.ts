@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ScrollerOptions } from 'primeng/api';
+import { ApiService } from 'src/app/services/api-service/api.service';
 
 @Component({
   selector: 'user-modal',
@@ -30,17 +31,7 @@ export class UserFormComponent implements OnChanges, OnInit {
     role: ['', Validators.required],
     vatNo: ['', Validators.required],
   });
-  roles=[{
-    name:'Ρολος 1',value:1
-  },
-  {
-    name:'Ρολος 2',value:2
-  },{
-    name:'Ρολος 3',value:3
-  },
-  {
-    name:'Ρολος 4',value:4
-  }]
+  roles = [];
   virtualScrollOptions: ScrollerOptions = {
     itemSize: 34,
     orientation: 'vertical',
@@ -52,8 +43,14 @@ export class UserFormComponent implements OnChanges, OnInit {
   ];
 
   cycleId?: string;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private apiService: ApiService
+  ) {
     this.formInit();
+    this.apiService.getUserRoles().subscribe((resp: any) => {
+      this.roles = resp;
+    });
   }
   onSubmit() {
     this.formSubmit.emit(this.userForm?.value);
@@ -88,9 +85,9 @@ export class UserFormComponent implements OnChanges, OnInit {
         vatNo: this.row['vatNo'],
         role: this.row['role'],
         email: this.row['email'],
-        name: this.row['name'],
-        surname: this.row['surname'],
-        active: this.row['active'],
+        name: this.row['firstName'],
+        surname: this.row['lastName'],
+        active: this.row['isActive'],
       });
     }
   }

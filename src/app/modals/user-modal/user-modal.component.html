@@ -106,17 +106,18 @@
     <div class="form-column">
       <div class="form-row">
         <div class="p-field-radiobutton">
-          <p-radioButton value="false" formControlName="active"></p-radioButton>
-          <label for="active">Ανενεργός</label>
+          <p-radioButton id="inactive" [value]="false" formControlName="active"></p-radioButton>
+          <label for="inactive">Ανενεργός</label>
         </div>
         <div class="p-field-radiobutton">
-          <p-radioButton value="true" formControlName="active"></p-radioButton>
+          <p-radioButton id="active" [value]="true" formControlName="active"></p-radioButton>
           <label for="active">Ενεργός</label>
         </div>
+        
       </div>
       <div
         *ngIf="
-          userForm.controls['name'].invalid && userForm.controls['name'].touched
+          userForm.controls['active'].invalid && userForm.controls['active'].touched
         "
       >
         <p-message

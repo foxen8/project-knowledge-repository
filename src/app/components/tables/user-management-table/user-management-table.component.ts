@@ -2,8 +2,10 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
@@ -15,9 +17,10 @@ import { ApiService } from '../../../services/api-service/api.service';
   templateUrl: './user-management-table.component.html',
   styleUrls: ['./user-management-table.component.scss'],
 })
-export class UserManagementTableComponent implements OnInit {
+export class UserManagementTableComponent implements OnInit,OnChanges{
   @ViewChild('dt1') table: Table | undefined;
   @Input() showDialog: boolean = false;
+  @Input() refreshTrigger: boolean = false;
   @Output() addDialogClosed = new EventEmitter<boolean>();
 
   usersArray: Array<any> = [];
@@ -39,17 +42,20 @@ export class UserManagementTableComponent implements OnInit {
     this.getUsers();
     this.initMenuActions();
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['refreshTrigger'] && !changes['refreshTrigger'].isFirstChange()) {
+      this.getUsers();
+    }
+  }
   customGlobalFilter(value: string, data: any[]): any[] {
     if (!value) return data;
 
     const lowerCaseValue = value.toLowerCase();
-
     return data.filter((item) => {
       return (
-        item.name.toLowerCase().includes(lowerCaseValue) ||
         item.email.toLowerCase().includes(lowerCaseValue) ||
-        item.surname.toLowerCase().includes(lowerCaseValue) ||
-        item.active.toLowerCase().includes(lowerCaseValue)
+        item.firstName.toLowerCase().includes(lowerCaseValue) ||
+        item.lastName.toLowerCase().includes(lowerCaseValue)
       );
     });
   }
@@ -89,6 +95,8 @@ export class UserManagementTableComponent implements OnInit {
         name: data.name,
         surname: data.surname,
         active: data.active,
+        role: data.role,
+        vatNo: data.vatNo,
       };
       this.usersArray[this.selectedIndex] = this.newRow;
       this.filteredUsers = this.usersArray;
@@ -125,9 +133,16 @@ export class UserManagementTableComponent implements OnInit {
     ];
   }
   updateUser(user: any) {
-    this.apiService.updateUser(user).subscribe((resp) => {});
+    this.apiService.updateUser(this.selectedRow.id, user).subscribe((resp) => {
+      this.getUsers();
+    });
   }
   handleDelete(data: any) {
-    data ?? this.apiService.deleteUser().subscribe((resp) => {});
+    this.apiService.deleteUser(this.selectedRow.id).subscribe((resp) => {
+      this.getUsers();
+    });
+  }
+  refreshList(): void {
+    this.getUsers();
   }
 }

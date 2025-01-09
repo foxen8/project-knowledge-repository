@@ -47,7 +47,8 @@ export class PositionFamilyComponent implements OnInit {
     this.displayModal = true;
   }
   addSkill(position: any) {
-    this.selectedPositionFamily = position;
+    // this.selectedPositionFamily = position;
+    this.selectedDescription = '';
     this.showEditModalBool = true;
     this.selectedTitle = 'Προσθήκη Καθήκοντος';
   }

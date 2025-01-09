@@ -34,7 +34,7 @@
       <td>
         <i
           class="pi"
-          [ngStyle]="{ color: user.active ? 'green' : 'red' }"
+          [ngStyle]="{ color: user.isActive ? 'green' : 'red' }"
           [ngClass]="{
             'pi-check-circle': user.active,
             'pi-times-circle': !user.active
@@ -42,9 +42,10 @@
         ></i>
         {{ user.email }}
       </td>
-      <td>{{ user.surname }}</td>
-      <td>{{ user.name }}</td>
-      <td>{{ user.active }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.firstName }}</td>
+      <td *ngIf="user.isActive">Ενεργός</td>
+      <td *ngIf="!user.isActive">Μη Ενεργός</td>
       <td>
         <p-button
           (onClick)="selectUsersMenu.toggle($event)"

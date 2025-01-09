@@ -29,13 +29,14 @@ import {
   UpdateUserRequest,
 } from 'src/app/contracts/requests';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   url: string = `${environment.apiUrl}`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
   getSections(request?: GetSectionsRequest): Observable<GetSectionsResponse[]> {
     return this.http.get(this.url + 'homepage', {}) as Observable<
       GetSectionsResponse[]
@@ -44,22 +45,44 @@ export class ApiService {
   addSection(
     request?: /*AddSectionRequest*/ any
   ): Observable<AddSectionResponse> {
-    return this.http.post(this.url + 'homepage/topic/', {
-      title: request.title,
-      description: request.description,
-    });
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    return this.http.post(
+      this.url + 'homepage/topic/',
+      {
+        title: request.title,
+        description: request.description,
+      },
+      { headers: headers }
+    );
   }
   editSection(
     request?: /*EditSectionRequest*/ any,
     sectionId?: string
   ): Observable<EditSectionResponse> {
-    return this.http.put(this.url + 'homepage/topic/' + sectionId, {
-      title: request.title,
-      description: request.description,
-    });
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    return this.http.put(
+      this.url + 'homepage/topic/' + sectionId,
+      {
+        title: request.title,
+        description: request.description,
+      },
+      { headers: headers }
+    );
   }
   deleteSection(sectionId?: string): Observable<DeleteSectionResponse> {
-    return this.http.delete(this.url + 'homepage/topic/' + sectionId);
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    return this.http.delete(this.url + 'homepage/topic/' + sectionId, {
+      headers: headers,
+    });
   }
   getJobFamilies(): Observable<any> {
     return this.http.get(this.url + 'jobFamily', {});
@@ -67,26 +90,40 @@ export class ApiService {
   deletePositionSection(
     request?: /*DeleteSectionRequest*/ any
   ): Observable<DeleteSectionResponse> {
-    return this.http.post(this.url + '/...', {});
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    return this.http.post(this.url + '/...', {
+      headers: headers,
+    });
   }
   editPositionSection(
     request: /*EditPositionSectionRequest*/ any
   ): Observable<EditPositionSectionResponse> {
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     let knowledgeCategoryIds = request.knowledgeCategories.map(
       (kc: any) => kc.id
     );
 
     let generalOutlineIds = request.generalOutlines.map((go: any) => go.id);
-    return this.http.put(this.url + 'jobFamily/profileRole/' + request.id, {
-      id: request.id,
-      name: request.name,
-      description: request.description,
-      vision: request.vision,
-      socialImpact: request.socialImpact,
-      duties: request.duties,
-      knowledgeCategoryIds: knowledgeCategoryIds,
-      generalOutlineIds: generalOutlineIds,
-    });
+    return this.http.put(
+      this.url + 'jobFamily/profileRole/' + request.id,
+      {
+        id: request.id,
+        name: request.name,
+        description: request.description,
+        vision: request.vision,
+        socialImpact: request.socialImpact,
+        duties: request.duties,
+        knowledgeCategoryIds: knowledgeCategoryIds,
+        generalOutlineIds: generalOutlineIds,
+      },
+      { headers: headers }
+    );
   }
   getPositionsDetails(
     id: /*GetPositionsDetailsRequest*/ any
@@ -103,6 +140,10 @@ export class ApiService {
     goutlineId: string,
     profileRoleId: string
   ): Observable<AddGeneralOutlineResponse> {
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     return this.http.post(
       this.url +
         'generalOutline/' +
@@ -112,6 +153,9 @@ export class ApiService {
       {
         id: goutlineId,
         profileRoleId: profileRoleId,
+      },
+      {
+        headers: headers,
       }
     );
   }
@@ -119,29 +163,79 @@ export class ApiService {
     knowledgeCategoryId: string,
     name: string
   ): Observable<EditKnowledgeTitleResponse> {
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     return this.http.put(
-      this.url + 'knowledge/category/' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNDQ0MjAyYS0wODFjLTQyYWMtYmQ3NS1kMmM1MjUwZmU2MjMiLCJ1c2VySWQiOiI1NWRkZDQ4MS00NDlkLTRjODMtYTlmMy1hMGM2MzU3YmM1YjUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTeXN0ZW1BZG1pbmlzdHJhdG9yIiwiZXhwIjoxNzM5NDk2MDk5LCJpc3MiOiJLbm93bGVkZ2VSZXBvc2l0b3J5In0.y_L5E3uHaGQDo8yFqeJcArHKFidGvBnIAqTZdgp5RsY',
+      this.url + 'knowledge/category/' + knowledgeCategoryId,
       {
-        knowledgeCategoryId: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNDQ0MjAyYS0wODFjLTQyYWMtYmQ3NS1kMmM1MjUwZmU2MjMiLCJ1c2VySWQiOiI1NWRkZDQ4MS00NDlkLTRjODMtYTlmMy1hMGM2MzU3YmM1YjUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJTeXN0ZW1BZG1pbmlzdHJhdG9yIiwiZXhwIjoxNzM5NDk2MDk5LCJpc3MiOiJLbm93bGVkZ2VSZXBvc2l0b3J5In0.y_L5E3uHaGQDo8yFqeJcArHKFidGvBnIAqTZdgp5RsY',
-        request: { name: name },
-      }
+        name: name,
+      },
+      { headers: headers }
     );
   }
   addUser(request?: any): Observable<AddUserResponse> {
-    return this.http.post(this.url + '/...', {});
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.post(
+      this.url + 'user',
+      {
+        vatNo: parseInt(request.vatNo),
+        firstName: request.name,
+        lastName: request.surname,
+        email: request.email,
+        roleId: request.role.id,
+        isActive: JSON.parse(request.active),
+      },
+      { headers: headers }
+    );
   }
   getUsers(activeUsers?: boolean): Observable<GetUsersResponse> {
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     let request = {};
     activeUsers !== undefined
       ? (request = { activeUsers: activeUsers })
       : (request = {});
-    return this.http.post(this.url + 'user/getAll', request);
+
+    return this.http.post(this.url + 'user/getAll', request, {
+      headers: headers,
+    });
   }
-  updateUser(request?: UpdateUserRequest): Observable<UpdateUserResponse> {
-    return this.http.post(this.url + '/...', {});
+  updateUser(userId: any, user: any): Observable<UpdateUserResponse> {
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.put(
+      this.url + 'user/' + userId,
+      {
+        vatNo: parseInt(user.vatNo),
+        firstName: user.name,
+        lastName: user.surname,
+        email: user.email,
+        roleId: user.role.id,
+        isActive: JSON.parse(user.active),
+      },
+      { headers: headers }
+    );
   }
-  deleteUser(request?: DeleteUserRequest): Observable<DeleteUserResponse> {
-    return this.http.post(this.url + '/...', {});
+  deleteUser(userId?: any): Observable<DeleteUserResponse> {
+    console.log(userId);
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.delete(this.url + 'user/' + userId, { headers: headers });
   }
   getGeneralOutlines(
     unassigned?: boolean
@@ -152,16 +246,50 @@ export class ApiService {
     });
   }
   updateGeneralOutline(
-    request?: /*UpdateGeneralOutlineRequest*/ any
+    roleId: any,
+    id: any
   ): Observable<UpdateGeneralOutlineResponse> {
-    return this.http.post(this.url + '/...', {});
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    return this.http.post(
+      this.url + 'generalOutline/' + id + '/assign/profileRole/' + roleId,
+      {
+        id:id,
+        profileRoleId:roleId
+      },
+      {
+        headers: headers,
+      }
+    );
   }
   getKnowledgeCategories(): Observable<any> {
     return this.http.get(this.url + 'knowledge/category');
   }
   login(): Observable<any> {
     return this.http.post(this.url + 'user/login', {
-       gsisToken: 'TempTokenTBD',
+      gsisToken: 'TempTokenTBD',
+    });
+  }
+  getUserRoles() {
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.get(this.url + 'user/role', {
+      headers: headers,
+    });
+  }
+  getProfileRoles() {
+    const token = this.cookieService.get('apiToken');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.http.get(this.url + 'jobFamily/profileRole', {
+      headers: headers,
     });
   }
 }

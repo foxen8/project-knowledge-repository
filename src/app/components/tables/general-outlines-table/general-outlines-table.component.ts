@@ -12,7 +12,6 @@ import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ApiService } from '../../../services/api-service/api.service';
 
-
 @Component({
   selector: 'general-outlines-table',
   templateUrl: './general-outlines-table.component.html',
@@ -24,32 +23,7 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
   @Input() checked: boolean = false;
   @Output() addDialogClosed = new EventEmitter<boolean>();
 
-  generalOutlinesArray: Array<any> = [
-    // {
-    //   code: '1.1',
-    //   positionGeneralOutline: 'xx',
-    //   isAssigned: true,
-    //   profileRoleCode: 'JP1.1',
-    //   profileRole: 'xxx',
-    //   profileRoleDescription: 'xxxx',
-    // },
-    // {
-    //   code: '1.1',
-    //   positionGeneralOutline: 'xx',
-    //   isAssigned: false,
-    //   profileRoleCode: 'JP1.1',
-    //   profileRole: 'xxx',
-    //   profileRoleDescription: 'xxxx',
-    // },
-    // {
-    //   code: '1.1',
-    //   positionGeneralOutline: 'xx',
-    //   isAssigned: true,
-    //   profileRoleCode: 'JP1.1',
-    //   profileRole: 'xxx',
-    //   profileRoleDescription: 'xxxx',
-    // },
-  ];
+  generalOutlinesArray: Array<any> = [];
   filteredGOutlines: any[] = [];
   loading: boolean = false;
   selectGOutlinesMenuActions: Array<MenuItem> = [];
@@ -63,8 +37,8 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
     this.showDialog = false;
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['changes'] !== undefined) {
-      if (changes['changes'].currentValue !== undefined) {
+    if (changes['checked'].previousValue !== undefined) {
+      if (changes['checked'].currentValue !== undefined) {
         this.getGeneralOutlines();
       }
     }
@@ -83,10 +57,17 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
     this.addDialogClosed.emit(false);
     return this.showDialog;
   }
-  getGeneralOutlines() {
-    this.apiService.getGeneralOutlines().subscribe((resp:any) => {
-    this.generalOutlinesArray = resp;
-    this.filteredGOutlines = this.generalOutlinesArray;
+  getGeneralOutlines(bool?: boolean) {
+    const fetchOutlines = this.checked
+      ? this.apiService.getGeneralOutlines(true)
+      : this.apiService.getGeneralOutlines();
+
+    fetchOutlines.subscribe((resp: any) => {
+      this.generalOutlinesArray = resp.map((goutline: any) => ({
+        ...goutline,
+        isAssigned: goutline.profileRole != null,
+      }));
+      this.filteredGOutlines = this.generalOutlinesArray;
     });
   }
   initMenuActions() {
@@ -106,21 +87,13 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
     ];
   }
   handleFormSubmit(data: any) {
-    if (this.showDialog) {
-      this.newRow = {
-        code: data.code,
-        positionGeneralOutline: data.positionGeneralOutline,
-        isAssigned: data.isAssigned,
-        profileRoleCode: data.profileRoleCode,
-        profileRole: data.profileRole,
-        profileRoleDescription: data.profileRoleDescription,
-      };
-      this.generalOutlinesArray[this.selectedIndex] = this.newRow;
-      this.filteredGOutlines = this.generalOutlinesArray;
-      this.updateGeneralOutline(this.newRow);
-    }
+    this.updateGeneralOutline(data.profileRole.id);
   }
-  updateGeneralOutline(gOutline: any) {
-    this.apiService.updateGeneralOutline(gOutline).subscribe((resp) => {});
+  updateGeneralOutline(roleId: any) {
+    this.apiService
+      .updateGeneralOutline(roleId, this.selectedRow.id)
+      .subscribe((resp) => {
+        this.getGeneralOutlines();
+      });
   }
 }

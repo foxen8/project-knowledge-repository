@@ -25,6 +25,7 @@
       <td>
         <p-checkbox
           [(ngModel)]="goutline.isAssigned"
+          [value]="goutline.isAssigned"
           [binary]="true"
           [disabled]="true"
         ></p-checkbox>
@@ -54,10 +55,12 @@
   </ng-template>
 </p-table>
 <p-dialog
-  *ngIf="selectedRow"
   [(visible)]="showDialog"
   header="Επεξεργασία ανάθεσης ΓΠΘ σε Προφίλ Ρόλου"
 >
-  <app-general-outlines-modal [row]="selectedRow" (formSubmit)="handleFormSubmit($event)"
-  (cancel)="handleCancel()"></app-general-outlines-modal>
+  <app-general-outlines-modal
+    [row]="selectedRow"
+    (formSubmit)="handleFormSubmit($event)"
+    (cancel)="handleCancel()"
+  ></app-general-outlines-modal>
 </p-dialog>
