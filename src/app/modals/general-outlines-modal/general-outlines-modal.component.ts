@@ -8,6 +8,7 @@ import {
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ScrollerOptions } from 'primeng/api';
 import { ApiService } from 'src/app/services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'app-general-outlines-modal',
@@ -33,7 +34,8 @@ export class GeneralOutlinesModalComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private helperService:HelperService
   ) {
     this.formInit();
     this.getProfileRoles();
@@ -79,6 +81,8 @@ export class GeneralOutlinesModalComponent {
         id: item.id,
         description: item.description,
       }));
+    }, (error) => {
+      this.helperService.errorHandle(error);
     });
   }
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../../services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'app-users-management',
@@ -9,8 +10,11 @@ import { ApiService } from '../../services/api-service/api.service';
 export class UsersManagementComponent {
   checked: boolean = false;
   addUser: boolean = false;
-  refreshTrigger = false; 
-   constructor(private apiService: ApiService) {}
+  refreshTrigger = false;
+  constructor(
+    private apiService: ApiService,
+    private helperService: HelperService
+  ) {}
   showDialog() {
     this.addUser = true;
   }
@@ -19,9 +23,14 @@ export class UsersManagementComponent {
   }
   handleCancel() {}
   onAddSubmit(event: any) {
-    this.apiService.addUser(event).subscribe((resp) => {
-      this.refreshTrigger = !this.refreshTrigger; 
-    });
+    this.apiService.addUser(event).subscribe(
+      (resp) => {
+        this.refreshTrigger = !this.refreshTrigger;
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
     this.addUser = false;
   }
 }

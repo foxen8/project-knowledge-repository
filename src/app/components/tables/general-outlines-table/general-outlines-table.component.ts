@@ -11,6 +11,7 @@ import {
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ApiService } from '../../../services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'general-outlines-table',
@@ -32,7 +33,10 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
   editGOutlineModal: boolean;
   newRow: any;
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private helperService: HelperService
+  ) {
     this.editGOutlineModal = false;
     this.showDialog = false;
   }
@@ -62,13 +66,18 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
       ? this.apiService.getGeneralOutlines(true)
       : this.apiService.getGeneralOutlines();
 
-    fetchOutlines.subscribe((resp: any) => {
-      this.generalOutlinesArray = resp.map((goutline: any) => ({
-        ...goutline,
-        isAssigned: goutline.profileRole != null,
-      }));
-      this.filteredGOutlines = this.generalOutlinesArray;
-    });
+    fetchOutlines.subscribe(
+      (resp: any) => {
+        this.generalOutlinesArray = resp.map((goutline: any) => ({
+          ...goutline,
+          isAssigned: goutline.profileRole != null,
+        }));
+        this.filteredGOutlines = this.generalOutlinesArray;
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   initMenuActions() {
     this.selectGOutlinesMenuActions = [
@@ -90,10 +99,13 @@ export class GeneralOutlinesTableComponent implements OnInit, OnChanges {
     this.updateGeneralOutline(data.profileRole.id);
   }
   updateGeneralOutline(roleId: any) {
-    this.apiService
-      .updateGeneralOutline(roleId, this.selectedRow.id)
-      .subscribe((resp) => {
+    this.apiService.updateGeneralOutline(roleId, this.selectedRow.id).subscribe(
+      (resp) => {
         this.getGeneralOutlines();
-      });
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
 }

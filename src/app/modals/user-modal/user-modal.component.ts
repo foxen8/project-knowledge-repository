@@ -10,6 +10,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ScrollerOptions } from 'primeng/api';
 import { ApiService } from 'src/app/services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'user-modal',
@@ -45,11 +46,14 @@ export class UserFormComponent implements OnChanges, OnInit {
   cycleId?: string;
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private helperService:HelperService
   ) {
     this.formInit();
     this.apiService.getUserRoles().subscribe((resp: any) => {
       this.roles = resp;
+    }, (error) => {
+      this.helperService.errorHandle(error);
     });
   }
   onSubmit() {

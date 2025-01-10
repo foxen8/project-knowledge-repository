@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
-import { ApiService } from '../api-service/api.service';
-import { AddSectionResponse, EditSectionResponse } from 'src/app/contracts/responses';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelperService {
-  constructor(private apiService: ApiService) {}
+  constructor(private cookieService: CookieService) {}
   openDialog(
     isAdd: boolean,
     sectionTitle?: string,
@@ -28,7 +27,7 @@ export class HelperService {
         <textarea id="description" class="swal2-textarea" placeholder="Συμπληρώστε την περιγραφή της ενότητας" style="width: 90%; height: 500px;">${sectionDescription}</textarea>
       </div>`;
     return Swal.fire({
-      title: isDisabled?'Επεξεργασία Ενότητας':'Προσθήκη Ενότητας',
+      title: isDisabled ? 'Επεξεργασία Ενότητας' : 'Προσθήκη Ενότητας',
       html: htmlContent,
       showCancelButton: true,
       width: '1400px',
@@ -45,7 +44,8 @@ export class HelperService {
         const descriptionElement = document.getElementById(
           'description'
         ) as HTMLInputElement;
-        const descriptionValue = descriptionElement?.value || sectionDescription;
+        const descriptionValue =
+          descriptionElement?.value || sectionDescription;
 
         if (!descriptionValue) {
           Swal.showValidationMessage('Παρακαλώ συμπληρώστε και τα δύο πεδία');
@@ -70,6 +70,51 @@ export class HelperService {
       }
       return null; // Return null if canceled
     });
-     
+  }
+  public errorHandle(error: any): void {
+    let txt = '';
+    if (error.error != null && error.error != undefined) {
+      txt = this.extractTitles(error.error);
+    }
+    if (error.status == 401) {
+      txt = 'Έληξε το token';
+      // this.oauthService.initCodeFlow(); ξανακανει Login
+    } else if (error.status == 403) {
+      txt = 'Δεν έχετε δικαιώματα για τη συγκεκριμένη ενέργεια';
+    } else if (error.status == 404) {
+      txt = '';
+    } else if (
+      error.status == 500 &&
+      Object.keys(error.error.errors)[0] == 'WP-T-U-03'
+    ) {
+      this.cookieService.delete('apiToken');
+      // this.oauthService.logOut(); κανε Logout
+      txt = 'Ο χρήστης δεν έχει τα απαραίτητα δικαιώματα.';
+    }
+    Swal.fire({
+      title: 'Κάτι πήγε στραβά!',
+      text: txt,
+      icon: 'error',
+      denyButtonText: 'OK',
+      showDenyButton: true,
+      showConfirmButton: false,
+    });
+  }
+  public extractTitles(errorObj: any, divider: string = ' | '): string {
+    let txt: string = '';
+    for (const key in errorObj.errors) {
+      if (errorObj.errors.hasOwnProperty(key)) {
+        const errorList = errorObj.errors[key];
+        const titles = errorList
+          .map((errorItem: any) => errorItem.title)
+          .join(divider);
+        if (txt) {
+          txt += divider + titles;
+        } else {
+          txt = titles;
+        }
+      }
+    }
+    return txt;
   }
 }

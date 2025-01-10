@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ApiService } from '../../services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'app-knowledge-page',
@@ -14,7 +15,7 @@ export class KnowledgePageComponent implements OnInit {
   accordionTabs: any = [];
 
   tooltipContent: string = '';
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService,private helperService:HelperService) {}
   ngOnInit(): void {
     this.getAccordionTabs();
   }
@@ -42,12 +43,16 @@ export class KnowledgePageComponent implements OnInit {
     if (title) {
       this.apiService.editKnowledgeTitle(tab.id, title).subscribe((resp) => {
         this.getAccordionTabs();
+      }, (error) => {
+        this.helperService.errorHandle(error);
       });
     }
   }
   getAccordionTabs() {
     this.apiService.getKnowledgeCategories().subscribe((resp) => {
       this.accordionTabs = resp;
+    }, (error) => {
+      this.helperService.errorHandle(error);
     });
   }
 }

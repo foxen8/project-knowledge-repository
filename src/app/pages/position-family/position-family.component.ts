@@ -27,7 +27,11 @@ export class PositionFamilyComponent implements OnInit {
   selectedTitle: string = '';
   selectedDescription: string = '';
   selectedDuty: any;
-  constructor(private router: Router, private apiService: ApiService) {
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private helperService: HelperService
+  ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
     this.familyName = state?.['familyName'] || '';
     this.parentName = state?.['parentName'] || '';
@@ -69,11 +73,14 @@ export class PositionFamilyComponent implements OnInit {
       (d: any) => d.id === duty.id
     );
     this.selectedPositionFamily.duties.splice(index, 1);
-    this.apiService
-      .editPositionSection(this.selectedPositionFamily)
-      .subscribe((resp) => {
+    this.apiService.editPositionSection(this.selectedPositionFamily).subscribe(
+      (resp) => {
         this.getPositionDetails();
-      });
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   addGOutline() {
     const optionsHtml = this.generalOutlines
@@ -131,21 +138,30 @@ export class PositionFamilyComponent implements OnInit {
             result.value.selectedOutline.id,
             this.selectedPositionFamily.id
           )
-          .subscribe((resp) => {
-            this.getPositionDetails();
-          });
+          .subscribe(
+            (resp) => {
+              this.getPositionDetails();
+            },
+            (error) => {
+              this.helperService.errorHandle(error);
+            }
+          );
       }
     });
   }
   getGeneralOutlines() {
-    this.apiService.getGeneralOutlines(true).subscribe((resp: any) => {
-      this.generalOutlines = resp;
-    });
+    this.apiService.getGeneralOutlines(true).subscribe(
+      (resp: any) => {
+        this.generalOutlines = resp;
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   getPositionDetails() {
-    this.apiService
-      .getPositionsDetails(this.profileRoleId)
-      .subscribe((resp) => {
+    this.apiService.getPositionsDetails(this.profileRoleId).subscribe(
+      (resp) => {
         this.positions = resp.profileRoles;
         this.selectedPositionFamily = this.positions[0];
         this.allDuties = this.positions.flatMap((item) => item.duties);
@@ -153,7 +169,11 @@ export class PositionFamilyComponent implements OnInit {
         resp.profileRoles[0].generalOutlines.forEach((g: any) => {
           this.jobPositions.push(g);
         });
-      });
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   handleSave(event: any) {
     if (event.title == 'Όραμα') {
@@ -175,11 +195,14 @@ export class PositionFamilyComponent implements OnInit {
       });
     }
 
-    this.apiService
-      .editPositionSection(this.selectedPositionFamily)
-      .subscribe((resp) => {
+    this.apiService.editPositionSection(this.selectedPositionFamily).subscribe(
+      (resp) => {
         this.getPositionDetails();
-      });
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
     this.showEditModalBool = false;
   }
   handleRemove(position: any, event: Event): void {
@@ -189,11 +212,14 @@ export class PositionFamilyComponent implements OnInit {
     );
     this.selectedPositionFamily.generalOutlines.splice(index, 1);
     console.log(this.selectedPositionFamily.generalOutlines);
-    this.apiService
-      .editPositionSection(this.selectedPositionFamily)
-      .subscribe((resp) => {
+    this.apiService.editPositionSection(this.selectedPositionFamily).subscribe(
+      (resp) => {
         this.getPositionDetails();
-      });
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   onPageChange(event: any) {
     const currentIndex = event.page; // Get the active index

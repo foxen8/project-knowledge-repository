@@ -11,6 +11,7 @@ import {
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Table, TableFilterEvent } from 'primeng/table';
 import { ApiService } from '../../../services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'user-management-table',
@@ -33,7 +34,7 @@ export class UserManagementTableComponent implements OnInit,OnChanges{
   deleteModal: boolean;
   newRow: any;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,private helperService:HelperService) {
     this.editUserModal = false;
     this.showDialog = false;
     this.deleteModal = false;
@@ -107,6 +108,8 @@ export class UserManagementTableComponent implements OnInit,OnChanges{
     this.apiService.getUsers().subscribe((resp: any) => {
       this.usersArray = resp;
       this.filteredUsers = this.usersArray;
+    }, (error) => {
+      this.helperService.errorHandle(error);
     });
   }
   initMenuActions() {
@@ -135,11 +138,15 @@ export class UserManagementTableComponent implements OnInit,OnChanges{
   updateUser(user: any) {
     this.apiService.updateUser(this.selectedRow.id, user).subscribe((resp) => {
       this.getUsers();
+    }, (error) => {
+      this.helperService.errorHandle(error);
     });
   }
   handleDelete(data: any) {
     this.apiService.deleteUser(this.selectedRow.id).subscribe((resp) => {
       this.getUsers();
+    }, (error) => {
+      this.helperService.errorHandle(error);
     });
   }
   refreshList(): void {

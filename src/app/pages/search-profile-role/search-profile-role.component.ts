@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as d3 from 'd3';
 import { ApiService } from '../../services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 @Component({
   selector: 'app-search-profile-role',
   templateUrl: './search-profile-role.component.html',
@@ -16,7 +17,11 @@ export class SearchProfileRoleComponent {
   width: number = 900;
   height: number = 600;
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private helperService: HelperService
+  ) {}
 
   ngOnInit() {
     this.getTree();
@@ -136,13 +141,13 @@ export class SearchProfileRoleComponent {
         }
       })
       .on('click', (event: MouseEvent, d: any) => {
-        console.log(d)
+        console.log(d);
         if (!d.children && d.data.tooltip) {
           this.router.navigate(['/position-family'], {
             state: {
               familyName: d.data.name,
               parentName: d.parent.data.name,
-              id:d.data.id
+              id: d.data.id,
             },
           });
         }
@@ -173,24 +178,29 @@ export class SearchProfileRoleComponent {
     }
   }
   getTree() {
-    this.apiService.getJobFamilies().subscribe((response: any) => {
-      const formattedData = response.map((jobFamily: any) => ({
-        name: jobFamily.title,
-        children: jobFamily.profileRoles.map((profileRole: any) => ({
-          id:jobFamily.id,
-          name: profileRole.name,
-          tooltip: profileRole.description,
-        })),
-      }));
+    this.apiService.getJobFamilies().subscribe(
+      (response: any) => {
+        const formattedData = response.map((jobFamily: any) => ({
+          name: jobFamily.title,
+          children: jobFamily.profileRoles.map((profileRole: any) => ({
+            id: jobFamily.id,
+            name: profileRole.name,
+            tooltip: profileRole.description,
+          })),
+        }));
 
-      this.data = {
-        name: 'Οικογένειες θέσεων',
-        children: formattedData,
-      };
-      this.filteredData = this.data;
+        this.data = {
+          name: 'Οικογένειες θέσεων',
+          children: formattedData,
+        };
+        this.filteredData = this.data;
 
-      this.initTree();
-      this.updateTree(this.filteredData);
-    });
+        this.initTree();
+        this.updateTree(this.filteredData);
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service/api.service';
+import { HelperService } from 'src/app/services/helper-service/helper.service';
 
 @Component({
   selector: 'app-general-outlines',
@@ -11,7 +12,7 @@ export class GeneralOutlinesComponent {
   generalOutlines: any[] = [];
   displayModal: boolean = false;
   selectedOutline: any;
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService,private helperService:HelperService) {}
   ngOnInit(): void {
     this.getGeneralOutlines();
   }
@@ -22,6 +23,8 @@ export class GeneralOutlinesComponent {
   getGeneralOutlines() {
     this.apiService.getGeneralOutlines().subscribe((resp: any) => {
       this.generalOutlines = resp;
+    }, (error) => {
+      this.helperService.errorHandle(error);
     });
   }
 }

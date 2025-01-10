@@ -14,7 +14,6 @@ import {
 } from 'src/app/contracts/responses';
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -32,7 +31,7 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private helperService: HelperService,
     private apiService: ApiService,
-    private cookieService:CookieService
+    private cookieService: CookieService
   ) {}
   ngOnInit(): void {
     this.login();
@@ -60,9 +59,14 @@ export class LandingPageComponent implements OnInit {
     );
   }
   login() {
-    this.apiService.login().subscribe((apiToken) => {
-      this.cookieService.set('apiToken', apiToken.token);
-    });
+    this.apiService.login().subscribe(
+      (apiToken) => {
+        this.cookieService.set('apiToken', apiToken.token);
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   toggleContentFlag() {
     this.isAdmin = !this.isAdmin;
@@ -95,32 +99,46 @@ export class LandingPageComponent implements OnInit {
     this.showDeleteModal = true;
   }
   getSections() {
-    this.apiService.getSections().subscribe((resp) => {
-      this.sections = resp;
-    });
+    this.apiService.getSections().subscribe(
+      (resp) => {
+        this.sections = resp;
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   handleCancel() {
     this.showDeleteModal = false;
   }
   handleDelete(event: any) {
-    this.apiService
-      .deleteSection(this.selectedSection?.id)
-      .subscribe((resp) => {
+    this.apiService.deleteSection(this.selectedSection?.id).subscribe(
+      (resp) => {
         this.getSections();
-      });
+      },
+      (error) => {
+        this.helperService.errorHandle(error);
+      }
+    );
   }
   handleSave(event: any) {
     event.isAdd
-      ? this.apiService
-          .addSection(event)
-          .subscribe((resp: AddSectionResponse) => {
+      ? this.apiService.addSection(event).subscribe(
+          (resp: AddSectionResponse) => {
             this.getSections();
-          })
-      : this.apiService
-          .editSection(event, this.selectedSection.id)
-          .subscribe((resp: AddSectionResponse) => {
+          },
+          (error) => {
+            this.helperService.errorHandle(error);
+          }
+        )
+      : this.apiService.editSection(event, this.selectedSection.id).subscribe(
+          (resp: AddSectionResponse) => {
             this.getSections();
-          });
+          },
+          (error) => {
+            this.helperService.errorHandle(error);
+          }
+        );
     this.showAddEditModal = false;
   }
 }
