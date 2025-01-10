@@ -1,17 +1,34 @@
-<p-carousel *ngIf="generalOutlines" [value]="generalOutlines!" [circular]="true" class="custom-carousel" [page]="index">
+<p-carousel
+  *ngIf="generalOutlines"
+  [value]="generalOutlines!"
+  [circular]="true"
+  class="custom-carousel"
+  [page]="index"
+>
   <ng-template let-outline pTemplate="item">
     <div class="modal-header">
       <h3>{{ outline.name }}</h3>
+      <h4>{{ outline.politicalSector }}</h4>
     </div>
     <div class="modal-section">
       <h4>Αποστολή</h4>
       <p>{{ outline.description }}</p>
     </div>
-    <div class="modal-section">
-      <h4>Κύρια Καθήκοντα</h4>
-      <ul>
-        <li *ngFor="let duty of outline.duties">{{ duty.description }}</li>
-      </ul>
+    <div class="modal-section two-columns">
+      <div>
+        <h4>Δεξιότητες</h4>
+        <ul>
+          <li *ngFor="let cap of outline.duties">{{ cap.description }}</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Γνώσεις</h4>
+        <ul>
+          <li *ngFor="let know of outline.qualifications">
+            {{ know.description }}
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="modal-section two-columns">
       <div>
