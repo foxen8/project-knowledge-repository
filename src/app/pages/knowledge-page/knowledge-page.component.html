@@ -10,7 +10,7 @@
         (click)="showEditModal(knowledgeDescr, true)"
       ></p-button> -->
     </h1>
-    <p>{{ knowledgeDescr }}</p>
+    <p [innerHTML]="knowledgeDescr"></p>
     <h3>Κατηγορίες Γνώσεων</h3>
     <p-accordion [activeIndex]="0">
       <p-accordionTab

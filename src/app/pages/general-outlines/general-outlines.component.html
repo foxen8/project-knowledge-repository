@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="knowledge-section">
     <h1>Γενικά Περιγράμματα Θέσης</h1>
-    <p>{{ knowledgeDescr }}</p>
+    <p [innerHTML]="knowledgeDescr"></p>
     <h3>Λίστα Γενικών Περιγραμμάτων Θέσεων</h3>
     <p-table [value]="generalOutlines" class="custom-table">
       <ng-template pTemplate="header">

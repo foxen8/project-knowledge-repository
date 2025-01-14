@@ -64,3 +64,6 @@ ul {
 li {
   margin-bottom: 5px;
 }
+.multiline-text {
+  white-space: pre-wrap; /* Allows handling of \n as line breaks */
+}
