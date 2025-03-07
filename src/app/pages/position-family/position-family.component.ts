@@ -27,6 +27,7 @@ export class PositionFamilyComponent implements OnInit {
   selectedTitle: string = '';
   selectedDescription: string = '';
   selectedDuty: any;
+  modalTitle: string ='';
   constructor(
     private router: Router,
     private apiService: ApiService,
@@ -55,6 +56,7 @@ export class PositionFamilyComponent implements OnInit {
     this.selectedDescription = '';
     this.showEditModalBool = true;
     this.selectedTitle = 'Προσθήκη Καθήκοντος';
+    this.modalTitle = this.selectedTitle;
   }
   showEditModal(
     sectionTitle: string,
@@ -65,6 +67,7 @@ export class PositionFamilyComponent implements OnInit {
     this.selectedPositionFamily = position;
     this.showEditModalBool = true;
     this.selectedTitle = sectionTitle;
+    this.modalTitle = 'Επεξεργασία ' +this.selectedTitle;
     this.selectedDescription = sectionDescription;
     this.selectedDuty = duty;
   }
@@ -211,7 +214,6 @@ export class PositionFamilyComponent implements OnInit {
       (g: any) => g.id === position.id
     );
     this.selectedPositionFamily.generalOutlines.splice(index, 1);
-    console.log(this.selectedPositionFamily.generalOutlines);
     this.apiService.editPositionSection(this.selectedPositionFamily).subscribe(
       (resp) => {
         this.getPositionDetails();

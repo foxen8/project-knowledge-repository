@@ -40,6 +40,7 @@ import { GeneralOutlinesModalComponent } from './modals/general-outlines-modal/g
 import { HttpClientModule } from '@angular/common/http';
 import { AddEditModalComponent } from './components/add-edit-modal/add-edit-modal.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     MessageModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RadioButtonModule
+    RadioButtonModule,
+    BreadcrumbModule
   ],
   bootstrap: [AppComponent],
 })

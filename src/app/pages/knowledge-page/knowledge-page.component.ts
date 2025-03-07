@@ -42,8 +42,6 @@ export class KnowledgePageComponent implements OnInit {
       cancelButtonText: 'Ακύρωση',
       showCancelButton: true,
     });
-    console.log(tab);
-    console.log(title);
     if (title) {
       this.apiService.editKnowledgeTitle(tab.id, title).subscribe(
         (resp) => {

@@ -306,7 +306,7 @@
 <p-dialog
   *ngIf="selectedPositionFamily != undefined"
   [(visible)]="showEditModalBool"
-  header="Επεξεργασία Πεδίου"
+  [header]="modalTitle"
   [style]="{ width: '65rem' }"
 >
   <add-edit-modal

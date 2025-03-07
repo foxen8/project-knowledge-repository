@@ -86,6 +86,7 @@
 </p-dialog>
 <p-dialog [(visible)]="deleteModal" header="Διαγραφή Χρήστη">
   <delete-warning
+    [deleteText]="'τον χρήστη'"
     (delete)="handleDelete($event)"
     (cancel)="handleCancel()"
   ></delete-warning>

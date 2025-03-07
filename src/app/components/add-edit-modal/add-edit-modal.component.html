@@ -1,23 +1,29 @@
 <div *ngIf="title != undefined">
   <form (ngSubmit)="onSave()" #form="ngForm">
-    <div style="text-align: left; padding: 20px">
+    <div style="text-align: left; padding: 40px">
       <label
         for="title"
         style="
           display: block;
           margin-bottom: 0.5em;
-          font-size: 30px;
+          font-size: 15px;
           font-weight: bold;
         "
-        >Τίτλος</label
+        >Τίτλος {{titleType}}</label
       >
       <input
-        *ngIf="!isDisabled "
+        *ngIf="!isDisabled"
         type="text"
         id="title"
         class="swal2-input"
         placeholder="Τίτλος Ενότητας"
-        style="width: 90%"
+        style="
+          display: block;
+          margin-bottom: 0.5em;
+          font-size: 30px;
+          font-weight: bold;
+          width: 90%;
+        "
         [(ngModel)]="title"
         name="title"
       />
@@ -32,25 +38,32 @@
           font-size: 30px;
           font-weight: bold;
         "
-        >Περιγραφή Ενότητας</label
+        >Περιγραφή {{titleType}}</label
       >
       <textarea
         id="description"
-        class="swal2-textarea"
+        class="swal2-textarea modal-textarea"
         placeholder="Συμπληρώστε την περιγραφή της ενότητας"
         style="width: 90%; height: 500px"
         [(ngModel)]="description"
         name="description"
-        >{{ description }}</textarea
+        
+        >{{ description  }}</textarea
       >
 
-      <div class="flex justify-content-end gap-2">
+      <div class="flex-container">
         <p-button
           label="Ακύρωση"
           severity="secondary"
           (onClick)="onCancel()"
+          class="cancel-btn"
         ></p-button>
-        <p-button label="Αποθήκευση" class="mr-4" type="submit"></p-button>
+        <p-button
+          label="Αποθήκευση"
+          class="mr-4"
+          type="submit"
+          class="save-btn"
+        ></p-button>
       </div>
     </div>
   </form>

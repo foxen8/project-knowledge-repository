@@ -15,6 +15,7 @@ import {
 })
 export class AddEditModalComponent implements OnInit, OnChanges {
   @Input() title: string = '';
+  @Input() titleType: string = '';
   @Input() description?: string;
   @Input() duties?: any;
   @Output() save = new EventEmitter<any>();

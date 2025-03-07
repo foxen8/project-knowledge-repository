@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./delete-warning.component.scss'],
 })
 export class DeleteWarningComponent {
+  @Input() deleteText: string = '';
   @Output() delete = new EventEmitter<any>(); // Emit form data on submit
   @Output() cancel = new EventEmitter<void>(); // Emit cancel event to close dialog
 

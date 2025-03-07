@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as d3 from 'd3';
 import { ApiService } from '../../services/api-service/api.service';
 import { HelperService } from 'src/app/services/helper-service/helper.service';
+import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-search-profile-role',
   templateUrl: './search-profile-role.component.html',
@@ -16,6 +17,7 @@ export class SearchProfileRoleComponent {
   tree: any;
   width: number = 900;
   height: number = 600;
+  items: MenuItem[] | undefined;
 
   constructor(
     private router: Router,
@@ -25,6 +27,22 @@ export class SearchProfileRoleComponent {
 
   ngOnInit() {
     this.getTree();
+    this.items = [
+      {
+        label: 'Αρχική',
+        command: () => {
+          this.router.navigate(['']);
+        },
+        styleClass: 'action-link',
+      },
+      {
+        label: 'Αναζήτηση Προφίλ Ρόλου',
+        command: () => {
+          this.router.navigate(['role-search']);
+        },
+        styleClass: 'action-link',
+      },
+    ];
   }
 
   initTree() {
@@ -115,8 +133,8 @@ export class SearchProfileRoleComponent {
 
     nodeGroup
       .append('text')
-      .attr('dy', 3)
-      .attr('x', (d: any) => (d.children ? -10 : 10))
+      .attr('dy', -10)
+      .attr('dx', (d: any) => (d.children ? -5 : 5))
       .style('text-anchor', (d: any) => (d.children ? 'end' : 'start'))
       .text((d: any) => d.data.name)
       .on('mouseover', function (event: MouseEvent, d: any) {
@@ -141,7 +159,6 @@ export class SearchProfileRoleComponent {
         }
       })
       .on('click', (event: MouseEvent, d: any) => {
-        console.log(d);
         if (!d.children && d.data.tooltip) {
           this.router.navigate(['/position-family'], {
             state: {

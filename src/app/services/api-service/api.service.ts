@@ -229,7 +229,6 @@ export class ApiService {
     );
   }
   deleteUser(userId?: any): Observable<DeleteUserResponse> {
-    console.log(userId);
     const token = this.cookieService.get('apiToken');
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -256,8 +255,8 @@ export class ApiService {
     return this.http.post(
       this.url + 'generalOutline/' + id + '/assign/profileRole/' + roleId,
       {
-        id:id,
-        profileRoleId:roleId
+        id: id,
+        profileRoleId: roleId,
       },
       {
         headers: headers,

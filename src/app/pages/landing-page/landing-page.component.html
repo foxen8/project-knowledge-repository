@@ -44,8 +44,9 @@
     </div>
   </div>
 </div>
-<p-dialog [(visible)]="showDeleteModal" header="Διαγραφή Χρήστη">
+<p-dialog [(visible)]="showDeleteModal" header="Διαγραφή Ενότητας">
   <delete-warning
+    [deleteText]="'την ενότητα'"
     (delete)="handleDelete($event)"
     (cancel)="handleCancel()"
   ></delete-warning>
@@ -56,6 +57,7 @@
   [style]="{ width: '65rem' }"
 >
   <add-edit-modal
+    [titleType]="'Ενότητας'"
     [title]="selectedSection.title"
     [description]="selectedSection.description"
     (cancel)="handleCancel()"

@@ -94,7 +94,6 @@ export class LandingPageComponent implements OnInit {
     }
   }
   onDelete(section: any) {
-    console.log(section);
     this.selectedSection = section;
     this.showDeleteModal = true;
   }
